@@ -1,48 +1,56 @@
 (function () {
   "use strict";
   function applyRYZONBranding() {
-    if (document.querySelector(".ryzon-unified-brand")) return;
-    const candidates = Array.from(document.querySelectorAll("header h1, header h2, header .brand, header .ryzon-brand, main h1, main h2, main .brand, main .ryzon-brand, h1, h2, .brand, .ryzon-brand, .logo"))
-      .filter(el => !el.closest("footer") && /RYZON/i.test((el.textContent || "").trim()));
-    const target = candidates[0];
-    if (!target || !target.parentElement) return;
+    const candidates = Array.from(document.querySelectorAll(
+      "header h1, header h2, header .ryzon-brand, main h1, main h2, main .ryzon-brand, h1, h2, .ryzon-brand"
+    )).filter(el => {
+      if (el.closest("footer, .ryzon-unified-brand")) return false;
+      if (!/RYZON/i.test((el.textContent || "").trim())) return false;
+      // Prefer the smallest brand-name element; never replace a wrapper containing another brand heading.
+      return !Array.from(el.querySelectorAll("h1, h2, .ryzon-brand")).some(child =>
+        /RYZON/i.test((child.textContent || "").trim())
+      );
+    });
 
-    const scope = target.closest("header") || target.parentElement;
-    const marks = Array.from(scope.querySelectorAll(".logo, .brand-mark, .ryzon-mark, .ryzon-logo-mark"))
-      .filter(el => el !== target && /^R$/i.test((el.textContent || "").trim()));
-    let mark = marks[0] || null;
+    candidates.forEach(target => {
+      if (!target.parentElement || target.closest(".ryzon-unified-brand")) return;
+      const scope = target.closest("header") || target.parentElement;
+      const marks = Array.from(scope.querySelectorAll(".logo, .brand-mark, .ryzon-mark, .ryzon-logo-mark"))
+        .filter(el => !el.closest(".ryzon-unified-brand") && /^R$/i.test((el.textContent || "").trim()));
+      let mark = marks[0] || null;
 
-    const oldTaglines = Array.from(scope.querySelectorAll(".tagline, .subtitle, .brand-tagline"))
-      .filter(el => /One App, Endless Possibilities!?/i.test((el.textContent || "").trim()));
-    oldTaglines.forEach(el => el.remove());
+      const oldTaglines = Array.from(scope.querySelectorAll(".tagline, .subtitle, .brand-tagline"))
+        .filter(el => /One App, Endless Possibilities!?/i.test((el.textContent || "").trim()));
+      oldTaglines.forEach(el => el.remove());
 
-    const targetText = (target.textContent || "").trim();
-    const label = (mark && target.contains(mark) ? targetText.replace(/^R\s*/i, "").trim() : targetText) || "RYZON";
-    const parent = target.parentElement;
-    const lockup = document.createElement("div");
-    lockup.className = "ryzon-unified-brand";
+      const targetText = (target.textContent || "").trim();
+      const label = (mark && target.contains(mark) ? targetText.replace(/^R\\s*/i, "").trim() : targetText) || "RYZON";
+      const parent = target.parentElement;
+      const lockup = document.createElement("div");
+      lockup.className = "ryzon-unified-brand";
 
-    if (!mark) {
-      mark = document.createElement("span");
-      mark.textContent = "R";
-    }
-    mark.classList.add("ryzon-unified-mark");
-    mark.setAttribute("aria-hidden", "true");
+      if (!mark) {
+        mark = document.createElement("span");
+        mark.textContent = "R";
+      }
+      mark.classList.add("ryzon-unified-mark");
+      mark.setAttribute("aria-hidden", "true");
 
-    const stack = document.createElement("span");
-    stack.className = "ryzon-unified-copy";
-    const name = document.createElement("span");
-    name.className = "ryzon-unified-name";
-    name.textContent = label.replace(/^RYZON\s*/i, "RYZON") || "RYZON";
-    const tagline = document.createElement("span");
-    tagline.className = "ryzon-unified-tagline";
-    tagline.textContent = "One App, Endless Possibilities!";
+      const stack = document.createElement("span");
+      stack.className = "ryzon-unified-copy";
+      const name = document.createElement("span");
+      name.className = "ryzon-unified-name";
+      name.textContent = label.replace(/^RYZON\\s*/i, "RYZON") || "RYZON";
+      const tagline = document.createElement("span");
+      tagline.className = "ryzon-unified-tagline";
+      tagline.textContent = "One App, Endless Possibilities!";
 
-    stack.append(name, tagline);
-    lockup.append(mark, stack);
-    parent.insertBefore(lockup, target);
-    if (mark.parentElement !== lockup) mark.remove();
-    target.remove();
+      stack.append(name, tagline);
+      lockup.append(mark, stack);
+      parent.insertBefore(lockup, target);
+      if (mark.parentElement !== lockup) mark.remove();
+      target.remove();
+    });
   }
 
   function addStyles() {
