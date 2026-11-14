@@ -139,6 +139,45 @@ button:focus-visible,select:focus-visible,a:focus-visible{
           <span class="slider"></span>
         </label>
       </div>
+
+      <div class="setting">
+        <div class="setting-icon">🌈</div>
+        <div class="setting-info">
+          <strong>App Theme · 19 Styles</strong>
+          <small>Choose your own RYZON colour theme. Saved on this device.</small>
+        </div>
+        <select id="appearanceTheme" aria-label="App colour theme">
+          <option value="ocean">Ocean Blue</option><option value="midnight">Midnight</option>
+          <option value="purple">Royal Purple</option><option value="emerald">Emerald</option>
+          <option value="sunset">Sunset</option><option value="rose">Rose Pink</option>
+          <option value="sky">Sky Blue</option><option value="gold">Golden</option>
+          <option value="crimson">Crimson</option><option value="aqua">Aqua</option>
+          <option value="lavender">Lavender</option><option value="forest">Forest</option>
+          <option value="coffee">Coffee</option><option value="arctic">Arctic</option>
+          <option value="white">Pure White</option><option value="graphite">Graphite</option>
+          <option value="neon">Neon</option><option value="coral">Coral</option>
+          <option value="galaxy">Galaxy</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div class="setting-icon">🔤</div>
+        <div class="setting-info">
+          <strong>Font Style · 19 Styles</strong>
+          <small>Pick a readable font for your app.</small>
+        </div>
+        <select id="appearanceFont" aria-label="App font style">
+          <option value="Poppins">Poppins · Modern</option><option value="Nunito">Nunito · Rounded</option>
+          <option value="Quicksand">Quicksand · Soft</option><option value="Inter">Inter · Clean</option>
+          <option value="Roboto">Roboto · Simple</option><option value="Lato">Lato · Friendly</option>
+          <option value="Montserrat">Montserrat · Stylish</option><option value="Outfit">Outfit · Modern</option>
+          <option value="Rubik">Rubik · Rounded</option><option value="Manrope">Manrope · Premium</option>
+          <option value="DM Sans">DM Sans · Minimal</option><option value="Urbanist">Urbanist · Elegant</option>
+          <option value="Raleway">Raleway · Light</option><option value="Open Sans">Open Sans · Readable</option>
+          <option value="Playfair Display">Playfair Display · Classic</option><option value="Merriweather">Merriweather · Traditional</option>
+          <option value="Ubuntu">Ubuntu · Friendly</option><option value="Mukta">Mukta · Indian languages</option>
+          <option value="Noto Sans">Noto Sans · Multilingual</option>
+        </select>
+      </div>
       <div class="setting">
         <div class="setting-icon">🌐</div>
         <div class="setting-info">
@@ -405,6 +444,23 @@ $("themeToggle").addEventListener("change",()=>{
   document.body.classList.toggle("light",theme==="light");
   localStorage.setItem("ryzon_theme",theme);
   showMessage("Theme updated.");
+});
+
+// Personal RYZON appearance (19 themes + 19 font styles)
+const appearanceTheme=$("appearanceTheme");
+const appearanceFont=$("appearanceFont");
+appearanceTheme.value=localStorage.getItem("ryzon_appearance_theme")||"ocean";
+appearanceFont.value=localStorage.getItem("ryzon_appearance_font")||"Poppins";
+window.RYZONApplyAppearance?.();
+appearanceTheme.addEventListener("change",()=>{
+  localStorage.setItem("ryzon_appearance_theme",appearanceTheme.value);
+  window.RYZONApplyAppearance?.();
+  showMessage("Your RYZON theme has been saved.");
+});
+appearanceFont.addEventListener("change",()=>{
+  localStorage.setItem("ryzon_appearance_font",appearanceFont.value);
+  window.RYZONApplyAppearance?.();
+  showMessage("Your font style has been saved.");
 });
 
 // Language preference
