@@ -84,7 +84,7 @@
         justify-content: center !important;
         background: linear-gradient(145deg,#55dcff,#078bd0) !important;
         color: #fff !important;
-        font: 900 34px/1 Arial,sans-serif !important;
+        font: 700 32px/1 "Trebuchet MS", "Segoe UI", sans-serif !important;
         letter-spacing: 0 !important;
         box-shadow: 0 6px 18px #0799e544 !important;
       }
@@ -101,8 +101,8 @@
         margin: 0 !important;
         padding: 0 !important;
         color: #55dcff !important;
-        font: 800 23px/1.05 Arial,sans-serif !important;
-        letter-spacing: 2px !important;
+        font: 600 22px/1.1 "Trebuchet MS", "Segoe UI", sans-serif !important;
+        letter-spacing: 1.2px !important;
         text-align: left !important;
         white-space: nowrap;
       }
@@ -119,7 +119,7 @@
       @media (max-width: 360px) {
         .ryzon-unified-brand { gap: 8px !important; }
         .ryzon-unified-mark { flex-basis: 42px !important; width: 42px !important; height: 42px !important; min-width: 42px !important; min-height: 42px !important; font-size: 30px !important; }
-        .ryzon-unified-name { font-size: 20px !important; }
+        .ryzon-unified-name { font-size: 19px !important; }
         .ryzon-unified-tagline { font-size: 9px !important; }
       }
     `;
