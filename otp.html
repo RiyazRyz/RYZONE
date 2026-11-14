@@ -612,14 +612,8 @@ $("mainButton").onclick=async()=>{
   }else{
    const result=await signInWithEmailAndPassword(auth,email,password);
    await reload(result.user);
-   if(!result.user.emailVerified){
-    await sendEmailVerification(result.user);
-    $("verificationText").textContent=T("emailNotVerified");
-    $("emailSection").style.display="none";$("phoneSection").style.display="none";
-    $("accountTabs").style.display="none";$("methodTabs").style.display="none";
-    $("verifiedSection").style.display="block";$("googleButton").style.display="none";
-    $("accountPrompt").style.display="none";message(T("verificationSent"),true);return;
-   }
+   // Existing email/password accounts may sign in without repeating email verification.
+   // Email verification is sent only during new email-account registration.
    clearAttempts();successLogin();
   }
  }catch(error){showError(error)}
