@@ -331,6 +331,12 @@ body{padding:0!important}
 }
 
 
+/* Explore collections live on their own scrollable screen, keeping the Reels stage full-height */
+.launch-collections-screen{position:fixed;inset:0;z-index:120;overflow-y:auto;overscroll-behavior:contain;background:#071426;padding:calc(12px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom));}
+.launch-screen-header{display:flex;align-items:center;gap:14px;min-height:48px;margin-bottom:12px;color:#f3f8ff}
+.launch-screen-header strong{font-size:17px}
+.launch-back{border:1px solid #315573;background:#102d49;color:#fff;border-radius:11px;padding:9px 12px}
+.launch-collections-screen .launch-shelf{max-width:650px;margin:0 auto}
 /* RYZON launch discovery shelf */
 .launch-shelf{margin:12px 0 10px;padding:14px;border:1px solid #244d6c;border-radius:18px;background:linear-gradient(145deg,#102b47,#091a2e);box-shadow:0 12px 30px #0004}
 .launch-shelf-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
@@ -406,6 +412,21 @@ body{padding:0!important}
   </div>
  </article>
 
+
+ <nav class="social-bottom shorts-bottom-nav" aria-label="RYZON navigation">
+  <button type="button" class="active" onclick="showShortsHome(event)"><b>⌂</b>Home</button>
+  <button type="button" onclick="showExploreInfo()"><b>⌕</b>Explore</button>
+  <button type="button" onclick="showVideoUploadInfo()"><b>＋</b>Upload</button>
+  <button type="button" onclick="showRandomSetup(event)"><b>💬</b>Random Chat</button>
+  <button type="button" onclick="openMyProfile()"><b>◉</b>Profile</button>
+ </nav>
+</section>
+
+<section id="launchCollections" class="launch-collections-screen hidden" aria-label="RYZON Launch Picks">
+ <div class="launch-screen-header">
+  <button type="button" class="launch-back" onclick="showShortsHome()">← Back</button>
+  <strong>RYZON Explore</strong>
+ </div>
  <section class="launch-shelf" aria-label="RYZON launch video collections">
   <div class="launch-shelf-head"><h2>✨ RYZON Launch Picks</h2><span>OFFICIAL COLLECTIONS</span></div>
   <p class="launch-shelf-note">Discover what RYZON creators can share. These are starter categories, not fake user videos or activity.</p>
@@ -416,13 +437,6 @@ body{padding:0!important}
   </div>
   <div class="launch-shelf-foot">🎬 Real RYZON Official videos will appear here after they are uploaded and reviewed. Creator videos will be shown when creators publish them.</div>
  </section>
- <nav class="social-bottom shorts-bottom-nav" aria-label="RYZON navigation">
-  <button type="button" class="active" onclick="showShortsHome(event)"><b>⌂</b>Home</button>
-  <button type="button" onclick="showExploreInfo()"><b>⌕</b>Explore</button>
-  <button type="button" onclick="showVideoUploadInfo()"><b>＋</b>Upload</button>
-  <button type="button" onclick="showRandomSetup(event)"><b>💬</b>Random Chat</button>
-  <button type="button" onclick="openMyProfile()"><b>◉</b>Profile</button>
- </nav>
 </section>
 
 <section class="card" id="randomCoinWallet" aria-label="RYZON Coin Wallet">
@@ -814,7 +828,10 @@ function openRYZONSearch(){
  location.href="./explore.html?q="+encodeURIComponent(query.trim());
 }
 function showFeedActionInfo(message){alert(message);}
-function showExploreInfo(){alert("Explore will show reviewed RYZON community videos after the secure feed is connected.");}
+function showExploreInfo(){
+ $("randomHub").classList.add("hidden");
+ $("launchCollections").classList.remove("hidden");
+}
 function showVideoUploadInfo(){alert("Video upload is not active yet. It will open here after secure storage, creator permissions and moderation are ready.");}
 function showStatus(message){$("status").textContent=message;}
 function setEmptyMessage(message){
@@ -872,6 +889,7 @@ function resetChatState(){
 }
 function showShortsHome(event){
  if(event)event.preventDefault();
+ $("launchCollections").classList.add("hidden");
  $("randomHub").classList.remove("hidden");
  $("setupCard").classList.add("hidden");
  $("chatCard").classList.add("hidden");
