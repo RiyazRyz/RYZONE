@@ -337,6 +337,20 @@ body{padding:0!important}
 .launch-screen-header strong{font-size:17px}
 .launch-back{border:1px solid #315573;background:#102d49;color:#fff;border-radius:11px;padding:9px 12px}
 .launch-collections-screen .launch-shelf{max-width:650px;margin:0 auto}
+/* RYZON Find Friend Hub — responsive UI shell; data actions stay inactive until Worker endpoints are ready */
+.friend-hub-screen{position:fixed;inset:0;z-index:125;overflow-y:auto;overscroll-behavior:contain;background:#071426;color:#f3f8ff;padding:calc(12px + env(safe-area-inset-top)) 14px calc(20px + env(safe-area-inset-bottom));}
+.friend-hub-inner{max-width:720px;margin:0 auto;padding-bottom:20px}
+.friend-hub-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;margin-bottom:14px}
+.friend-hub-head h2{font-size:19px;margin:0}.friend-hub-back,.friend-tab{border:1px solid #315573;background:#102d49;color:#eaf7ff;border-radius:12px;padding:10px 12px}
+.friend-hub-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:14px}
+.friend-tab{font-size:11px;padding:11px 4px;min-width:0}.friend-tab.active{background:#07557a;border-color:#55dcff;color:#fff}
+.friend-hub-panel{border:1px solid #244766;border-radius:17px;background:linear-gradient(150deg,#102b47,#091a2e);padding:16px;margin-bottom:12px}
+.friend-hub-panel h3{margin:0 0 8px;font-size:16px}.friend-hub-panel p{color:#a9bfd2;font-size:12px;line-height:1.6;margin:0}
+.friend-search-row{display:flex;gap:8px;margin:12px 0}.friend-search-row input{min-width:0;flex:1;border:1px solid #315573;border-radius:11px;background:#071a2d;color:#fff;padding:12px;font-size:13px}
+.friend-empty-state{text-align:center;padding:24px 12px;color:#a9bfd2}.friend-empty-state b{display:block;color:#eaf7ff;font-size:14px;margin-bottom:7px}
+.friend-hub-note{border:1px solid #735b2d;background:#302817;color:#f6dca6;border-radius:12px;padding:11px;font-size:11px;line-height:1.55;margin-top:12px}
+.friend-hub-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.friend-hub-actions button{border:1px solid #315573;background:#142f4b;color:#eaf7ff;border-radius:11px;padding:12px;font-size:12px}
+@media(max-width:380px){.friend-hub-tabs{gap:4px}.friend-tab{font-size:10px;padding:10px 2px}.friend-hub-panel{padding:13px}}
 /* RYZON launch discovery shelf */
 .launch-shelf{margin:12px 0 10px;padding:14px;border:1px solid #244d6c;border-radius:18px;background:linear-gradient(145deg,#102b47,#091a2e);box-shadow:0 12px 30px #0004}
 .launch-shelf-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
@@ -416,6 +430,7 @@ body{padding:0!important}
  <nav class="social-bottom shorts-bottom-nav" aria-label="RYZON navigation">
   <button type="button" class="active" onclick="showShortsHome(event)"><b>⌂</b>Home</button>
   <button type="button" onclick="showExploreInfo()"><b>⌕</b>Explore</button>
+  <button type="button" onclick="showFriendHub()"><b>♧</b>Friends</button>
   <button type="button" onclick="showVideoUploadInfo()"><b>＋</b>Upload</button>
   <button type="button" onclick="showRandomSetup(event)"><b>💬</b>Random Chat</button>
   <button type="button" onclick="openMyProfile()"><b>◉</b>Profile</button>
@@ -437,6 +452,36 @@ body{padding:0!important}
   </div>
   <div class="launch-shelf-foot">🎬 Real RYZON Official videos will appear here after they are uploaded and reviewed. Creator videos will be shown when creators publish them.</div>
  </section>
+</section>
+
+<section id="friendHubScreen" class="friend-hub-screen hidden" aria-label="RYZON Find Friend">
+ <div class="friend-hub-inner">
+  <div class="friend-hub-head"><button class="friend-hub-back" type="button" onclick="showShortsHome()">← Back</button><h2>♧ Find Friend</h2><span aria-hidden="true">🌐</span></div>
+  <div class="friend-hub-tabs" role="tablist" aria-label="Find Friend sections">
+   <button class="friend-tab active" type="button" data-friend-tab="discover" onclick="showFriendTab('discover',this)">Discover</button>
+   <button class="friend-tab" type="button" data-friend-tab="friends" onclick="showFriendTab('friends',this)">Friends</button>
+   <button class="friend-tab" type="button" data-friend-tab="requests" onclick="showFriendTab('requests',this)">Requests</button>
+   <button class="friend-tab" type="button" data-friend-tab="profile" onclick="showFriendTab('profile',this)">Profile</button>
+  </div>
+  <section class="friend-hub-panel" data-friend-panel="discover">
+   <h3>Discover people</h3><p>Find people by display name, language and interests.</p>
+   <div class="friend-search-row"><input id="friendDiscoverSearch" type="search" placeholder="Search by name or interest" maxlength="60" disabled><button class="friend-hub-back" type="button" disabled>Search</button></div>
+   <div class="friend-empty-state"><b>Discover is being connected</b>Real profiles will appear after secure search and privacy filters are enabled. No sample or invented accounts are shown.</div>
+  </section>
+  <section class="friend-hub-panel hidden" data-friend-panel="friends">
+   <h3>My Friends</h3><p>Accepted friends, online status, favorites and recently added friends.</p>
+   <div class="friend-empty-state"><b>Friends list is not connected yet</b>Your real friend list will load after the protected Friends API is ready.</div>
+  </section>
+  <section class="friend-hub-panel hidden" data-friend-panel="requests">
+   <h3>Friend Requests</h3><p>Review received requests and manage requests you have sent.</p>
+   <div class="friend-empty-state"><b>Requests are not connected yet</b>Accept, reject and cancel actions will be enabled after server-side privacy and request checks are completed.</div>
+  </section>
+  <section class="friend-hub-panel hidden" data-friend-panel="profile">
+   <h3>My RYZON Profile</h3><p>Edit your display name, profile photo and bio. Your existing profile editor is available below.</p>
+   <div class="friend-hub-actions"><button type="button" onclick="openMyProfile()">Edit My Profile</button><button type="button" onclick="location.href='./notifications.html'">Notifications</button></div>
+  </section>
+  <div class="friend-hub-note">🔒 Privacy first: search visibility, private-profile settings, friend requests, blocking and reporting must be enforced by the server before people or actions are displayed.</div>
+ </div>
 </section>
 
 <section class="card" id="randomCoinWallet" aria-label="RYZON Coin Wallet">
@@ -828,6 +873,18 @@ function openRYZONSearch(){
  location.href="./explore.html?q="+encodeURIComponent(query.trim());
 }
 function showFeedActionInfo(message){alert(message);}
+function showFriendHub(){
+ $("randomHub").classList.add("hidden");
+ $("launchCollections").classList.add("hidden");
+ $("setupCard").classList.add("hidden");
+ $("chatCard").classList.add("hidden");
+ $("friendHubScreen").classList.remove("hidden");
+ showFriendTab("discover");
+}
+function showFriendTab(tab,button){
+ document.querySelectorAll("[data-friend-panel]").forEach(panel=>panel.classList.toggle("hidden",panel.getAttribute("data-friend-panel")!==tab));
+ document.querySelectorAll("[data-friend-tab]").forEach(item=>item.classList.toggle("active",item.getAttribute("data-friend-tab")===tab));
+}
 function showExploreInfo(){
  $("randomHub").classList.add("hidden");
  $("launchCollections").classList.remove("hidden");
@@ -889,6 +946,7 @@ function resetChatState(){
 }
 function showShortsHome(event){
  if(event)event.preventDefault();
+ $("friendHubScreen").classList.add("hidden");
  $("launchCollections").classList.add("hidden");
  $("randomHub").classList.remove("hidden");
  $("setupCard").classList.add("hidden");
@@ -897,6 +955,7 @@ function showShortsHome(event){
 }
 function showRandomSetup(event){
  if(event)event.preventDefault();
+ $("friendHubScreen").classList.add("hidden");
  $("randomHub").classList.add("hidden");
  $("chatCard").classList.add("hidden");
  $("setupCard").classList.remove("hidden");
