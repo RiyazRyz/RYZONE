@@ -153,9 +153,27 @@
     const fontKey = localStorage.getItem("ryzon_appearance_font") || "Poppins";
     const safeFont = /^[a-zA-Z ]+$/.test(fontKey) ? fontKey : "Poppins";
     const root = document.documentElement;
-    ["--ryzon-bg","--ryzon-card","--ryzon-card2","--ryzon-accent","--ryzon-text","--ryzon-muted","--ryzon-border"].forEach((key,i)=>root.style.setProperty(key,palette[i]));
+    const variableNames = ["--ryzon-bg","--ryzon-card","--ryzon-card2","--ryzon-accent","--ryzon-text","--ryzon-muted","--ryzon-border"];
+    variableNames.forEach((key,i)=>{
+      root.style.setProperty(key,palette[i]);
+      document.body.style.setProperty(key,palette[i]);
+    });
+    // Common aliases used by existing RYZON page styles.
+    const aliases = {"--bg":palette[0],"--navy":palette[0],"--card":palette[1],"--panel":palette[1],"--card2":palette[2],"--panel2":palette[2],"--accent":palette[3],"--cyan":palette[3],"--text":palette[4],"--muted":palette[5],"--border":palette[6],"--line":palette[6]};
+    Object.entries(aliases).forEach(([key,value])=>{
+      root.style.setProperty(key,value);
+      document.body.style.setProperty(key,value);
+    });
     root.dataset.ryzonTheme = themeKey;
     root.style.setProperty("--ryzon-font", '"' + safeFont + '", "Noto Sans", Arial, sans-serif');
+    let fontLink = document.getElementById("ryzon-selected-google-font");
+    if (!fontLink) {
+      fontLink = document.createElement("link");
+      fontLink.id = "ryzon-selected-google-font";
+      fontLink.rel = "stylesheet";
+      document.head.appendChild(fontLink);
+    }
+    fontLink.href = "https://fonts.googleapis.com/css2?family=" + encodeURIComponent(safeFont).replace(/%20/g, "+") + ":wght@400;500;600;700&display=swap";
     document.body.style.backgroundColor = palette[0];
     document.body.style.color = palette[4];
     document.body.style.fontFamily = root.style.getPropertyValue("--ryzon-font");
