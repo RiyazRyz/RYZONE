@@ -330,6 +330,22 @@ body{padding:0!important}
  #randomHub .shorts-bottom-nav{padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
 }
 
+
+/* RYZON launch discovery shelf */
+.launch-shelf{margin:12px 0 10px;padding:14px;border:1px solid #244d6c;border-radius:18px;background:linear-gradient(145deg,#102b47,#091a2e);box-shadow:0 12px 30px #0004}
+.launch-shelf-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.launch-shelf-head h2{font-size:16px;margin:0;color:#f3f8ff}
+.launch-shelf-head span{font-size:10px;color:#69dfff;border:1px solid #28617d;border-radius:20px;padding:5px 8px}
+.launch-shelf-note{margin:0 0 12px;color:#9db6cc;font-size:11px;line-height:1.5}
+.launch-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.launch-tile{min-height:112px;padding:11px 9px;border:1px solid #2c5270;border-radius:14px;background:linear-gradient(150deg,#17496a,#10243d 78%);display:flex;flex-direction:column;justify-content:space-between;gap:8px}
+.launch-tile:nth-child(2){background:linear-gradient(150deg,#3c3568,#17243f 78%)}
+.launch-tile:nth-child(3){background:linear-gradient(150deg,#18594f,#102b3d 78%)}
+.launch-tile-icon{font-size:23px}
+.launch-tile strong{display:block;font-size:11px;color:#f4f9ff}
+.launch-tile small{display:block;margin-top:4px;font-size:9px;line-height:1.35;color:#b6cadd}
+.launch-shelf-foot{margin-top:11px;padding-top:10px;border-top:1px solid #24415f;color:#a9bfd2;font-size:10px;line-height:1.5}
+@media(max-width:360px){.launch-grid{gap:6px}.launch-tile{padding:9px 7px}.launch-tile strong{font-size:10px}}
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
@@ -389,6 +405,17 @@ body{padding:0!important}
    <button class="video-action" type="button" onclick="showFeedActionInfo('Remix will be available after creator permissions and moderation are ready.')" aria-label="Remix">⟳<small>Remix</small></button>
   </div>
  </article>
+
+ <section class="launch-shelf" aria-label="RYZON launch video collections">
+  <div class="launch-shelf-head"><h2>✨ RYZON Launch Picks</h2><span>OFFICIAL COLLECTIONS</span></div>
+  <p class="launch-shelf-note">Discover what RYZON creators can share. These are starter categories, not fake user videos or activity.</p>
+  <div class="launch-grid">
+   <article class="launch-tile"><span class="launch-tile-icon" aria-hidden="true">🍲</span><div><strong>Food & Cooking</strong><small>Recipes, kitchen tips and food stories</small></div></article>
+   <article class="launch-tile"><span class="launch-tile-icon" aria-hidden="true">💡</span><div><strong>Learning & Ideas</strong><small>Useful skills, projects and creativity</small></div></article>
+   <article class="launch-tile"><span class="launch-tile-icon" aria-hidden="true">🌍</span><div><strong>Travel & Nature</strong><small>Places, culture and beautiful moments</small></div></article>
+  </div>
+  <div class="launch-shelf-foot">🎬 Real RYZON Official videos will appear here after they are uploaded and reviewed. Creator videos will be shown when creators publish them.</div>
+ </section>
  <nav class="social-bottom shorts-bottom-nav" aria-label="RYZON navigation">
   <button type="button" class="active" onclick="showShortsHome(event)"><b>⌂</b>Home</button>
   <button type="button" onclick="showExploreInfo()"><b>⌕</b>Explore</button>
