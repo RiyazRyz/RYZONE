@@ -449,12 +449,15 @@ $("googleAuthButton").addEventListener("click",async()=>{
   $("loginStatus").textContent="Redirecting to Google securely...";
 
   try{
+    // Keep the redirect result pending until Firebase returns to this page.
+    sessionStorage.setItem("ryzonAdminGoogleRedirectPending","1");
     await signInWithRedirect(auth,googleProvider);
   }catch(error){
+    sessionStorage.removeItem("ryzonAdminGoogleRedirectPending");
     button.disabled=false;
     button.innerHTML='<span class="google-mark" aria-hidden="true">G</span> Continue with Google';
     $("loginStatus").textContent=
-      "Google sign-in could not start: "+friendlyAuthError(error);
+      "Google sign-in could not start ["+(error?.code||"unknown")+"]: "+friendlyAuthError(error);
   }
 });
 
@@ -471,11 +474,62 @@ function friendlyAuthError(error){
   return error?.message||"Please try again.";
 }
 
-// Resolve the redirect result after Google returns to this page.
-getRedirectResult(auth).catch(error=>{
-  $("loginStatus").textContent=
-    "Google sign-in failed: "+friendlyAuthError(error);
-});
+// Resolve the Google redirect before rejecting a non-admin account.
+// This prevents the auth-state listener from hiding the useful redirect diagnostic.
+(async()=>{
+  const marker="ryzonAdminGoogleRedirectPending";
+  const wasGoogleRedirect=sessionStorage.getItem(marker)==="1";
+  try{
+    const result=await getRedirectResult(auth);
+    sessionStorage.removeItem(marker);
+
+    if(result?.user){
+      const returnedUser=result.user;
+      const providerNames=(returnedUser.providerData||[])
+        .map(item=>item.providerId)
+        .filter(Boolean);
+      const uidMatches=returnedUser.uid===ADMIN_UID;
+
+      if(uidMatches){
+        $("loginStatus").textContent=
+          "Google sign-in successful. Admin UID: MATCH. Providers: "+
+          (providerNames.join(", ")||"not reported")+".";
+      }else{
+        $("loginStatus").textContent=
+          "Google sign-in completed, but Admin UID: NO MATCH. "+
+          "This Google identity is not linked to the existing authorized Admin account. "+
+          "No access was granted.";
+        await signOut(auth);
+      }
+    }else if(wasGoogleRedirect){
+      const current=auth.currentUser;
+      if(current && current.uid!==ADMIN_UID){
+        await signOut(auth);
+        $("loginStatus").textContent=
+          "Google redirect returned without a matching Admin UID. No access was granted.";
+      }else if(current && current.uid===ADMIN_UID){
+        $("loginStatus").textContent=
+          "Google sign-in successful. Admin UID: MATCH.";
+      }else{
+        $("loginStatus").textContent=
+          "Google returned to the dashboard, but Firebase provided no sign-in result. "+
+          "Try again and note any error code shown.";
+      }
+    }
+  }catch(error){
+    sessionStorage.removeItem(marker);
+    if(auth.currentUser && auth.currentUser.uid!==ADMIN_UID){
+      await signOut(auth).catch(()=>{});
+    }
+    $("loginStatus").textContent=
+      "Google sign-in failed ["+(error?.code||"unknown")+"]: "+
+      friendlyAuthError(error);
+  }finally{
+    const button=$("googleAuthButton");
+    button.disabled=false;
+    button.innerHTML='<span class="google-mark" aria-hidden="true">G</span> Continue with Google';
+  }
+})();
 
 window.resetAdminPassword=async function(){
 
@@ -508,9 +562,16 @@ onAuthStateChanged(auth,async user=>{
     setAdminView(false);
     clearAdminData();
 
+    // Wait for getRedirectResult to identify the returned Google account.
+    if(user && sessionStorage.getItem("ryzonAdminGoogleRedirectPending")==="1"){
+      $("loginStatus").textContent=
+        "Google account returned. Checking the authorized Admin UID...";
+      return;
+    }
+
     if(user){
       $("loginStatus").textContent=
-        "This account is not authorized as admin.";
+        "This account is not authorized as admin. Admin UID check failed.";
       await signOut(auth);
     }
   }
