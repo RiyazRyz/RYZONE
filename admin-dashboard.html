@@ -58,6 +58,24 @@ button{
 }
 button:disabled{opacity:.5;cursor:not-allowed}
 .primary{background:#1265a8;color:white}
+.google-login{
+  width:100%;margin:10px 0 4px;background:#fff;color:#243447;
+  border:1px solid #cbd5e1;display:flex;align-items:center;
+  justify-content:center;gap:10px;min-height:46px;
+}
+.google-login:hover{background:#f8fafc}
+.google-mark{
+  display:inline-grid;place-items:center;width:22px;height:22px;
+  border:1px solid #d7dee7;border-radius:50%;font-weight:800;
+  color:#4285f4;background:#fff;
+}
+.admin-google-divider{
+  display:flex;align-items:center;gap:10px;color:#718096;
+  font-size:12px;margin:12px 0;
+}
+.admin-google-divider:before,.admin-google-divider:after{
+  content:"";height:1px;background:#e2e8f0;flex:1;
+}
 .approve{background:#16834a;color:white}
 .reject,.logout{background:#c93636;color:white}
 .neutral{background:#e7eef5;color:#173b58}
@@ -170,6 +188,15 @@ footer{
     </button>
   </form>
 
+  <div class="admin-google-divider" aria-hidden="true">OR</div>
+  <button class="google-login" type="button" id="googleAuthButton">
+    <span class="google-mark" aria-hidden="true">G</span>
+    Continue with Google
+  </button>
+
+  <p class="muted" style="font-size:13px">
+    Google sign-in is accepted only for the existing authorized Admin account.
+  </p>
   <p id="loginStatus" role="status"></p>
   <p id="resetStatus" role="status"></p>
 </section>
@@ -301,6 +328,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
@@ -406,6 +436,45 @@ $("loginForm").addEventListener("submit",async event=>{
     $("authButton").disabled=false;
     $("authButton").textContent="Login";
   }
+});
+
+// Mobile-friendly Google sign-in uses Firebase redirect flow.
+const googleProvider=new GoogleAuthProvider();
+googleProvider.setCustomParameters({prompt:"select_account"});
+
+$("googleAuthButton").addEventListener("click",async()=>{
+  const button=$("googleAuthButton");
+  button.disabled=true;
+  button.textContent="Opening Google sign-in...";
+  $("loginStatus").textContent="Redirecting to Google securely...";
+
+  try{
+    await signInWithRedirect(auth,googleProvider);
+  }catch(error){
+    button.disabled=false;
+    button.innerHTML='<span class="google-mark" aria-hidden="true">G</span> Continue with Google';
+    $("loginStatus").textContent=
+      "Google sign-in could not start: "+friendlyAuthError(error);
+  }
+});
+
+function friendlyAuthError(error){
+  const code=error?.code||"";
+  if(code==="auth/operation-not-allowed")
+    return "Google sign-in is not enabled in Firebase Authentication.";
+  if(code==="auth/unauthorized-domain")
+    return "This website domain is not authorized in Firebase Authentication.";
+  if(code==="auth/account-exists-with-different-credential")
+    return "This Google email already uses another sign-in method. The Google provider must be securely linked to the existing Admin account first.";
+  if(code==="auth/popup-blocked"||code==="auth/redirect-cancelled-by-user")
+    return "Google sign-in was interrupted. Please try again.";
+  return error?.message||"Please try again.";
+}
+
+// Resolve the redirect result after Google returns to this page.
+getRedirectResult(auth).catch(error=>{
+  $("loginStatus").textContent=
+    "Google sign-in failed: "+friendlyAuthError(error);
 });
 
 window.resetAdminPassword=async function(){
