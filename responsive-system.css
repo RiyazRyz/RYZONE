@@ -45,3 +45,47 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* RYZON LOGIN PAGE LAYOUT
+   Scoped to otp.html by its unique success overlay; other pages are unchanged. */
+body:has(#successOverlay){
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:
+    max(12px,env(safe-area-inset-top))
+    max(12px,env(safe-area-inset-right))
+    max(12px,env(safe-area-inset-bottom))
+    max(12px,env(safe-area-inset-left));
+}
+body:has(#successOverlay) > .container{
+  flex:0 1 430px;
+  width:100%;
+  max-width:430px;
+  min-width:0;
+  margin-inline:auto;
+}
+@media (max-height:760px){
+  body:has(#successOverlay){align-items:flex-start}
+  body:has(#successOverlay) > .container{margin-block:0 auto}
+}
+@media (max-width:480px){
+  body:has(#successOverlay) > .container{
+    padding:clamp(16px,4vw,22px);
+    border-radius:20px;
+  }
+  body:has(#successOverlay) .premium-box{padding:14px}
+  body:has(#successOverlay) .premium-actions{gap:8px}
+  body:has(#successOverlay) .premium-forgot,
+  body:has(#successOverlay) .premium-signup{min-width:0;overflow-wrap:anywhere}
+}
+@media (max-width:360px){
+  body:has(#successOverlay) > .container{padding:15px}
+  body:has(#successOverlay) h1{font-size:28px}
+  body:has(#successOverlay) .tabs,
+  body:has(#successOverlay) .method-tabs{gap:6px}
+  body:has(#successOverlay) .tabs button,
+  body:has(#successOverlay) .method-tabs button{padding-inline:4px}
+}
