@@ -171,7 +171,45 @@ footer{
   </form>
 
   <p id="loginStatus" role="status"></p>
+  <div class="notice" style="margin-top:16px">
+    <strong>Demo Login (Preview Only)</strong><br>
+    This public demo opens sample dashboard content only. It cannot access or change real RYZON data.
+  </div>
+  <form id="demoLoginForm">
+    <input type="text" id="demoLoginId" placeholder="Demo Login ID" autocomplete="username" required>
+    <input type="password" id="demoLoginPassword" placeholder="Demo Password" autocomplete="current-password" required>
+    <button class="neutral" type="submit" id="demoLoginButton">Open Demo Dashboard</button>
+    <p id="demoLoginStatus" role="status"></p>
+  </form>
   <p id="resetStatus" role="status"></p>
+</section>
+
+<section id="demoPanel" class="hidden">
+  <div class="panel">
+    <div class="topline">
+      <div>
+        <h2>RYZON Demo Dashboard</h2>
+        <p class="muted">Preview mode · Sample information only</p>
+      </div>
+      <button class="logout" type="button" id="demoLogoutButton">Exit Demo</button>
+    </div>
+    <div class="notice">
+      You are viewing a demonstration. These sample figures are not live user, project, payment, or report records.
+      No real data can be viewed, approved, edited, or deleted from this mode.
+    </div>
+    <div class="stats" style="margin-top:14px">
+      <div class="stat">Sample Projects<strong>12</strong></div>
+      <div class="stat">Sample Pending<strong>4</strong></div>
+      <div class="stat">Sample Approved<strong>6</strong></div>
+      <div class="stat">Sample Rejected<strong>2</strong></div>
+    </div>
+  </div>
+  <div class="panel">
+    <h2>Demo Sections</h2>
+    <div class="project"><h3>Project Review Preview</h3><p>Example project: Learning App</p><span class="badge status-pending">SAMPLE · PENDING</span></div>
+    <div class="project"><h3>User Management Preview</h3><p class="muted">User records are not connected in demo mode.</p></div>
+    <div class="project"><h3>Reports Preview</h3><p class="muted">Reports are not connected in demo mode.</p></div>
+  </div>
 </section>
 
 <section id="adminPanel" class="hidden">
@@ -320,6 +358,12 @@ const auth=getAuth(app);
 
 const ADMIN_UID="30G6RAmoyJVZsz2rBXEhqdXtVXR2";
 
+// These credentials are intentionally public and grant DEMO PREVIEW ONLY.
+// Never use them for real administrator access.
+const DEMO_LOGIN_ID="RYZON@786";
+const DEMO_LOGIN_PASSWORD="Saleemsahail@786";
+let demoMode=false;
+
 let allProjects=[];
 let loadingProjects=false;
 
@@ -331,8 +375,10 @@ function isAdmin(){
 }
 
 function setAdminView(enabled){
+  if(enabled) demoMode=false;
   $("adminPanel").classList.toggle("hidden",!enabled);
-  $("loginPanel").classList.toggle("hidden",enabled);
+  $("loginPanel").classList.toggle("hidden",enabled||demoMode);
+  $("demoPanel").classList.toggle("hidden",!demoMode);
 }
 
 function updateStats(list){
@@ -369,6 +415,27 @@ window.toggleAdminAuth=async function(){
 
   $("loginForm").requestSubmit();
 };
+
+$("demoLoginForm").addEventListener("submit",event=>{
+  event.preventDefault();
+  const id=$("demoLoginId").value.trim();
+  const password=$("demoLoginPassword").value;
+  if(id===DEMO_LOGIN_ID && password===DEMO_LOGIN_PASSWORD){
+    demoMode=true;
+    setAdminView(false);
+    $("demoLoginStatus").textContent="Demo preview opened. No live data is connected.";
+    $("demoLoginPassword").value="";
+  }else{
+    $("demoLoginStatus").textContent="Invalid demo ID or password.";
+  }
+});
+
+$("demoLogoutButton").addEventListener("click",()=>{
+  demoMode=false;
+  setAdminView(false);
+  $("demoLoginStatus").textContent="Demo preview closed.";
+  $("demoLoginPassword").value="";
+});
 
 $("loginForm").addEventListener("submit",async event=>{
   event.preventDefault();
@@ -436,7 +503,7 @@ onAuthStateChanged(auth,async user=>{
     setAdminView(true);
     await loadProjects();
   }else{
-    setAdminView(false);
+    if(!demoMode) setAdminView(false);
     clearAdminData();
 
     if(user){
