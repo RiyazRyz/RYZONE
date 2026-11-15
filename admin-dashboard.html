@@ -329,8 +329,7 @@ import {
   signOut,
   sendPasswordResetEmail,
   GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
+  signInWithPopup,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
@@ -438,28 +437,10 @@ $("loginForm").addEventListener("submit",async event=>{
   }
 });
 
-// Mobile-friendly Google sign-in uses Firebase redirect flow.
+// Use a user-initiated popup to avoid cross-domain redirect storage issues
+// that can affect GitHub Pages when Firebase authDomain is on another domain.
 const googleProvider=new GoogleAuthProvider();
 googleProvider.setCustomParameters({prompt:"select_account"});
-
-$("googleAuthButton").addEventListener("click",async()=>{
-  const button=$("googleAuthButton");
-  button.disabled=true;
-  button.textContent="Opening Google sign-in...";
-  $("loginStatus").textContent="Redirecting to Google securely...";
-
-  try{
-    // Keep the redirect result pending until Firebase returns to this page.
-    sessionStorage.setItem("ryzonAdminGoogleRedirectPending","1");
-    await signInWithRedirect(auth,googleProvider);
-  }catch(error){
-    sessionStorage.removeItem("ryzonAdminGoogleRedirectPending");
-    button.disabled=false;
-    button.innerHTML='<span class="google-mark" aria-hidden="true">G</span> Continue with Google';
-    $("loginStatus").textContent=
-      "Google sign-in could not start ["+(error?.code||"unknown")+"]: "+friendlyAuthError(error);
-  }
-});
 
 function friendlyAuthError(error){
   const code=error?.code||"";
@@ -468,68 +449,45 @@ function friendlyAuthError(error){
   if(code==="auth/unauthorized-domain")
     return "This website domain is not authorized in Firebase Authentication.";
   if(code==="auth/account-exists-with-different-credential")
-    return "This Google email already uses another sign-in method. The Google provider must be securely linked to the existing Admin account first.";
-  if(code==="auth/popup-blocked"||code==="auth/redirect-cancelled-by-user")
-    return "Google sign-in was interrupted. Please try again.";
+    return "This Google email already uses another sign-in method. Sign in with the existing method first; do not create a second Admin account.";
+  if(code==="auth/popup-blocked")
+    return "The browser blocked the Google sign-in window. Allow pop-ups for this site and try again.";
+  if(code==="auth/popup-closed-by-user")
+    return "Google sign-in window was closed before completion.";
+  if(code==="auth/network-request-failed")
+    return "Network connection failed during Google sign-in. Check internet and retry.";
   return error?.message||"Please try again.";
 }
 
-// Resolve the Google redirect before rejecting a non-admin account.
-// This prevents the auth-state listener from hiding the useful redirect diagnostic.
-(async()=>{
-  const marker="ryzonAdminGoogleRedirectPending";
-  const wasGoogleRedirect=sessionStorage.getItem(marker)==="1";
+$("googleAuthButton").addEventListener("click",async()=>{
+  const button=$("googleAuthButton");
+  button.disabled=true;
+  button.textContent="Connecting to Google...";
+  $("loginStatus").textContent="Waiting for Google sign-in...";
+
   try{
-    const result=await getRedirectResult(auth);
-    sessionStorage.removeItem(marker);
+    const result=await signInWithPopup(auth,googleProvider);
+    const returnedUser=result.user;
 
-    if(result?.user){
-      const returnedUser=result.user;
-      const providerNames=(returnedUser.providerData||[])
-        .map(item=>item.providerId)
-        .filter(Boolean);
-      const uidMatches=returnedUser.uid===ADMIN_UID;
-
-      if(uidMatches){
-        $("loginStatus").textContent=
-          "Google sign-in successful. Admin UID: MATCH. Providers: "+
-          (providerNames.join(", ")||"not reported")+".";
-      }else{
-        $("loginStatus").textContent=
-          "Google sign-in completed, but Admin UID: NO MATCH. "+
-          "This Google identity is not linked to the existing authorized Admin account. "+
-          "No access was granted.";
-        await signOut(auth);
-      }
-    }else if(wasGoogleRedirect){
-      const current=auth.currentUser;
-      if(current && current.uid!==ADMIN_UID){
-        await signOut(auth);
-        $("loginStatus").textContent=
-          "Google redirect returned without a matching Admin UID. No access was granted.";
-      }else if(current && current.uid===ADMIN_UID){
-        $("loginStatus").textContent=
-          "Google sign-in successful. Admin UID: MATCH.";
-      }else{
-        $("loginStatus").textContent=
-          "Google returned to the dashboard, but Firebase provided no sign-in result. "+
-          "Try again and note any error code shown.";
-      }
+    if(returnedUser.uid!==ADMIN_UID){
+      $("loginStatus").textContent=
+        "Google sign-in completed, but this Google account does not match the existing Admin UID. Access denied.";
+      await signOut(auth);
+      return;
     }
+
+    $("loginStatus").textContent="Google Admin sign-in successful. Opening dashboard...";
+    setAdminView(true);
+    await loadProjects();
   }catch(error){
-    sessionStorage.removeItem(marker);
-    if(auth.currentUser && auth.currentUser.uid!==ADMIN_UID){
-      await signOut(auth).catch(()=>{});
-    }
     $("loginStatus").textContent=
       "Google sign-in failed ["+(error?.code||"unknown")+"]: "+
       friendlyAuthError(error);
   }finally{
-    const button=$("googleAuthButton");
     button.disabled=false;
     button.innerHTML='<span class="google-mark" aria-hidden="true">G</span> Continue with Google';
   }
-})();
+});
 
 window.resetAdminPassword=async function(){
 
@@ -561,13 +519,6 @@ onAuthStateChanged(auth,async user=>{
   }else{
     setAdminView(false);
     clearAdminData();
-
-    // Wait for getRedirectResult to identify the returned Google account.
-    if(user && sessionStorage.getItem("ryzonAdminGoogleRedirectPending")==="1"){
-      $("loginStatus").textContent=
-        "Google account returned. Checking the authorized Admin UID...";
-      return;
-    }
 
     if(user){
       $("loginStatus").textContent=
