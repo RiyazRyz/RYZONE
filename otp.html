@@ -591,7 +591,9 @@ function showError(error){
  if(["auth/invalid-credential","auth/wrong-password","auth/user-not-found"].includes(code)){
   failedAttempt();
  }else{
-  message(errors[code]?T(errors[code]):(error?.message||"An error occurred."));
+  const readable=errors[code]?T(errors[code]):(error?.message||"An error occurred.");
+  // Show Firebase's exact error code to make Phone Auth failures diagnosable.
+  message(code?readable+" ("+code+")":readable);
  }
  console.error(error);
 }
@@ -736,9 +738,17 @@ $("googleButton").onclick=async()=>{
 
 /* RECAPTCHA */
 async function createRecaptcha(){
+ // Keep the existing verifier so a solved reCAPTCHA is not discarded
+ // when the user taps Send OTP after completing the challenge.
  if(recaptchaVerifier){
-  try{recaptchaVerifier.clear()}catch(e){console.warn(e)}
-  recaptchaVerifier=null;
+  try{
+   await recaptchaVerifier.render();
+   return;
+  }catch(e){
+   console.warn("Reusing reCAPTCHA verifier failed; creating a fresh one:",e);
+   try{recaptchaVerifier.clear()}catch(clearError){console.warn(clearError)}
+   recaptchaVerifier=null;
+  }
  }
  $("recaptcha-container").innerHTML="";
  recaptchaVerifier=new RecaptchaVerifier(auth,"recaptcha-container",{size:"normal"});
@@ -754,7 +764,8 @@ async function sendOtp(){
  if(mode==="login"&&isLocked())return;
  busy(button,true);
  try{
-  await setLoginPersistence();await createRecaptcha();
+  await setLoginPersistence();
+  if(!recaptchaVerifier)await createRecaptcha();
   confirmationResult=await signInWithPhoneNumber(auth,phone,recaptchaVerifier);
   $("otpCode").value="";startOtpTimer();message(T("otpSent"),true);
  }catch(error){confirmationResult=null;showError(error)}
