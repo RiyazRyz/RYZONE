@@ -138,6 +138,79 @@ button:disabled{opacity:.55;cursor:not-allowed}
 @keyframes pop{from{opacity:0;transform:scale(.75)}to{opacity:1;transform:scale(1)}}
 @media(max-width:360px){.container{padding:18px}.tabs button,.method-tabs button{font-size:12px}}
 @media(max-height:720px){body{align-items:flex-start}}
+
+/* SCREENSHOT-MATCHED FIXED LOGIN LAYOUT */
+body{align-items:flex-start;padding:24px 14px;background:#061326}
+.container{width:100%;max-width:610px;padding:0;border:1px solid #18385d;border-radius:0;background:#061326;box-shadow:0 18px 55px #0009;overflow:hidden}
+.top{position:absolute;z-index:3;top:30px;right:max(18px,calc((100vw - 610px)/2 + 16px));margin:0}
+.top button{background:#17365a;color:#fff}
+.brand-banner{min-height:108px;padding:18px 24px;display:flex;align-items:center;gap:18px;background:linear-gradient(100deg,#020915,#071a35 72%,#000);border-bottom:1px solid #17365a}
+.brand-mark{width:68px;height:68px;display:flex;align-items:center;justify-content:center;border-radius:15px;background:linear-gradient(145deg,#55dcff,#078bd0);color:#fff;font-size:52px;font-weight:900;box-shadow:0 5px 22px #078bd066}
+.brand-name{font-size:36px;line-height:1;color:#55cfff;font-weight:900;letter-spacing:2px}
+.brand-tagline{margin-top:6px;color:#f1f5fb;font-size:15px}
+.hero-banner{padding:15px 28px 18px;background:linear-gradient(105deg,#122b60,#071a35 78%);border-bottom:1px solid #173b72}
+.hero-banner strong{display:block;color:#f4f7ff;font-size:35px;line-height:1.18;letter-spacing:.2px}
+.hero-banner strong span{color:#55d7ff}
+.hero-banner small{display:block;margin-top:8px;color:#b8cce4;font-size:13px}
+.logo,h1,.tagline{display:none!important}
+.premium-box{margin:0;padding:20px 24px 18px;border:0;border-radius:0;border-bottom:2px solid #d6a83d;background:radial-gradient(ellipse at 50% 0%,#173e8d 0%,#061338 65%,#02091c 100%);box-shadow:inset 0 0 26px #123d9b66}
+.premium-heading{font-family:Georgia,serif;font-size:23px;color:#ffd95c;text-shadow:0 2px 5px #000}
+.premium-subtitle{color:#e5d8a8;font-size:12px}
+.premium-pin{height:58px;margin:7px 0 0;border:2px solid #39a9ff;border-radius:30px;background:linear-gradient(180deg,#1558e9,#052b9e);color:#fff;letter-spacing:6px;font-size:19px;box-shadow:0 0 12px #138bff88}
+.premium-pin::placeholder{color:#e5efff;letter-spacing:1px}
+.premium-login{height:54px;margin-top:10px;border:2px solid #ffe47c;border-radius:28px;background:linear-gradient(180deg,#ffe987,#d99b13);color:#17100a;font-size:20px;box-shadow:0 0 12px #f4bd35aa}
+.premium-actions{margin-top:10px}
+.premium-forgot,.premium-signup{border:0;text-decoration:underline;font-weight:bold;font-size:14px;color:#ffe27b}
+.premium-forgot{color:#ffe27b}
+.premium-signup{color:#ffe27b}
+.premium-note{background:#10264b;color:#ffe7a8}
+.auth-panel{margin:0;padding:22px 24px 30px;background:#f8fbff;color:#26384d;border-radius:0 0 26px 26px;min-height:560px}
+.access-title{font-size:13px;font-weight:900;letter-spacing:.5px;color:#33465f}
+.access-subtitle{margin:8px 0 18px;color:#8492a4;font-size:12px}
+#subtitle{display:none}
+#accountTabs{display:none!important}
+.method-tabs{gap:12px;margin-bottom:16px}
+.method-tabs button{border-radius:16px;background:#e8eef8;color:#45546b;font-weight:800}
+.method-tabs button.active{background:#dce8ff;color:#244b91;box-shadow:none}
+.auth-panel input:not([type=checkbox]){border:1px solid #d8e0e9;background:#fff;color:#25364b;box-shadow:0 2px 7px #14243a0d}
+.auth-panel input::placeholder{color:#a3adba}
+.auth-panel button:not(.password-toggle){border-radius:12px}
+.auth-panel #mainButton,.auth-panel #sendOtpButton,.auth-panel #verifyOtpButton{background:#2858d7;color:#fff}
+.auth-panel .password-toggle{background:transparent;color:#087fbd}
+.auth-panel .small-link{color:#49658c}
+.auth-panel .note,.auth-panel .description{color:#697b91}
+.auth-panel #phoneSection,.auth-panel #verifiedSection,.auth-panel #otpSection{border-color:#e1e7ef}
+.auth-panel .remember-row{color:#586a80}
+.auth-panel .divider{color:#8795a7}
+.auth-panel .divider:before,.auth-panel .divider:after{background:#dce3ec}
+.auth-panel .google-button{background:#fff;color:#24364b;border:1px solid #d8e1e9}
+.auth-panel .bottom-text{color:#65758b}
+.auth-panel .bottom-text a{color:#2858d7}
+#lastLogin,#message{margin-left:24px;margin-right:24px}
+#lastLogin{color:#b5c5d8}
+#message{background:#18314f;color:#fff}
+.footer-links{margin:22px 24px 0;padding:15px 0 22px;border-color:#27415e}
+.footer-links a{color:#a8c6e8}
+@media(max-width:480px){
+ body{padding:0;min-height:100vh}
+ .container{max-width:none;border-left:0;border-right:0}
+ .top{top:12px;right:12px}
+ .brand-banner{min-height:92px;padding:14px 16px;gap:12px}
+ .brand-mark{width:58px;height:58px;font-size:44px}
+ .brand-name{font-size:29px}
+ .brand-tagline{font-size:12px}
+ .hero-banner{padding:14px 18px 16px}
+ .hero-banner strong{font-size:29px}
+ .premium-box{padding:17px 16px}
+ .premium-heading{font-size:20px}
+ .auth-panel{padding:19px 18px 26px;min-height:560px}
+}
+@media(max-width:350px){
+ .premium-actions{gap:4px}
+ .premium-forgot,.premium-signup{font-size:11px}
+ .hero-banner strong{font-size:26px}
+}
+
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
@@ -157,6 +230,35 @@ button:disabled{opacity:.55;cursor:not-allowed}
  <h1>RYZON</h1>
  <div class="tagline">One App, Endless Possibilities!</div>
 
+
+ <section class="brand-banner" aria-label="RYZON">
+  <div class="brand-mark">R</div>
+  <div><div class="brand-name">RYZON</div><div class="brand-tagline">One App, Endless Possibilities!</div></div>
+ </section>
+ <section class="hero-banner">
+  <strong>Your world.<br><span>Your RYZON.</span></strong>
+  <small>Sign in your way. Get back to what matters.</small>
+ </section>
+ <!-- PREMIUM QUICK LOGIN -->
+ <section class="premium-box" id="premiumSection">
+  <div class="premium-heading" id="premiumHeading">👑 PREMIUM QUICK LOGIN</div>
+  <div class="premium-subtitle" id="premiumSubtitle">Exclusive RYZON Premium Members</div>
+
+  <input id="premiumPin" class="premium-pin" type="password" inputmode="numeric"
+   maxlength="8" placeholder="ENTER PREMIUM PIN" autocomplete="off" aria-label="Premium PIN">
+
+  <button type="button" class="premium-login" id="premiumLoginButton">👑 LOGIN</button>
+
+  <div class="premium-actions">
+   <div class="premium-forgot" id="premiumForgot" role="button" tabindex="0">Forget PIN?</div>
+   <div class="premium-signup" id="premiumSignup" role="button" tabindex="0">Premium Sign Up</div>
+  </div>
+
+  <div class="premium-note" id="premiumNote" role="status"></div>
+ </section>
+ <section class="auth-panel">
+  <div class="access-title">CHOOSE YOUR ACCESS</div>
+  <div class="access-subtitle">Quick PIN or create your Premium account</div>
  <div class="subtitle" id="subtitle" data-ryzon-text="welcomeBack">Welcome Back! Login to continue</div>
 
  <div class="tabs" id="accountTabs">
@@ -223,23 +325,8 @@ button:disabled{opacity:.55;cursor:not-allowed}
   <a href="#" id="signupLink" data-ryzon-text="signUp">Sign Up</a>
  </div>
 
- <!-- PREMIUM QUICK LOGIN -->
- <section class="premium-box" id="premiumSection">
-  <div class="premium-heading" id="premiumHeading">👑 PREMIUM QUICK LOGIN</div>
-  <div class="premium-subtitle" id="premiumSubtitle">Exclusive RYZON Premium Members</div>
-
-  <input id="premiumPin" class="premium-pin" type="password" inputmode="numeric"
-   maxlength="8" placeholder="ENTER PREMIUM PIN" autocomplete="off" aria-label="Premium PIN">
-
-  <button type="button" class="premium-login" id="premiumLoginButton">👑 LOGIN</button>
-
-  <div class="premium-actions">
-   <div class="premium-forgot" id="premiumForgot" role="button" tabindex="0">Forget PIN?</div>
-   <div class="premium-signup" id="premiumSignup" role="button" tabindex="0">Premium Sign Up</div>
-  </div>
-
-  <div class="premium-note" id="premiumNote" role="status"></div>
  </section>
+
 
  <div id="lastLogin"></div>
  <div id="message"></div>
