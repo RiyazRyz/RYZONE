@@ -12,6 +12,8 @@ const APP_FILES = [
   "./notifications.html",
   "./explore.html",
   "./random-chat.html",
+  "./friends.html",
+  "./wallet.html",
   "./secret-chat.html",
   "./settings.html",
   "./premium.html",
