@@ -211,6 +211,12 @@ body{align-items:flex-start;padding:24px 14px;background:#061326}
  .hero-banner strong{font-size:26px}
 }
 
+
+.premium-entry{display:flex;align-items:center;gap:10px;margin-top:8px}
+.premium-entry .premium-pin{flex:1;min-width:0;margin:0;height:58px}
+.premium-entry .premium-login{flex:0 0 31%;width:31%;margin:0;height:58px;padding:8px 10px;font-size:19px}
+@media(max-width:480px){.premium-entry{gap:7px}.premium-entry .premium-login{flex-basis:31%;width:31%;font-size:17px}}
+
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
@@ -244,10 +250,11 @@ body{align-items:flex-start;padding:24px 14px;background:#061326}
   <div class="premium-heading" id="premiumHeading">👑 PREMIUM QUICK LOGIN</div>
   <div class="premium-subtitle" id="premiumSubtitle">Exclusive RYZON Premium Members</div>
 
+  <div class="premium-entry">
   <input id="premiumPin" class="premium-pin" type="password" inputmode="numeric"
    maxlength="8" placeholder="ENTER PREMIUM PIN" autocomplete="off" aria-label="Premium PIN">
-
   <button type="button" class="premium-login" id="premiumLoginButton">👑 LOGIN</button>
+  </div>
 
   <div class="premium-actions">
    <div class="premium-forgot" id="premiumForgot" role="button" tabindex="0">Forget PIN?</div>
