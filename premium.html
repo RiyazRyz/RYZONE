@@ -190,6 +190,12 @@ footer{
 }
 a{color:var(--accent)}
 [hidden]{display:none!important}
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.plan-option{background:var(--card2);border:1px solid var(--border);border-radius:11px;padding:14px}
+.plan-option strong{display:block;color:var(--gold);font-size:15px}
+.plan-option small{display:block;color:var(--muted);margin-top:5px;font-size:12px}
+.plan-option button{padding:10px;font-size:12px}
+@media(max-width:420px){.plan-grid{grid-template-columns:1fr}}
 button:focus-visible,a:focus-visible{
   outline:2px solid var(--accent);
   outline-offset:3px;
@@ -250,6 +256,21 @@ button:focus-visible,a:focus-visible{
   <p class="note">
     Membership subscription and payment are not active yet.
   </p>
+</div>
+
+
+<div class="card" id="premiumPlans">
+  <h2>🗓️ Choose Your Premium Duration</h2>
+  <p class="description">Six membership durations are planned. Prices and subscription activation are not published yet.</p>
+  <div class="plan-grid">
+    <div class="plan-option"><strong>Daily</strong><small>1 day</small><button class="secondary" onclick="showDurationPlan('Daily','1 day')">Select Plan</button></div>
+    <div class="plan-option"><strong>Weekly</strong><small>7 days</small><button class="secondary" onclick="showDurationPlan('Weekly','7 days')">Select Plan</button></div>
+    <div class="plan-option"><strong>Monthly</strong><small>30 days</small><button class="secondary" onclick="showDurationPlan('Monthly','30 days')">Select Plan</button></div>
+    <div class="plan-option"><strong>3 Months</strong><small>90 days</small><button class="secondary" onclick="showDurationPlan('3 Months','90 days')">Select Plan</button></div>
+    <div class="plan-option"><strong>6 Months</strong><small>180 days</small><button class="secondary" onclick="showDurationPlan('6 Months','180 days')">Select Plan</button></div>
+    <div class="plan-option"><strong>Yearly</strong><small>365 days</small><button class="secondary" onclick="showDurationPlan('Yearly','365 days')">Select Plan</button></div>
+  </div>
+  <p class="note">Premium membership does not include bonus coins. Coins are separate purchases. Selecting a plan here is only a preview; no payment or subscription starts.</p>
 </div>
 
 <div class="card">
@@ -478,6 +499,10 @@ window.showPlan=function(plan){
       "RYZON Premium is not available yet. Payment and subscription services are not connected."
     );
   }
+};
+
+window.showDurationPlan=function(name,duration){
+  showMessage(name+" Premium plan ("+duration+") selected for preview. Pricing and activation are not available yet; no payment has been taken.");
 };
 
 window.selectGift=function(name,type){
