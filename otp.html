@@ -264,6 +264,49 @@ body{min-height:100vh;align-items:flex-start!important;justify-content:center!im
 .splash-loader{position:absolute;z-index:4;bottom:18%;display:flex;flex-direction:column;align-items:center;gap:8px;color:#fff1c5;font:12px Arial,sans-serif}
 .splash-loader span{width:31px;height:31px;border-radius:50%;border:3px solid #7b602a;border-top-color:#ffe17b;border-right-color:#e7b33d;animation:ryzonSplashSpin .85s linear infinite;box-shadow:0 0 12px #e7b33d55}
 @keyframes ryzonSplashSpin{to{transform:rotate(360deg)}}
+
+/* LOGIN PAGE LAYOUT FIX — preserve all existing authentication features */
+.login-options{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0 12px;min-height:28px}
+.auth-panel .login-options .remember-row{display:flex!important;align-items:center;gap:8px;margin:0!important;min-width:0;font-size:13px}
+.auth-panel .login-options .remember-row input{width:17px!important;height:17px!important;flex:0 0 17px;margin:0!important}
+.auth-panel .login-options #forgotLink{display:block;margin:0!important;position:static!important;min-height:0!important;white-space:nowrap;font-size:13px;text-align:right}
+.auth-panel #mainButton{display:block;width:100%;margin:4px 0 0}
+.brand-lockup{gap:5px!important}
+.brand-lockup img{display:none!important}
+.brand-name{font-size:clamp(34px,9vw,43px)!important;letter-spacing:6px!important}
+.brand-tagline{font-size:9px!important;letter-spacing:2px!important}
+.brand-banner{padding:42px 14px 20px!important;min-height:125px!important}
+.auth-panel{padding:13px 18px 18px!important}
+.method-tabs{margin:5px 0 12px!important}
+.method-tabs button{flex:1;min-width:0}
+#emailSection input:not([type=checkbox]),#phoneSection input:not([type=checkbox]){width:100%;max-width:100%}
+.auth-panel .divider{margin:13px 0!important}
+.auth-panel .google-button{width:100%;margin:0!important}
+.premium-box{margin-top:15px!important;padding:12px!important}
+.premium-entry{align-items:center}
+.premium-entry .premium-pin{min-width:0}
+.bottom-text{margin-top:13px!important;font-size:12px!important}
+.footer-links{gap:14px!important;margin-top:12px!important}
+#lastLogin:empty,#message:empty{display:none!important}
+@media(max-width:480px){
+ body{padding:0 10px 18px!important}
+ .container{max-width:440px!important}
+ .brand-banner{padding:37px 12px 17px!important;min-height:112px!important}
+ .brand-name{font-size:36px!important;letter-spacing:5px!important}
+ .auth-panel{padding:12px 14px 16px!important}
+ .auth-panel input:not([type=checkbox]){height:46px!important;margin:6px 0!important}
+ .method-tabs button{height:44px!important}
+ .auth-panel #mainButton{height:47px!important}
+ .premium-box{margin-top:13px!important;padding:11px!important}
+ .premium-entry .premium-pin,.premium-entry .premium-login{height:42px!important}
+}
+@media(max-width:350px){
+ .login-options{gap:5px}
+ .auth-panel .login-options .remember-row{font-size:11px}
+ .auth-panel .login-options #forgotLink{font-size:11px}
+ .brand-name{font-size:32px!important;letter-spacing:4px!important}
+ .premium-entry .premium-login{font-size:11px!important}
+}
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
@@ -329,15 +372,16 @@ body{min-height:100vh;align-items:flex-start!important;justify-content:center!im
     <p class="note" data-ryzon-text="passwordNote">Create a separate account using your email. Verify your email using the verification link.</p>
    </div>
 
-   <label class="remember-row" id="rememberRow">
-    <input id="rememberMe" type="checkbox" checked>
-    <span data-ryzon-text="rememberMe">Remember Me</span>
-   </label>
+   <div class="login-options" id="loginOptions">
+    <label class="remember-row" id="rememberRow">
+     <input id="rememberMe" type="checkbox" checked>
+     <span data-ryzon-text="rememberMe">Remember Me</span>
+    </label>
+    <span id="forgotLink" class="small-link" data-ryzon-text="forgotPassword">Forgot Password?</span>
+   </div>
 
    <button id="mainButton" type="button" data-ryzon-text="loginEmail">Login with Email</button>
   </div>
-
-  <span id="forgotLink" class="small-link" data-ryzon-text="forgotPassword">Forgot Password?</span>
  </section>
 
  <section id="phoneSection">
