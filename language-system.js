@@ -1,6 +1,6 @@
 
-const RYZON_LANG_KEY = "ryzonLanguage";
-const RYZON_TEMP_LANG_KEY = "ryzonTemporaryEnglish";
+const RYZONE_LANG_KEY = "ryzonLanguage";
+const RYZONE_TEMP_LANG_KEY = "ryzonTemporaryEnglish";
 
 const languageNames = {
   en: "English",
@@ -36,9 +36,9 @@ const translations = {
     browser:"Browser", randomChat:"Random Chat",
     parcelSafety:"Parcel Safety", localServices:"Local Services",
     safetyHelp:"Safety & Help", premium:"Premium",
-    language:"Language", welcome:"Welcome to RYZON!",
+    language:"Language", welcome:"Welcome to RYZONE!",
     tagline:"Your world. Your language. Your possibilities.",
-    search:"🔍 Search RYZON...", mainServices:"Main Services",
+    search:"🔍 Search RYZONE...", mainServices:"Main Services",
     projectIdeas:"Project Ideas", projectMarket:"Project Market",
     scamAlert:"⚠️ SCAM ALERT: Never share OTP, UPI PIN or bank details. ⚠️",
     jobsTitle:"Jobs & Career",
@@ -56,7 +56,7 @@ const translations = {
     jobSearch:"Job Search",
     jobSearchHelp:"Choose a category and enter a keyword to search.",
     searchingFor:"Searching for:",
-    loginTitle:"Welcome to RYZON",
+    loginTitle:"Welcome to RYZONE",
     loginDescription:"Login or create your account",
     login:"Login", signUp:"Sign Up",
     email:"Email", mobile:"Mobile",
@@ -68,7 +68,7 @@ const translations = {
     createAccount:"Create Account",
     forgotPassword:"Forgot Password?",
     welcomeBack:"Welcome Back! Login to continue",
-    createAccountTitle:"Create Your RYZON Account",
+    createAccountTitle:"Create Your RYZONE Account",
     noAccount:"Don't have an account?",
     alreadyAccount:"Already have an account?",
     mobileLogin:"Mobile OTP Login",
@@ -86,7 +86,7 @@ const translations = {
     verifyEmail:"I Have Verified My Email",
     verificationText:"Open your email and click the verification link.",
     successTitle:"Login Successful!",
-    successWelcome:"Welcome to RYZON",
+    successWelcome:"Welcome to RYZONE",
     lastLogin:"Last Login:",
     terms:"Terms & Conditions",
     privacy:"Privacy Policy",
@@ -128,9 +128,9 @@ const translations = {
     localServices:"உள்ளூர் சேவைகள்",
     safetyHelp:"பாதுகாப்பு மற்றும் உதவி",
     premium:"பிரீமியம்", language:"மொழி",
-    welcome:"RYZON-க்கு உங்களை வரவேற்கிறோம்!",
+    welcome:"RYZONE-க்கு உங்களை வரவேற்கிறோம்!",
     tagline:"உங்கள் உலகம். உங்கள் மொழி. உங்கள் வாய்ப்புகள்.",
-    search:"🔍 RYZON-ஐ தேடுங்கள்...",
+    search:"🔍 RYZONE-ஐ தேடுங்கள்...",
     mainServices:"முக்கிய சேவைகள்",
     projectIdeas:"திட்ட யோசனைகள்",
     projectMarket:"திட்டச் சந்தை",
@@ -150,7 +150,7 @@ const translations = {
     jobSearch:"வேலை தேடல்",
     jobSearchHelp:"பிரிவைத் தேர்ந்தெடுத்து முக்கியச் சொல்லை உள்ளிட்டு தேடுங்கள்.",
     searchingFor:"தேடுவது:",
-    loginTitle:"RYZON-க்கு உங்களை வரவேற்கிறோம்",
+    loginTitle:"RYZONE-க்கு உங்களை வரவேற்கிறோம்",
     loginDescription:"உள்நுழையுங்கள் அல்லது கணக்கை உருவாக்குங்கள்",
     login:"உள்நுழைவு", signUp:"புதிய கணக்கு",
     email:"மின்னஞ்சல்", mobile:"மொபைல்",
@@ -162,7 +162,7 @@ const translations = {
     createAccount:"கணக்கை உருவாக்குங்கள்",
     forgotPassword:"Password மறந்துவிட்டதா?",
     welcomeBack:"மீண்டும் வரவேற்கிறோம்! தொடர உள்நுழையுங்கள்",
-    createAccountTitle:"உங்கள் RYZON கணக்கை உருவாக்குங்கள்",
+    createAccountTitle:"உங்கள் RYZONE கணக்கை உருவாக்குங்கள்",
     noAccount:"கணக்கு இல்லையா?",
     alreadyAccount:"ஏற்கனவே கணக்கு உள்ளதா?",
     mobileLogin:"மொபைல் OTP உள்நுழைவு",
@@ -180,7 +180,7 @@ const translations = {
     verifyEmail:"Email சரிபார்த்துவிட்டேன்",
     verificationText:"உங்கள் Email-ஐத் திறந்து Verification Link-ஐ அழுத்துங்கள்.",
     successTitle:"உள்நுழைவு வெற்றிகரமாக முடிந்தது!",
-    successWelcome:"RYZON-க்கு வரவேற்கிறோம்",
+    successWelcome:"RYZONE-க்கு வரவேற்கிறோம்",
     lastLogin:"கடைசி உள்நுழைவு:",
     terms:"விதிமுறைகள் மற்றும் நிபந்தனைகள்",
     privacy:"தனியுரிமைக் கொள்கை",
@@ -434,55 +434,55 @@ Object.keys(commonTranslations).forEach(language => {
   translations[language] = commonTranslations[language];
 });
 
-function getRYZONPrimaryLanguage() {
-  const saved = localStorage.getItem(RYZON_LANG_KEY);
+function getRYZONEPrimaryLanguage() {
+  const saved = localStorage.getItem(RYZONE_LANG_KEY);
   return translations[saved] ? saved : "en";
 }
 
-function getRYZONLanguage() {
-  const primary = getRYZONPrimaryLanguage();
-  const temporary = localStorage.getItem(RYZON_TEMP_LANG_KEY);
+function getRYZONELanguage() {
+  const primary = getRYZONEPrimaryLanguage();
+  const temporary = localStorage.getItem(RYZONE_TEMP_LANG_KEY);
 
   if (temporary === "true") return "en";
   return primary;
 }
 
-function setRYZONLanguage(language) {
+function setRYZONELanguage(language) {
   if (!translations[language]) {
-    alert(translations[getRYZONLanguage()].unsupportedLanguage);
+    alert(translations[getRYZONELanguage()].unsupportedLanguage);
     return;
   }
 
-  localStorage.setItem(RYZON_LANG_KEY, language);
-  localStorage.removeItem(RYZON_TEMP_LANG_KEY);
-  applyRYZONLanguage();
+  localStorage.setItem(RYZONE_LANG_KEY, language);
+  localStorage.removeItem(RYZONE_TEMP_LANG_KEY);
+  applyRYZONELanguage();
 }
 
-function toggleRYZONLanguage() {
-  const primary = getRYZONPrimaryLanguage();
+function toggleRYZONELanguage() {
+  const primary = getRYZONEPrimaryLanguage();
 
   if (primary === "en") return;
 
-  const temporary = localStorage.getItem(RYZON_TEMP_LANG_KEY);
+  const temporary = localStorage.getItem(RYZONE_TEMP_LANG_KEY);
 
   if (temporary === "true") {
-    localStorage.removeItem(RYZON_TEMP_LANG_KEY);
+    localStorage.removeItem(RYZONE_TEMP_LANG_KEY);
   } else {
-    localStorage.setItem(RYZON_TEMP_LANG_KEY, "true");
+    localStorage.setItem(RYZONE_TEMP_LANG_KEY, "true");
   }
 
-  applyRYZONLanguage();
+  applyRYZONELanguage();
 }
 
-function getRYZONText(key) {
-  const language = getRYZONLanguage();
+function getRYZONEText(key) {
+  const language = getRYZONELanguage();
   const dictionary = translations[language] || translations.en;
 
   return dictionary[key] || translations.en[key] || key;
 }
 
-function applyRYZONLanguage() {
-  const language = getRYZONLanguage();
+function applyRYZONELanguage() {
+  const language = getRYZONELanguage();
   const dictionary = translations[language] || translations.en;
 
   document.documentElement.lang = language;
@@ -500,9 +500,9 @@ function applyRYZONLanguage() {
   });
 
   document.querySelectorAll("[data-ryzon-language-toggle]").forEach(button => {
-    const primary = getRYZONPrimaryLanguage();
+    const primary = getRYZONEPrimaryLanguage();
     const isTemporaryEnglish =
-      localStorage.getItem(RYZON_TEMP_LANG_KEY) === "true";
+      localStorage.getItem(RYZONE_TEMP_LANG_KEY) === "true";
 
     button.textContent = isTemporaryEnglish
       ? "🌐 " + (languageNames[primary] || "Language")
@@ -510,13 +510,13 @@ function applyRYZONLanguage() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", applyRYZONLanguage);
+document.addEventListener("DOMContentLoaded", applyRYZONELanguage);
 
 window.addEventListener("storage", function(event) {
   if (
-    event.key === RYZON_LANG_KEY ||
-    event.key === RYZON_TEMP_LANG_KEY
+    event.key === RYZONE_LANG_KEY ||
+    event.key === RYZONE_TEMP_LANG_KEY
   ) {
-    applyRYZONLanguage();
+    applyRYZONELanguage();
   }
 });
