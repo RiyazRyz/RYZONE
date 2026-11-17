@@ -49,7 +49,7 @@ self.addEventListener("install", event => {
   );
 });
 
-// ACTIVATE: Remove old RYZON caches
+// ACTIVATE: Remove old RYZONE caches
 self.addEventListener("activate", event => {
   event.waitUntil(
     (async () => {
