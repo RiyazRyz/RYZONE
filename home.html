@@ -320,6 +320,31 @@ header,.shortcut-row,.bottom-nav{background:#080807 !important;border-color:#725
 .modal-backdrop{background:#000d !important}
 .modal{box-shadow:0 12px 40px #000c,0 0 0 1px #9b742b44 !important}
 
+/* RYZON REFERENCE HOME */
+:root{--navy:#030303!important;--blue:#0b0a08!important;--cyan:#f1c65e!important;--text:#fff8e8!important;--muted:#c6b68e!important;--panel:#11100d!important;--line:#72551d!important}
+html,body{background:#030303!important;color:#fff8e8!important}body{background:radial-gradient(ellipse at 50% -20%,#34230b 0%,#090806 44%,#020202 80%)!important}
+body>header{background:#050505!important;border-bottom:1px solid #74571f!important;min-height:66px!important;justify-content:center!important}
+.brand{color:#f5d078!important;font-family:Georgia,'Times New Roman',serif!important;font-size:30px!important;letter-spacing:5px!important;text-shadow:0 0 12px #d5a33b66!important}
+.brand-mark{background:#090909!important;border:2px solid #d5a63d!important;color:#f4d477!important;box-shadow:0 0 15px #d5a33b55!important}
+.header-actions{position:absolute!important;right:10px!important;top:50%!important;transform:translateY(-50%)!important;gap:5px!important}
+.icon-btn{width:35px!important;height:35px!important;border-radius:50%!important;background:#111!important;border:1px solid #715522!important;color:#f6d47c!important;font-size:17px!important}
+.ryzon-welcome-banner{position:relative;display:flex;align-items:center;justify-content:space-between;overflow:hidden;min-height:116px;margin:13px 13px 9px;padding:18px;border:1px solid #e4b84d;border-radius:16px;background:radial-gradient(ellipse at 78% 50%,#69440f88,transparent 45%),linear-gradient(110deg,#0b0a08,#211606 55%,#080706);box-shadow:0 0 18px #d9a83a2b,inset 0 0 25px #d7a63a15}
+.welcome-copy{position:relative;z-index:2;display:flex;flex-direction:column;gap:6px}.welcome-copy strong{font-size:22px;color:#fff8e8;text-shadow:0 2px 6px #000}.welcome-copy span{font-size:14px;color:#f0d48a}
+.welcome-gift{position:relative;z-index:2;font-size:48px;filter:drop-shadow(0 0 10px #e9b83d88)}.welcome-trail{position:absolute;width:62%;height:65px;right:8%;bottom:-29px;border-top:3px solid #f5ca59;border-radius:50%;transform:rotate(-10deg);filter:drop-shadow(0 0 7px #e7ad35)}
+.shortcut-row{background:#080706!important;border-color:#6b5120!important}.shortcut{background:#15120b!important;border-color:#806126!important;color:#f7e5b5!important}.shortcut.coin{background:linear-gradient(120deg,#765314,#241a09)!important;border-color:#e3b64e!important}.shortcut.shopping{background:#11100d!important;border-color:#806126!important}
+body>main{scrollbar-color:#9b742d #050505!important}.feed-heading h2,.section-heading h2{color:#f5d37b!important}
+.feed-tabs{gap:5px!important}.feed-tab{border-color:#5f4a22!important;color:#c8b98e!important}.feed-tab.active{color:#ffe18a!important;border-color:#e8b94b!important}
+.feed-stage{background:radial-gradient(ellipse at 50% 0%,#4b3511 0%,transparent 48%),linear-gradient(145deg,#17120a,#050505 70%,#1b1509)!important;border:1px solid #72551d!important}
+.play-symbol{border-color:#e8c36a99!important;color:#f5d67c!important}.feed-placeholder button,.help{background:linear-gradient(135deg,#ffe17b,#b77b12)!important;color:#171006!important;border-color:#f3cf6d!important}
+.service-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:9px!important}
+.tile{min-width:0!important;min-height:104px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;padding:11px 4px!important;border-radius:15px!important;border:1px solid #655126!important;background:linear-gradient(155deg,#17140e,#070707 70%)!important;color:#fff7df!important;box-shadow:inset 0 0 17px #d8a63b0b,0 4px 14px #0008!important;font-size:11px!important}
+.tile>span:first-child{font-size:29px!important;margin-bottom:6px!important;filter:drop-shadow(0 0 7px #e5b84f66)}.tile small{font-size:9px!important;color:#c9b98d!important;line-height:1.3!important}
+.feature-card,.update-card,.activity-row,.empty-state,.search,.modal{background:#11100d!important;border-color:#74571f!important;color:#fff5dc!important}
+.feature-card small,.update-card small,.activity-row small{color:#c6b68e!important}.section-link{color:#f3cc6b!important}
+.scam-ticker{background:#24180a!important;border-color:#9a6d22!important;color:#ffe5a3!important}
+.bottom-nav{background:#050505!important;border-top:1px solid #74571f!important;box-shadow:0 -5px 18px #000b!important}
+.bottom-nav button{color:#b9b4a6!important}.bottom-nav button.active{color:#ffd76a!important;text-shadow:0 0 10px #e3ae3d!important}.bottom-nav button span{font-size:23px!important}
+@media(max-width:380px){.service-grid{gap:6px!important}.tile{min-height:96px!important;font-size:10px!important}.tile>span:first-child{font-size:26px!important}.welcome-copy strong{font-size:19px!important}.welcome-gift{font-size:40px!important}.brand{font-size:24px!important}}
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
@@ -335,6 +360,7 @@ header,.shortcut-row,.bottom-nav{background:#080807 !important;border-color:#725
  </div>
 </header>
 
+<section class="ryzon-welcome-banner" aria-label="Welcome to RYZON"><div class="welcome-copy"><strong>Welcome to RYZON!</strong><span>Explore • Connect • Grow</span></div><div class="welcome-gift" aria-hidden="true">🎁</div><div class="welcome-trail" aria-hidden="true"></div></section>
 <div class="shortcut-row">
  <button class="shortcut coin" onclick="openModal('coinModal')">🪙 Coin Wallet　⌄</button>
  <button class="shortcut shopping" onclick="goTo('shopping.html','Opened Shopping')">🛍️ Shopping</button>
