@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-  function applyRYZONEBranding() {
+  function applyRYZONBranding() {
     const candidates = Array.from(document.querySelectorAll(
       "header h1, header h2, header .ryzon-brand, main h1, main h2, main .ryzon-brand, h1, h2, .ryzon-brand"
     )).filter(el => {
@@ -195,12 +195,12 @@
       body.light { background-color: var(--ryzon-bg) !important; }
     `;
   }
-  window.RYZONEApplyAppearance = applyUserAppearance;
+  window.RYZONApplyAppearance = applyUserAppearance;
 
   function start() {
     addStyles();
     applyUserAppearance();
-    applyRYZONEBranding();
+    applyRYZONBranding();
     if (!document.querySelector('link[rel="icon"][data-ryzon-logo]')) {
       const icon = document.createElement("link");
       icon.rel = "icon";
