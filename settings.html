@@ -5,10 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071426">
-<meta name="description" content="Manage your RYZON account, privacy, notifications and app preferences.">
+<meta name="description" content="Manage your RYZONE account, privacy, notifications and app preferences.">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/icon-192.png">
-<title>Settings | RYZON</title>
+<title>Settings | RYZONE</title>
 
 <style>
 :root{
@@ -114,14 +114,14 @@ button:focus-visible,select:focus-visible,a:focus-visible{
 <header>
   <button class="back" onclick="goBack()" aria-label="Go back">←</button>
   <div>
-    <div class="brand">RYZON</div>
+    <div class="brand">RYZONE</div>
     <small>One App, Endless Possibilities!</small>
   </div>
 </header>
 
 <main class="container">
   <h1 class="page-title">⚙️ Settings</h1>
-  <p class="subtitle">Manage your RYZON app preferences and account.</p>
+  <p class="subtitle">Manage your RYZONE app preferences and account.</p>
 
   <div id="loading">Checking your account...</div>
 
@@ -132,7 +132,7 @@ button:focus-visible,select:focus-visible,a:focus-visible{
         <div class="setting-icon">🎨</div>
         <div class="setting-info">
           <strong>Dark / Light Mode</strong>
-          <small>Change the appearance of RYZON.</small>
+          <small>Change the appearance of RYZONE.</small>
         </div>
         <label class="switch">
           <input type="checkbox" id="themeToggle" aria-label="Light mode">
@@ -144,7 +144,7 @@ button:focus-visible,select:focus-visible,a:focus-visible{
         <div class="setting-icon">🌈</div>
         <div class="setting-info">
           <strong>App Theme · 19 Styles</strong>
-          <small>Choose your own RYZON colour theme. Saved on this device.</small>
+          <small>Choose your own RYZONE colour theme. Saved on this device.</small>
         </div>
         <select id="appearanceTheme" aria-label="App colour theme">
           <option value="ocean">Ocean Blue</option><option value="midnight">Midnight</option>
@@ -286,7 +286,7 @@ button:focus-visible,select:focus-visible,a:focus-visible{
       <button class="primary-btn" onclick="resetPassword()">Reset Password</button>
     </div>
 
-    <div class="section-title">RYZON Services</div>
+    <div class="section-title">RYZONE Services</div>
     <div class="card">
       <button class="action" onclick="goTo('premium.html')">
         <div class="setting">
@@ -332,11 +332,11 @@ button:focus-visible,select:focus-visible,a:focus-visible{
           <span class="arrow">›</span>
         </div>
       </button>
-      <button class="action" onclick="showMessage('RYZON — One App, Endless Possibilities! Version 1.0.0')">
+      <button class="action" onclick="showMessage('RYZONE — One App, Endless Possibilities! Version 1.0.0')">
         <div class="setting">
           <div class="setting-icon">ℹ️</div>
           <div class="setting-info">
-            <strong>About RYZON</strong>
+            <strong>About RYZONE</strong>
             <small>Version 1.0.0</small>
           </div>
           <span class="arrow">›</span>
@@ -361,7 +361,7 @@ button:focus-visible,select:focus-visible,a:focus-visible{
           <div class="setting-icon">🚪</div>
           <div class="setting-info">
             <strong>Logout</strong>
-            <small>Sign out from your RYZON account.</small>
+            <small>Sign out from your RYZONE account.</small>
           </div>
           <span class="arrow">›</span>
         </div>
@@ -371,7 +371,7 @@ button:focus-visible,select:focus-visible,a:focus-visible{
 </main>
 
 <footer>
-  <div>RYZON © 2026</div>
+  <div>RYZONE © 2026</div>
   <p>One App, Endless Possibilities!</p>
   <a href="home.html">Home</a>
   <a href="help.html">Help</a>
@@ -446,20 +446,20 @@ $("themeToggle").addEventListener("change",()=>{
   showMessage("Theme updated.");
 });
 
-// Personal RYZON appearance (19 themes + 19 font styles)
+// Personal RYZONE appearance (19 themes + 19 font styles)
 const appearanceTheme=$("appearanceTheme");
 const appearanceFont=$("appearanceFont");
 appearanceTheme.value=localStorage.getItem("ryzon_appearance_theme")||"ocean";
 appearanceFont.value=localStorage.getItem("ryzon_appearance_font")||"Poppins";
-window.RYZONApplyAppearance?.();
+window.RYZONEApplyAppearance?.();
 appearanceTheme.addEventListener("change",()=>{
   localStorage.setItem("ryzon_appearance_theme",appearanceTheme.value);
-  window.RYZONApplyAppearance?.();
-  showMessage("Your RYZON theme has been saved.");
+  window.RYZONEApplyAppearance?.();
+  showMessage("Your RYZONE theme has been saved.");
 });
 appearanceFont.addEventListener("change",()=>{
   localStorage.setItem("ryzon_appearance_font",appearanceFont.value);
-  window.RYZONApplyAppearance?.();
+  window.RYZONEApplyAppearance?.();
   showMessage("Your font style has been saved.");
 });
 
@@ -552,7 +552,7 @@ window.openPrivacy=()=>{
 
 // Logout
 window.logout=async()=>{
-  if(!confirm("Are you sure you want to logout from RYZON?"))return;
+  if(!confirm("Are you sure you want to logout from RYZONE?"))return;
   try{
     await signOut(auth);
     location.replace("otp.html");
