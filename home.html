@@ -345,6 +345,20 @@ body>main{scrollbar-color:#9b742d #050505!important}.feed-heading h2,.section-he
 .bottom-nav{background:#050505!important;border-top:1px solid #74571f!important;box-shadow:0 -5px 18px #000b!important}
 .bottom-nav button{color:#b9b4a6!important}.bottom-nav button.active{color:#ffd76a!important;text-shadow:0 0 10px #e3ae3d!important}.bottom-nav button span{font-size:23px!important}
 @media(max-width:380px){.service-grid{gap:6px!important}.tile{min-height:96px!important;font-size:10px!important}.tile>span:first-child{font-size:26px!important}.welcome-copy strong{font-size:19px!important}.welcome-gift{font-size:40px!important}.brand{font-size:24px!important}}
+/* Reference layout refinements */
+body>header.ryzon-reference-header{position:relative;display:flex;align-items:center;justify-content:center;min-height:72px;padding:9px 8px;background:#050505!important;border-bottom:1px solid #74571f!important}
+.header-menu{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;background:transparent;color:#f7e2a0;font-size:27px}
+.brand-wordmark{gap:0!important}.brand-wordmark .brand-name{font-family:Georgia,'Times New Roman',serif;font-size:clamp(27px,7vw,39px);font-weight:700;letter-spacing:4px;color:#f3c95d;text-shadow:0 0 13px #e8b44788}
+.brand-y{position:relative;color:#fffdf4}.brand-y i{position:absolute;left:7px;top:3px;font:700 17px Arial,sans-serif;color:#16b94b;transform:rotate(-8deg);text-shadow:0 0 5px #25d66b}
+.ryzon-reference-header .header-actions{right:8px;gap:4px}.ryzon-reference-header .icon-btn{width:34px;height:34px;border-radius:50%;font-size:19px}
+.ryzon-welcome-banner{min-height:150px!important;margin:15px 13px 12px!important;padding:20px 17px!important;border-radius:18px!important;background:radial-gradient(ellipse at 83% 56%,#8c5a1599 0%,transparent 37%),linear-gradient(110deg,#0b0906,#211707 58%,#080706)!important}
+.welcome-copy strong{font-size:clamp(21px,5vw,28px)!important}.welcome-copy span{font-size:clamp(14px,3.7vw,18px)!important}
+.welcome-gift{width:76px;height:76px;flex:0 0 76px;filter:drop-shadow(0 0 12px #ffca42aa);z-index:3}.welcome-gift svg{width:100%;height:100%;overflow:visible}
+.welcome-trail{position:absolute;left:29%;right:3%;bottom:-1px;width:68%;height:70px;z-index:1;overflow:visible;transform:none;filter:drop-shadow(0 0 7px #e7ad35)}
+.service-grid .tile:nth-child(n+8){display:none!important}.service-grid.expanded .tile:nth-child(n+8){display:flex!important}
+.more-services-tile{font-family:Arial,sans-serif;cursor:pointer}.more-services-tile b{font-size:12px}
+.bottom-nav{justify-content:space-around}.bottom-nav button{font-size:11px}.bottom-nav button span{font-size:25px;line-height:1.1}
+@media(max-width:390px){.brand-wordmark .brand-name{letter-spacing:2px}.ryzon-reference-header .icon-btn{width:30px;height:32px;font-size:17px}.header-menu{left:7px}.welcome-gift{width:65px;height:65px;flex-basis:65px}.ryzon-welcome-banner{min-height:140px!important}}
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
@@ -352,15 +366,21 @@ body>main{scrollbar-color:#9b742d #050505!important}.feed-heading h2,.section-he
 
 <body>
 
-<header>
- <div class="brand"><span class="brand-mark" aria-label="RYZON logo">R</span><span>RYZON</span></div>
+<header class="ryzon-reference-header">
+ <button class="header-menu" onclick="openModal('settingsModal')" aria-label="Menu">☰</button>
+ <div class="brand brand-wordmark" aria-label="RYZON"><span class="brand-name">R<span class="brand-y">Y<i>✓</i></span>ZON</span></div>
  <div class="header-actions">
-  <button class="icon-btn" onclick="focusSearch()" aria-label="Search">🔍</button>
-  <button class="icon-btn" onclick="openModal('notificationsModal')" aria-label="Notifications">🔔</button>
+  <button class="icon-btn" onclick="focusSearch()" aria-label="Search">⌕</button>
+  <button class="icon-btn" onclick="openModal('notificationsModal')" aria-label="Notifications">♧</button>
+  <button class="icon-btn" onclick="goTo('language.html','Opened Language')" aria-label="Language">◎</button>
  </div>
 </header>
 
-<section class="ryzon-welcome-banner" aria-label="Welcome to RYZON"><div class="welcome-copy"><strong>Welcome to RYZON!</strong><span>Explore • Connect • Grow</span></div><div class="welcome-gift" aria-hidden="true">🎁</div><div class="welcome-trail" aria-hidden="true"></div></section>
+<section class="ryzon-welcome-banner" aria-label="Welcome to RYZON">
+ <div class="welcome-copy"><strong>Welcome to RYZON!</strong><span>Explore • Connect • Grow</span></div>
+ <div class="welcome-gift" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><linearGradient id="giftGold" x2="0" y2="1"><stop stop-color="#fff08a"/><stop offset=".55" stop-color="#ffb900"/><stop offset="1" stop-color="#b66a00"/></linearGradient><linearGradient id="giftRed" x2="0" y2="1"><stop stop-color="#ff7474"/><stop offset="1" stop-color="#bd1010"/></linearGradient></defs><path d="M18 42h64v48H18z" fill="url(#giftGold)" stroke="#ffe38b" stroke-width="3"/><path d="M12 34h76v17H12z" fill="url(#giftRed)" stroke="#ffb4a0" stroke-width="2"/><path d="M45 34h12v56H45z" fill="#fff0a0"/><path d="M50 34C20 34 18 8 34 8c13 0 16 16 16 26Zm0 0C80 34 82 8 66 8 53 8 50 24 50 34Z" fill="url(#giftRed)" stroke="#ffb5a0" stroke-width="2"/><path d="M24 57h13v9H24zm39 0h13v9H63z" fill="#fff0a0" opacity=".8"/></svg></div>
+ <svg class="welcome-trail" viewBox="0 0 520 120" preserveAspectRatio="none" aria-hidden="true"><path d="M4 108 C110 5 265 16 365 28 S470 50 514 2" fill="none" stroke="#ffda64" stroke-width="3"/><path d="M4 108 C110 5 265 16 365 28 S470 50 514 2" fill="none" stroke="#ffbf32" stroke-width="10" opacity=".22"/><path d="M495 8l9-9 8 11-12 1" fill="#fff0a1"/><circle cx="495" cy="8" r="5" fill="#fff4bd"/></svg>
+</section>
 <div class="shortcut-row">
  <button class="shortcut coin" onclick="openModal('coinModal')">🪙 Coin Wallet　⌄</button>
  <button class="shortcut shopping" onclick="goTo('shopping.html','Opened Shopping')">🛍️ Shopping</button>
@@ -409,6 +429,7 @@ body>main{scrollbar-color:#9b742d #050505!important}.feed-heading h2,.section-he
    <a class="tile" href="premium.html"><span>⭐</span>Premium</a>
    <a class="tile" href="language.html"><span>🌐</span>Language</a>
    <a class="tile" href="settings.html"><span>⚙️</span>Settings</a>
+   <button class="tile more-services-tile" id="moreServicesButton" type="button" onclick="toggleMoreServices()"><span>✣</span><b>More</b><small>All other services</small></button>
   </div>
  </section>
 
@@ -465,11 +486,10 @@ body>main{scrollbar-color:#9b742d #050505!important}.feed-heading h2,.section-he
 </main>
 
 <nav class="bottom-nav" aria-label="App navigation">
- <button class="active" onclick="goHome()"><span>🏠</span>Home</button>
- <button onclick="goTo('my-safe.html','Opened My Safe')"><span>🔐</span>My Safe</button>
- <button onclick="goTo('educational.html','Opened Education')"><span>🎓</span>Learn</button>
- <button onclick="openRandomChat()"><span>💬</span>Random Chat</button>
- <button onclick="openProfile()"><span>👤</span>Profile</button>
+ <button class="active" onclick="goHome()"><span>⌂</span>Home</button>
+ <button onclick="goTo('chat.html','Opened Group Chat')"><span>♧</span>Group Chat</button>
+ <button onclick="goTo('notifications.html','Opened Notifications')"><span>♢</span>Notifications</button>
+ <button onclick="openProfile()"><span>♙</span>Profile</button>
 </nav>
 
 <button class="help" onclick="openModal('helpModal')" aria-label="Help Center">🎧</button>
@@ -673,6 +693,14 @@ async function shareRYZON(){
  }
 }
 
+function toggleMoreServices(){
+ const grid=$("serviceGrid"),button=$("moreServicesButton");
+ if(!grid||!button)return;
+ const expanded=grid.classList.toggle("expanded");
+ button.querySelector("b").textContent=expanded?"Less":"More";
+ button.querySelector("small").textContent=expanded?"Show fewer services":"All other services";
+ button.querySelector("span").textContent=expanded?"−":"✣";
+}
 function searchTiles(value){
  const tiles=document.querySelectorAll("#serviceGrid .tile");
  let visibleCount=0;
