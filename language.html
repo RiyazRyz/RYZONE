@@ -230,7 +230,7 @@ function continueApp() {
   localStorage.removeItem("ryzonTemporaryEnglish");
 
   // Mark the next page as login
-  localStorage.setItem("ryzonNextAction", "login");
+  sessionStorage.setItem("ryzonNextAction", "login");
 
   message.style.color = "green";
   message.textContent = "Language selected. Opening login page...";
