@@ -1,8 +1,8 @@
-# RYZON
+# RYZONE
 
 ### One App, Endless Possibilities!
 
-RYZON is a multilingual Indian Super App designed to connect people with opportunities and essential services.
+RYZONE is a multilingual Indian Super App designed to connect people with opportunities and essential services.
 ## Main Features
 
 - Language Selection – 22 Indian Languages
