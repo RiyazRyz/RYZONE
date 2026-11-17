@@ -1109,7 +1109,7 @@ async function loadPartnerDetails(){
   const photoUrl=profile.photo_url||profile.photoUrl||"";
 
   $("profileDisplayName").textContent=displayName;
-  $("profileSubtitle").textContent=bio||chatText("connectedPartner");
+  $("profileSubtitle").textContent=profile.bio||chatText("connectedPartner");
   $("partnerName").textContent=displayName;
 
   if(photoUrl){
