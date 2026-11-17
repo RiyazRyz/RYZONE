@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "RYZON - One App, Endless Possibilities!",
-  "short_name": "RYZON",
-  "description": "RYZON - One App, Endless Possibilities! Connect, Chat, Explore and Discover.",
+  "name": "RYZONE - One App, Endless Possibilities!",
+  "short_name": "RYZONE",
+  "description": "RYZONE - One App, Endless Possibilities! Connect, Chat, Explore and Discover.",
   "start_url": "./otp.html",
   "scope": "./",
   "display": "standalone",
