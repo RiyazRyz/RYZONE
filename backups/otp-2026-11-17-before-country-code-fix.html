@@ -1,0 +1,1651 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071a30">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RYZON">
+
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+<title>RYZON - Login</title>
+<script src="language-system.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/css/intlTelInput.css">
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInput.min.js"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+ margin:0;min-height:100vh;display:flex;align-items:center;
+ justify-content:center;padding:20px;font-family:Arial,sans-serif;
+ color:#fff;background:radial-gradient(circle at top,#174c78 0%,transparent 45%),
+ linear-gradient(135deg,#061629,#071a30 55%,#102e4d);
+}
+.container{
+ width:100%;max-width:430px;padding:26px;border:1px solid #285174;
+ border-radius:24px;background:linear-gradient(160deg,#123454,#0c2742);
+ box-shadow:0 18px 55px #0008;
+}
+.top{display:flex;justify-content:flex-end;margin-bottom:12px}
+.top button{width:auto;margin:0;padding:9px 13px;border-radius:20px;background:#254664;font-size:13px}
+.logo{
+ width:76px;height:76px;margin:0 auto 10px;border-radius:23px;
+ display:flex;align-items:center;justify-content:center;
+ background:linear-gradient(145deg,#55dcff,#078bd0);
+ color:white;font-size:55px;font-weight:900;box-shadow:0 8px 25px #0799e566;
+}
+h1{text-align:center;margin:0;color:#55dcff;font-size:32px;letter-spacing:3px}
+.tagline{text-align:center;color:#8bdfff;font-size:13px;margin:5px 0}
+.subtitle{text-align:center;color:#d3e5f3;margin:17px 0 20px;font-size:15px}
+.tabs,.method-tabs{display:flex;gap:9px;margin-bottom:17px}
+.tabs button,.method-tabs button{flex:1;background:#254664;padding:12px 5px;font-size:14px;margin:0}
+.tabs button.active,.method-tabs button.active{
+ background:linear-gradient(110deg,#078bd0,#16bde0);box-shadow:0 5px 15px #0799e544;
+}
+input{
+ width:100%;padding:14px;margin:8px 0;border:1px solid #54738e;
+ border-radius:10px;background:#f7fbff;color:#102030;font-size:15px;outline:none;
+}
+input:focus{border:2px solid #20c5ed}
+input.input-error{border:2px solid #ff4444!important;background:#fff0f0!important}
+.iti{width:100%;margin:8px 0}.iti input{width:100%;margin:0}
+.iti__country-list{color:#102030;max-width:300px}
+button{
+ width:100%;padding:14px;margin-top:12px;border:0;border-radius:10px;
+ background:linear-gradient(110deg,#078bd0,#16bde0);color:white;
+ font-size:16px;font-weight:bold;cursor:pointer;
+}
+button:disabled{opacity:.55;cursor:not-allowed}
+.secondary{background:#31516e}
+.google-button{background:#fff;color:#24364b;border:1px solid #d8e1e9}
+.google-button span{font-size:18px;margin-right:8px}
+.password-row{position:relative}.password-row input{padding-right:75px}
+.password-toggle{
+ position:absolute;right:5px;top:8px;width:auto;height:43px;min-width:58px;
+ padding:5px;margin:0;background:transparent;color:#087fbd;font-size:13px;
+}
+.small-link{
+ display:block;text-align:right;margin-top:12px;color:#65d0ff;
+ cursor:pointer;text-decoration:underline;font-size:13px;
+}
+.divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:#a9bfd2;font-size:12px}
+.divider:before,.divider:after{content:"";height:1px;background:#45617b;flex:1}
+.note,.description{color:#c6d8e8;font-size:13px;line-height:1.5}
+.description{text-align:center}
+#phoneSection,#verifiedSection{display:none;margin-top:15px;padding-top:15px;border-top:1px solid #45617b}
+#otpSection{display:none;margin-top:15px;padding-top:12px;border-top:1px solid #45617b}
+#recaptcha-container{margin-top:12px;overflow:hidden}
+#message{
+ display:none;margin-top:15px;padding:12px;border-radius:9px;
+ background:#203e5a;line-height:1.5;font-size:14px;overflow-wrap:anywhere;
+}
+.remember-row{display:flex;align-items:center;gap:9px;margin:12px 0;color:#c6d8e8;font-size:13px}
+.remember-row input{width:17px;height:17px;margin:0;accent-color:#0799e5}
+#lastLogin{color:#a9bfd2;font-size:12px;text-align:center;margin-top:12px}
+.bottom-text{text-align:center;color:#c6d8e8;font-size:13px;margin-top:18px}
+.bottom-text a,.footer-links a{color:#65d0ff}
+.footer-links{
+ display:flex;justify-content:center;gap:16px;flex-wrap:wrap;
+ margin-top:22px;padding-top:15px;border-top:1px solid #45617b;
+}
+.footer-links a{font-size:12px}
+#otpTimer{color:#65d0ff;font-size:13px;text-align:center;margin:10px 0}
+.hidden{display:none!important}
+
+/* PREMIUM SECTION */
+.premium-box{
+ margin-top:22px;padding:17px;border:1px solid #c99a32;
+ border-radius:16px;background:linear-gradient(145deg,#172f48,#10243a);
+}
+.premium-heading{text-align:center;color:#f5c85b;font-size:19px;font-weight:bold;margin-bottom:5px}
+.premium-subtitle{text-align:center;color:#d8c28d;font-size:12px;margin-bottom:12px}
+.premium-pin{
+ background:#eaf5ff;border:2px solid #268bd0;color:#102030;
+ text-align:center;letter-spacing:7px;font-size:20px;font-weight:bold;
+}
+.premium-login{background:linear-gradient(110deg,#b88620,#f4d477);color:#17243a;font-weight:bold}
+.premium-actions{display:flex;justify-content:space-between;align-items:stretch;gap:10px;margin-top:12px}
+.premium-forgot,.premium-signup{
+ flex:1;min-height:44px;border-radius:8px;display:flex;align-items:center;
+ justify-content:center;text-align:center;font-size:12px;cursor:pointer;padding:8px;
+}
+.premium-forgot{border:2px solid #e34c55;color:#ff777e}
+.premium-signup{border:2px solid #9b69df;color:#c49aff}
+.premium-note{
+ display:none;margin-top:12px;padding:10px;border-radius:8px;
+ background:#203e5a;color:#ffe0a0;font-size:12px;line-height:1.5;overflow-wrap:anywhere;
+}
+#successOverlay{
+ display:none;position:fixed;inset:0;z-index:9999;background:#071b35ed;
+ align-items:center;justify-content:center;padding:20px;text-align:center;
+}
+.success-card{
+ max-width:320px;width:100%;padding:35px 22px;background:#102b49;
+ border:1px solid #285174;border-radius:22px;animation:pop .45s ease;
+}
+.success-check{
+ width:82px;height:82px;border-radius:50%;margin:0 auto 18px;
+ background:#20c878;display:flex;align-items:center;justify-content:center;font-size:48px;
+}
+.success-card h2{color:#65f0a5}
+@keyframes pop{from{opacity:0;transform:scale(.75)}to{opacity:1;transform:scale(1)}}
+@media(max-width:360px){.container{padding:18px}.tabs button,.method-tabs button{font-size:12px}}
+@media(max-height:720px){body{align-items:flex-start}}
+
+/* SCREENSHOT-MATCHED FIXED LOGIN LAYOUT */
+body{align-items:flex-start;padding:24px 14px;background:#061326}
+.container{width:100%;max-width:610px;padding:0;border:1px solid #18385d;border-radius:0;background:#061326;box-shadow:0 18px 55px #0009;overflow:hidden}
+.top{position:absolute;z-index:3;top:30px;right:max(18px,calc((100vw - 610px)/2 + 16px));margin:0}
+.top button{background:#17365a;color:#fff}
+.brand-banner{min-height:108px;padding:18px 24px;display:flex;align-items:center;gap:18px;background:linear-gradient(100deg,#020915,#071a35 72%,#000);border-bottom:1px solid #17365a}
+.brand-mark{width:68px;height:68px;display:flex;align-items:center;justify-content:center;border-radius:15px;background:linear-gradient(145deg,#55dcff,#078bd0);color:#fff;font-size:52px;font-weight:900;box-shadow:0 5px 22px #078bd066}
+.brand-name{font-size:36px;line-height:1;color:#55cfff;font-weight:900;letter-spacing:2px}
+.brand-tagline{margin-top:6px;color:#f1f5fb;font-size:15px}
+.hero-banner{padding:15px 28px 18px;background:linear-gradient(105deg,#122b60,#071a35 78%);border-bottom:1px solid #173b72}
+.hero-banner strong{display:block;color:#f4f7ff;font-size:35px;line-height:1.18;letter-spacing:.2px}
+.hero-banner strong span{color:#55d7ff}
+.hero-banner small{display:block;margin-top:8px;color:#b8cce4;font-size:13px}
+.logo,h1,.tagline{display:none!important}
+.premium-box{margin:0;padding:20px 24px 18px;border:0;border-radius:0;border-bottom:2px solid #d6a83d;background:radial-gradient(ellipse at 50% 0%,#173e8d 0%,#061338 65%,#02091c 100%);box-shadow:inset 0 0 26px #123d9b66}
+.premium-heading{font-family:Georgia,serif;font-size:23px;color:#ffd95c;text-shadow:0 2px 5px #000}
+.premium-subtitle{color:#e5d8a8;font-size:12px}
+.premium-pin{height:58px;margin:7px 0 0;border:2px solid #39a9ff;border-radius:30px;background:linear-gradient(180deg,#1558e9,#052b9e);color:#fff;letter-spacing:6px;font-size:19px;box-shadow:0 0 12px #138bff88}
+.premium-pin::placeholder{color:#e5efff;letter-spacing:1px}
+.premium-login{height:54px;margin-top:10px;border:2px solid #ffe47c;border-radius:28px;background:linear-gradient(180deg,#ffe987,#d99b13);color:#17100a;font-size:20px;box-shadow:0 0 12px #f4bd35aa}
+.premium-actions{margin-top:10px}
+.premium-forgot,.premium-signup{border:0;text-decoration:underline;font-weight:bold;font-size:14px;color:#ffe27b}
+.premium-forgot{color:#ffe27b}
+.premium-signup{color:#ffe27b}
+.premium-note{background:#10264b;color:#ffe7a8}
+.auth-panel{margin:0;padding:22px 24px 30px;background:#f8fbff;color:#26384d;border-radius:0 0 26px 26px;min-height:560px}
+.access-title{font-size:13px;font-weight:900;letter-spacing:.5px;color:#33465f}
+.access-subtitle{margin:8px 0 18px;color:#8492a4;font-size:12px}
+#subtitle{display:none}
+#accountTabs{display:none!important}
+.method-tabs{gap:12px;margin-bottom:16px}
+.method-tabs button{border-radius:16px;background:#e8eef8;color:#45546b;font-weight:800}
+.method-tabs button.active{background:#dce8ff;color:#244b91;box-shadow:none}
+.auth-panel input:not([type=checkbox]){border:1px solid #d8e0e9;background:#fff;color:#25364b;box-shadow:0 2px 7px #14243a0d}
+.auth-panel input::placeholder{color:#a3adba}
+.auth-panel button:not(.password-toggle){border-radius:12px}
+.auth-panel #mainButton,.auth-panel #sendOtpButton,.auth-panel #verifyOtpButton{background:#2858d7;color:#fff}
+.auth-panel .password-toggle{background:transparent;color:#087fbd}
+.auth-panel .small-link{color:#49658c}
+.auth-panel .note,.auth-panel .description{color:#697b91}
+.auth-panel #phoneSection,.auth-panel #verifiedSection,.auth-panel #otpSection{border-color:#e1e7ef}
+.auth-panel .remember-row{color:#586a80}
+.auth-panel .divider{color:#8795a7}
+.auth-panel .divider:before,.auth-panel .divider:after{background:#dce3ec}
+.auth-panel .google-button{background:#fff;color:#24364b;border:1px solid #d8e1e9}
+.auth-panel .bottom-text{color:#65758b}
+.auth-panel .bottom-text a{color:#2858d7}
+#lastLogin,#message{margin-left:24px;margin-right:24px}
+#lastLogin{color:#b5c5d8}
+#message{background:#18314f;color:#fff}
+.footer-links{margin:22px 24px 0;padding:15px 0 22px;border-color:#27415e}
+.footer-links a{color:#a8c6e8}
+@media(max-width:480px){
+ body{padding:0;min-height:100vh}
+ .container{max-width:none;border-left:0;border-right:0}
+ .top{top:12px;right:12px}
+ .brand-banner{min-height:92px;padding:14px 16px;gap:12px}
+ .brand-mark{width:58px;height:58px;font-size:44px}
+ .brand-name{font-size:29px}
+ .brand-tagline{font-size:12px}
+ .hero-banner{padding:14px 18px 16px}
+ .hero-banner strong{font-size:29px}
+ .premium-box{padding:17px 16px}
+ .premium-heading{font-size:20px}
+ .auth-panel{padding:19px 18px 26px;min-height:560px}
+}
+@media(max-width:350px){
+ .premium-actions{gap:4px}
+ .premium-forgot,.premium-signup{font-size:11px}
+ .hero-banner strong{font-size:26px}
+}
+
+
+.premium-entry{display:flex;align-items:center;gap:10px;margin-top:8px}
+.premium-entry .premium-pin{flex:1;min-width:0;margin:0;height:58px}
+.premium-entry .premium-login{flex:0 0 31%;width:31%;margin:0;height:58px;padding:8px 10px;font-size:19px}
+@media(max-width:480px){.premium-entry{gap:7px}.premium-entry .premium-login{flex-basis:31%;width:31%;font-size:17px}}
+
+/* RYZON REFERENCE LOGIN */
+html,body{background:#030303!important;color:#fff!important}
+body{min-height:100vh;align-items:flex-start!important;justify-content:center!important;padding:0 12px 22px!important;font-family:Arial,Helvetica,sans-serif!important}
+.container{width:100%!important;max-width:440px!important;margin:0 auto!important;padding:0!important;border:0!important;border-radius:0!important;background:#030303!important;box-shadow:none!important;overflow:visible!important}
+.top{position:absolute!important;top:12px!important;right:12px!important;margin:0!important}.top button{background:#17130b!important;border:1px solid #8c6924!important;color:#f5d47b!important}
+.logo,h1,.tagline{display:none!important}
+.brand-banner{min-height:0!important;padding:34px 14px 18px!important;display:flex!important;justify-content:center!important;background:radial-gradient(ellipse at 50% 30%,#39270c 0%,#090806 48%,#030303 78%)!important;border:0!important}
+.brand-lockup{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px}.brand-lockup img{width:92px;height:92px;object-fit:contain;filter:drop-shadow(0 0 16px #dcae3f55)}
+.brand-name{font-family:Georgia,'Times New Roman',serif!important;font-size:39px!important;line-height:1!important;font-weight:700!important;letter-spacing:5px!important;color:#f4cb68!important;text-shadow:0 0 12px #d99c2e66,0 2px 3px #000!important}
+.brand-tagline{margin-top:5px!important;color:#e8c979!important;font-size:9px!important;letter-spacing:2.2px!important}.hero-banner{display:none!important}
+.auth-panel{min-height:0!important;margin:0!important;padding:15px 18px 18px!important;background:#050505!important;color:#fff!important;border-radius:0!important}
+.access-title,.access-subtitle{display:none!important}#subtitle{display:none!important}#accountTabs{display:none!important}
+.method-tabs{display:flex!important;gap:8px!important;margin:8px 0 14px!important}
+.method-tabs button{height:47px!important;border:1px solid #6b5527!important;border-radius:9px!important;background:#111!important;color:#f3e4bd!important;font-weight:700!important}
+.method-tabs button.active{background:linear-gradient(180deg,#ffe17b,#c58a16)!important;color:#171006!important;border-color:#f4d16e!important;box-shadow:0 0 15px #e3b13b55!important}
+.auth-panel input:not([type=checkbox]){height:49px!important;margin:7px 0!important;padding:0 14px!important;border:1px solid #75602f!important;border-radius:10px!important;background:#111!important;color:#fff!important;font-size:14px!important;box-shadow:inset 0 0 12px #000!important}
+.auth-panel input::placeholder{color:#b8b2a4!important}.auth-panel input:focus{border-color:#e9bd58!important;box-shadow:0 0 0 2px #d9a83b22!important}
+.password-row{margin-top:0!important}.auth-panel .password-toggle{top:7px!important;color:#e8c66f!important}
+.auth-panel .remember-row{display:flex!important;justify-content:flex-start!important;color:#eee!important;margin:9px 0 12px!important}.auth-panel .remember-row input{accent-color:#e9b83d!important}
+.auth-panel .small-link{color:#f2cf6c!important}#forgotLink{margin-top:-37px!important;position:relative!important;z-index:2!important;min-height:26px!important}
+.auth-panel #mainButton,.auth-panel #sendOtpButton,.auth-panel #verifyOtpButton{height:49px!important;background:linear-gradient(180deg,#ffe17b 0%,#e9ad25 55%,#b77b10 100%)!important;color:#171006!important;border:1px solid #f5d77e!important;border-radius:10px!important;font-size:17px!important;font-weight:800!important;box-shadow:0 4px 15px #d49a2e44!important}
+.auth-panel .divider{margin:14px 0!important;color:#d4c8aa!important}.auth-panel .divider:before,.auth-panel .divider:after{background:#6e5a2b!important}
+.auth-panel .google-button{height:46px!important;background:#fff!important;color:#171717!important;border:0!important;border-radius:25px!important;font-weight:700!important}
+.auth-panel .bottom-text{color:#d4c8aa!important}.auth-panel .bottom-text a{color:#f4ce67!important}
+.premium-box{margin:17px 0 0!important;padding:13px!important;border:2px solid #e2b849!important;border-radius:15px!important;background:linear-gradient(145deg,#15120b,#050505 70%)!important;box-shadow:0 0 17px #d7a83b22!important}
+.premium-heading{font-family:Arial,sans-serif!important;font-size:16px!important;color:#f7d56f!important;text-shadow:0 0 9px #dcae3f55!important}.premium-subtitle{color:#d3c18d!important}
+.premium-entry .premium-pin{height:43px!important;background:#0b0b13!important;border:1px solid #8c7744!important;color:#fff!important;border-radius:9px!important;letter-spacing:5px!important;font-size:16px!important}
+.premium-entry .premium-login{height:43px!important;background:linear-gradient(180deg,#ffe17b,#d99c1e)!important;color:#1b1406!important;border:1px solid #f5d77e!important;border-radius:9px!important;font-size:14px!important}
+.premium-forgot,.premium-signup{min-height:35px!important;border-radius:9px!important;text-decoration:none!important;background:#090909!important;font-size:12px!important}
+.premium-forgot{border:1px solid #d93c3c!important;color:#ff7777!important}.premium-signup{border:1px solid #b65be0!important;color:#e1a1ff!important}
+#lastLogin,#message{margin-left:18px!important;margin-right:18px!important}#message{background:#19140a!important;border:1px solid #816222!important;color:#ffe6a0!important}
+.footer-links{margin:15px 18px 0!important;padding:13px 0 18px!important;border-color:#5c4925!important}.footer-links a{color:#e8c86e!important}
+#successOverlay{background:#030303ee!important}.success-card{background:#11100c!important;border:1px solid #d5a73e!important}.success-check{background:#176b39!important}.success-card h2{color:#f1ce70!important}
+@media(max-width:360px){.brand-banner{padding-top:42px!important}.brand-lockup img{width:76px;height:76px}.brand-name{font-size:34px!important}.auth-panel{padding-left:14px!important;padding-right:14px!important}.premium-entry .premium-login{font-size:12px!important}}
+/* RYZON BLACK-GOLD SPLASH SCREEN */
+#ryzonSplash{position:fixed;inset:0;z-index:100000;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#241907 0%,#090806 43%,#020202 78%);color:#f5d477;transition:opacity .55s ease,visibility .55s ease}
+#ryzonSplash.hide{opacity:0;visibility:hidden;pointer-events:none}
+#ryzonSplash>img{position:relative;z-index:3;width:104px;height:104px;object-fit:contain;filter:drop-shadow(0 0 20px #e6b64288)}
+.splash-word{position:relative;z-index:3;margin-top:8px;font:700 clamp(40px,11vw,58px)/1 Georgia,'Times New Roman',serif;letter-spacing:7px;color:#f5ce6b;text-shadow:0 0 18px #dba52f88,0 3px 3px #000}
+.splash-tag{position:relative;z-index:3;margin-top:9px;font:600 9px Arial,sans-serif;letter-spacing:2.1px;color:#f0d48a;text-align:center}
+.splash-planet{position:absolute;left:-25%;right:-25%;bottom:-29%;height:48%;border-radius:50% 50% 0 0/34% 34% 0 0;border-top:3px solid #ffdc76;background:radial-gradient(ellipse at 50% 0%,#d89c2c55 0%,#70470d22 26%,#070604 68%);box-shadow:0 -8px 28px #e9b23e55,0 -28px 80px #c88b2430}
+.splash-planet:before{content:"";position:absolute;left:8%;right:8%;top:12px;height:2px;background:linear-gradient(90deg,transparent,#ffe28a,transparent);filter:blur(2px)}
+.planet-lights{position:absolute;left:18%;right:18%;top:23%;height:36%;opacity:.5;background:repeating-linear-gradient(90deg,transparent 0 13px,#dca63a55 14px 15px,transparent 16px 25px);mask-image:linear-gradient(180deg,#000,transparent)}
+.splash-rays{position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 48%,transparent 0deg 17deg,#e8b94a0b 18deg 18.5deg,transparent 19deg 35deg);mask-image:radial-gradient(ellipse at center,#000,transparent 72%)}
+.splash-loader{position:absolute;z-index:4;bottom:18%;display:flex;flex-direction:column;align-items:center;gap:8px;color:#fff1c5;font:12px Arial,sans-serif}
+.splash-loader span{width:31px;height:31px;border-radius:50%;border:3px solid #7b602a;border-top-color:#ffe17b;border-right-color:#e7b33d;animation:ryzonSplashSpin .85s linear infinite;box-shadow:0 0 12px #e7b33d55}
+@keyframes ryzonSplashSpin{to{transform:rotate(360deg)}}
+
+/* LOGIN PAGE LAYOUT FIX — preserve all existing authentication features */
+.login-options{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0 12px;min-height:28px}
+.auth-panel .login-options .remember-row{display:flex!important;align-items:center;gap:8px;margin:0!important;min-width:0;font-size:13px}
+.auth-panel .login-options .remember-row input{width:17px!important;height:17px!important;flex:0 0 17px;margin:0!important}
+.auth-panel .login-options #forgotLink{display:block;margin:0!important;position:static!important;min-height:0!important;white-space:nowrap;font-size:13px;text-align:right}
+.auth-panel #mainButton{display:block;width:100%;margin:4px 0 0}
+.brand-lockup{gap:5px!important}
+.brand-lockup img{display:none!important}
+.brand-name{font-size:clamp(34px,9vw,43px)!important;letter-spacing:6px!important}
+.brand-tagline{font-size:9px!important;letter-spacing:2px!important}
+.brand-banner{padding:42px 14px 20px!important;min-height:125px!important}
+.auth-panel{padding:13px 18px 18px!important}
+.method-tabs{margin:5px 0 12px!important}
+.method-tabs button{flex:1;min-width:0}
+#emailSection input:not([type=checkbox]),#phoneSection input:not([type=checkbox]){width:100%;max-width:100%}
+.auth-panel .divider{margin:13px 0!important}
+.auth-panel .google-button{width:100%;margin:0!important}
+.premium-box{margin-top:15px!important;padding:12px!important}
+.premium-entry{align-items:center}
+.premium-entry .premium-pin{min-width:0}
+.bottom-text{margin-top:13px!important;font-size:12px!important}
+.footer-links{gap:14px!important;margin-top:12px!important}
+#lastLogin:empty,#message:empty{display:none!important}
+@media(max-width:480px){
+ body{padding:0 10px 18px!important}
+ .container{max-width:440px!important}
+ .brand-banner{padding:37px 12px 17px!important;min-height:112px!important}
+ .brand-name{font-size:36px!important;letter-spacing:5px!important}
+ .auth-panel{padding:12px 14px 16px!important}
+ .auth-panel input:not([type=checkbox]){height:46px!important;margin:6px 0!important}
+ .method-tabs button{height:44px!important}
+ .auth-panel #mainButton{height:47px!important}
+ .premium-box{margin-top:13px!important;padding:11px!important}
+ .premium-entry .premium-pin,.premium-entry .premium-login{height:42px!important}
+}
+@media(max-width:350px){
+ .login-options{gap:5px}
+ .auth-panel .login-options .remember-row{font-size:11px}
+ .auth-panel .login-options #forgotLink{font-size:11px}
+ .brand-name{font-size:32px!important;letter-spacing:4px!important}
+ .premium-entry .premium-login{font-size:11px!important}
+}
+
+/* FINAL MOBILE LOGIN ALIGNMENT — keep existing auth markup and handlers */
+html,body{width:100%;max-width:100%;overflow-x:hidden!important;background:#030303!important}
+body{display:flex!important;align-items:flex-start!important;justify-content:center!important;padding:0 0 24px!important}
+.container{width:min(100%,440px)!important;max-width:440px!important;margin:0 auto!important;overflow:visible!important}
+.top{position:absolute!important;top:12px!important;right:max(12px,calc((100vw - 440px)/2 + 12px))!important;z-index:20!important;margin:0!important}
+.top button{min-height:38px!important;padding:8px 12px!important;border-radius:22px!important}
+.brand-banner{width:100%!important;min-height:145px!important;padding:48px 16px 16px!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;background:radial-gradient(ellipse at 50% 38%,#38270d 0%,#100c06 45%,#030303 78%)!important}
+.brand-lockup{width:100%!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:5px!important;text-align:center!important}
+.brand-lockup img{display:none!important}
+.brand-name{display:block!important;margin:0 auto!important;font-family:Georgia,'Times New Roman',serif!important;font-size:clamp(35px,10vw,43px)!important;line-height:1.08!important;letter-spacing:6px!important;color:#f5d078!important;text-align:center!important}
+.brand-tagline{display:block!important;margin:4px auto 0!important;font-size:9px!important;letter-spacing:2px!important;text-align:center!important;color:#e8c979!important}
+.auth-panel{width:100%!important;min-height:0!important;margin:0!important;padding:12px 18px 18px!important;background:#050505!important}
+.method-tabs{display:flex!important;width:100%!important;gap:9px!important;margin:7px 0 13px!important}
+.method-tabs button{flex:1 1 0!important;width:50%!important;min-width:0!important;height:46px!important}
+#emailFields,#phoneSection,#verifiedSection{width:100%!important}
+#emailFields input:not([type=checkbox]),#phoneSection input:not([type=checkbox]),#verifiedSection input:not([type=checkbox]){display:block!important;width:100%!important;max-width:100%!important;min-width:0!important}
+.password-row{width:100%!important}
+.password-row input{width:100%!important}
+.login-options{display:flex!important;align-items:center!important;justify-content:space-between!important;flex-wrap:nowrap!important;width:100%!important;gap:8px!important;margin:8px 0 12px!important}
+.auth-panel .login-options .remember-row{flex:0 1 auto!important;white-space:nowrap!important;font-size:12px!important}
+.auth-panel .login-options #forgotLink{flex:0 0 auto!important;white-space:nowrap!important;font-size:12px!important}
+.auth-panel #mainButton,.auth-panel #sendOtpButton,.auth-panel #verifyOtpButton,.auth-panel .google-button{width:100%!important;max-width:100%!important}
+.auth-panel #mainButton{height:47px!important;margin:3px 0 0!important}
+.auth-panel .divider{margin:13px 0!important}
+.auth-panel .google-button{height:46px!important;margin:0!important}
+.premium-box{width:100%!important;margin:14px 0 0!important;padding:12px!important}
+.premium-entry{display:flex!important;width:100%!important;gap:7px!important}
+.premium-entry .premium-pin{flex:1 1 auto!important;width:0!important;min-width:0!important;height:44px!important}
+.premium-entry .premium-login{flex:0 0 31%!important;width:31%!important;min-width:0!important;height:44px!important;padding:5px!important;font-size:13px!important}
+.premium-actions{display:flex!important;width:100%!important;gap:8px!important;margin-top:9px!important}
+.premium-forgot,.premium-signup{flex:1 1 0!important;min-width:0!important;min-height:36px!important}
+.bottom-text{margin-top:13px!important;line-height:1.5!important}
+#lastLogin,#message{max-width:calc(100% - 36px)!important;margin-left:18px!important;margin-right:18px!important}
+.footer-links{width:calc(100% - 36px)!important;margin:14px 18px 0!important;padding-bottom:20px!important}
+@media(max-width:360px){
+ .brand-banner{min-height:132px!important;padding-top:45px!important}
+ .auth-panel{padding-left:13px!important;padding-right:13px!important}
+ .brand-name{font-size:34px!important;letter-spacing:5px!important}
+ .auth-panel .login-options .remember-row,.auth-panel .login-options #forgotLink{font-size:11px!important}
+ .premium-heading{font-size:14px!important}
+ .premium-entry .premium-login{font-size:11px!important}
+}
+
+/* RYZON login — match supplied navy / premium / white-card reference */
+html,body{margin:0!important;width:100%!important;min-height:100%!important;overflow-x:hidden!important;background:#07142f!important}
+body{display:block!important;padding:0 0 20px!important;color:#182944!important;font-family:Arial,Helvetica,sans-serif!important}
+.container{display:flex!important;flex-direction:column!important;width:100%!important;max-width:720px!important;min-height:100vh!important;margin:0 auto!important;padding:0 0 18px!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:#07142f!important;box-shadow:none!important}
+.top{position:absolute!important;top:26px!important;right:max(18px,calc((100vw - 720px)/2 + 18px))!important;z-index:10!important;margin:0!important}
+.top button{padding:9px 14px!important;border:1px solid #294c7c!important;border-radius:24px!important;background:#102b50!important;color:#e7f0ff!important;font-size:11px!important;letter-spacing:.4px!important}
+.logo,h1,.tagline{display:none!important}
+.brand-banner{position:relative!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;min-height:112px!important;padding:18px 30px!important;border:0!important;background:linear-gradient(110deg,#0a1938,#102650 58%,#07142f)!important}
+.brand-lockup{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:15px!important;width:auto!important;text-align:left!important}
+.brand-mark{display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 66px!important;width:66px!important;height:66px!important;border:2px solid #55b9ff!important;border-radius:17px!important;background:linear-gradient(145deg,#163d72,#071a39)!important;color:#f3f8ff!important;font-size:48px!important;font-weight:900!important;box-shadow:0 0 15px #278be766!important}
+.brand-copy{display:flex!important;flex-direction:column!important;align-items:flex-start!important}
+.brand-name{font-family:Arial,Helvetica,sans-serif!important;font-size:34px!important;font-weight:900!important;line-height:1!important;letter-spacing:2px!important;color:#f4f7ff!important;text-shadow:none!important}
+.brand-tagline{margin-top:5px!important;font-family:Arial,sans-serif!important;font-size:10px!important;letter-spacing:.5px!important;color:#d0def2!important}
+.secure-access{margin-left:auto!important;margin-right:0!important;padding:10px 15px!important;border:1px solid #294c7c!important;border-radius:25px!important;background:#102b50!important;color:#d9e7ff!important;font-size:10px!important;font-weight:800!important;letter-spacing:.7px!important}
+.hero-banner{display:block!important;padding:23px 38px 22px!important;background:linear-gradient(110deg,#0a1733,#0a1938 65%,#08142d)!important;border:0!important}
+.hero-banner strong{display:block!important;font-size:clamp(31px,6vw,45px)!important;line-height:1.2!important;letter-spacing:.1px!important;color:#fff!important}
+.hero-banner strong span{color:#55c8f3!important}
+.hero-banner small{display:block!important;margin-top:10px!important;color:#9eb4d2!important;font-size:15px!important}
+#premiumSection{order:0!important;display:block!important;width:100%!important;margin:0!important;padding:23px 34px 24px!important;border:0!important;border-top:1px solid #172d61!important;border-bottom:3px solid #d9a72d!important;border-radius:0!important;background:radial-gradient(ellipse at 50% 0%,#102e83 0%,#07143d 54%,#02091d 100%)!important;box-shadow:inset 0 0 30px #123a9a55!important}
+.premium-heading{font-family:Georgia,serif!important;font-size:clamp(21px,4vw,30px)!important;font-weight:900!important;color:#ffdc65!important;text-align:center!important;text-shadow:0 2px 5px #000!important}
+.premium-subtitle{margin:4px 0 12px!important;color:#d8e2f7!important;text-align:center!important;font-size:12px!important}
+.premium-entry{display:flex!important;align-items:center!important;gap:10px!important;width:100%!important;margin:10px 0 0!important}
+.premium-entry .premium-pin{flex:1 1 auto!important;width:0!important;min-width:0!important;height:62px!important;margin:0!important;padding:0 18px!important;border:2px solid #258cff!important;border-radius:34px!important;background:linear-gradient(180deg,#1558e9,#052a9c)!important;color:#fff!important;font-size:20px!important;letter-spacing:3px!important;box-shadow:0 0 14px #168bff99,inset 0 2px 8px #ffffff33!important}
+.premium-entry .premium-pin::placeholder{color:#e6efff!important;letter-spacing:1px!important}
+.premium-entry .premium-login{flex:0 0 32%!important;width:32%!important;height:60px!important;margin:0!important;border:2px solid #ffe47d!important;border-radius:34px!important;background:linear-gradient(180deg,#fff08d,#ffc21d 55%,#d89108)!important;color:#171006!important;font-size:clamp(16px,3vw,23px)!important;font-weight:900!important;box-shadow:0 0 13px #ffc52c99!important}
+.premium-actions{display:flex!important;justify-content:space-between!important;gap:16px!important;margin:13px 4px 0!important}
+.premium-forgot,.premium-signup{min-height:30px!important;padding:3px 0!important;border:0!important;background:transparent!important;text-decoration:underline!important;font-size:clamp(13px,2.5vw,17px)!important;font-weight:800!important;color:#ffe36e!important}
+.premium-signup{color:#ffe36e!important}
+.premium-note{background:#0c245a!important;color:#ffe9a6!important}
+.auth-panel{display:block!important;order:1!important;width:calc(100% - 40px)!important;max-width:680px!important;min-height:570px!important;margin:16px auto 0!important;padding:28px 32px 36px!important;border:1px solid #d9e1ed!important;border-radius:0 0 30px 30px!important;background:#fbfcff!important;color:#203653!important;box-shadow:0 14px 30px #0003!important}
+.access-title{display:block!important;margin:0!important;color:#273e5c!important;font-size:13px!important;font-weight:900!important;letter-spacing:.4px!important}
+.access-subtitle{display:block!important;margin:10px 0 25px!important;color:#8997aa!important;font-size:14px!important}
+#subtitle,#accountTabs{display:none!important}
+.method-tabs{display:flex!important;gap:14px!important;width:100%!important;margin:0 0 27px!important}
+.method-tabs button{flex:1 1 0!important;width:50%!important;height:58px!important;margin:0!important;border:0!important;border-radius:18px!important;background:#edf1f8!important;color:#69778c!important;font-size:16px!important;font-weight:900!important}
+.method-tabs button.active{background:#e1eaff!important;color:#284e91!important;box-shadow:none!important}
+.field-label{display:block!important;margin:0 0 7px 4px!important;color:#304763!important;font-size:13px!important;font-weight:900!important;letter-spacing:.35px!important}
+.auth-panel input:not([type=checkbox]){display:block!important;width:100%!important;height:62px!important;margin:0 0 22px!important;padding:0 19px!important;border:1px solid #d7dfeb!important;border-radius:16px!important;background:#fff!important;color:#233954!important;font-size:16px!important;box-shadow:0 1px 5px #182d4a12!important}
+.auth-panel input::placeholder{color:#a5afbd!important}
+.password-row{margin:0!important}
+.password-row input{padding-right:76px!important}
+.auth-panel .password-toggle{top:9px!important;right:8px!important;color:#45658e!important}
+.login-options{display:flex!important;align-items:center!important;justify-content:flex-end!important;min-height:24px!important;margin:-4px 3px 18px!important}
+.auth-panel .login-options .remember-row{display:none!important}
+.auth-panel .login-options #forgotLink{display:block!important;margin:0!important;position:static!important;color:#405e87!important;font-size:14px!important;font-weight:800!important;text-decoration:none!important}
+.auth-panel #mainButton,.auth-panel #sendOtpButton,.auth-panel #verifyOtpButton{width:100%!important;height:66px!important;margin:0!important;border:0!important;border-radius:17px!important;background:#2858d7!important;color:#fff!important;font-size:17px!important;font-weight:900!important;letter-spacing:.25px!important;box-shadow:none!important}
+.auth-panel #mainButton::after{content:"  →"!important}
+.auth-panel .divider{display:none!important}
+.auth-panel .google-button{display:block!important;width:100%!important;height:48px!important;margin:14px 0 0!important;border:1px solid #e0e6f0!important;border-radius:13px!important;background:#fff!important;color:#304762!important}
+.auth-panel .bottom-text{margin:26px 0 0!important;text-align:center!important;color:#526783!important;font-size:15px!important;font-weight:700!important}
+.auth-panel .bottom-text a{margin-left:5px!important;color:#304f8b!important;text-decoration:none!important}
+.auth-panel .bottom-text:after{content:"";display:block;height:1px;margin:28px 0 22px;background:#e4e9f1}
+.auth-panel .bottom-text{line-height:1.5!important}
+.auth-panel .bottom-text::first-line{color:#526783!important}
+.auth-panel .bottom-text{padding-bottom:2px!important}
+.auth-panel .bottom-text:before{content:"Your account. Your choice. Your privacy.";display:block;margin-top:24px;color:#9aa6b7;font-size:13px;font-weight:400}
+.auth-panel .note,.auth-panel .description{color:#697b91!important}
+.auth-panel #phoneSection,.auth-panel #verifiedSection,.auth-panel #otpSection{border-color:#e1e7ef!important}
+.auth-panel .remember-row{color:#586a80!important}
+#lastLogin,#message{width:calc(100% - 40px)!important;max-width:680px!important;margin:12px auto 0!important}
+#lastLogin{color:#d1dced!important}
+#message{padding:12px 16px!important;border-radius:10px!important;background:#122b50!important;color:#fff!important}
+.footer-links{justify-content:center!important;gap:14px!important;margin:20px auto 0!important;padding:12px 12px 0!important;border-color:#263d64!important}
+.footer-links a{color:#9db3d1!important;font-size:12px!important}
+@media(max-width:520px){
+ .brand-banner{min-height:100px!important;padding:15px 18px!important}
+ .brand-mark{flex-basis:56px!important;width:56px!important;height:56px!important;border-radius:14px!important;font-size:41px!important}
+ .brand-lockup{gap:10px!important}
+ .brand-name{font-size:28px!important;letter-spacing:1.5px!important}
+ .brand-tagline{font-size:8px!important;letter-spacing:0!important}
+ .secure-access{padding:8px 9px!important;font-size:8px!important}
+ .hero-banner{padding:22px 24px 20px!important}
+ .hero-banner strong{font-size:32px!important}
+ .hero-banner small{font-size:13px!important}
+ #premiumSection{padding:20px 17px 19px!important}
+ .premium-entry .premium-pin{height:56px!important;font-size:17px!important}
+ .premium-entry .premium-login{height:54px!important;flex-basis:32%!important;width:32%!important;font-size:16px!important}
+ .premium-actions{gap:8px!important}
+ .premium-forgot,.premium-signup{font-size:13px!important}
+ .auth-panel{width:calc(100% - 24px)!important;min-height:570px!important;margin-top:14px!important;padding:24px 20px 30px!important}
+ .method-tabs{gap:10px!important;margin-bottom:23px!important}
+ .method-tabs button{height:53px!important;font-size:14px!important;border-radius:15px!important}
+ .auth-panel input:not([type=checkbox]){height:57px!important;margin-bottom:20px!important;font-size:15px!important}
+ .auth-panel #mainButton,.auth-panel #sendOtpButton,.auth-panel #verifyOtpButton{height:59px!important;font-size:15px!important}
+ .auth-panel .bottom-text{font-size:13px!important}
+}
+@media(max-width:360px){
+ .brand-banner{padding-left:12px!important;padding-right:12px!important}
+ .secure-access{font-size:7px!important;padding:7px!important}
+ .brand-name{font-size:24px!important}
+ .hero-banner{padding-left:20px!important}
+ .hero-banner strong{font-size:29px!important}
+ .auth-panel{padding-left:15px!important;padding-right:15px!important}
+ .premium-entry{gap:6px!important}
+ .premium-entry .premium-login{font-size:14px!important}
+}
+
+/* Place the privacy statement after the create-account prompt, as in the reference */
+.auth-panel .bottom-text:before{content:none!important}
+.auth-panel .bottom-text:after{content:"Your account. Your choice. Your privacy."!important;display:block!important;height:auto!important;margin:25px 0 0!important;padding:22px 0 0!important;border-top:1px solid #e4e9f1!important;background:none!important;color:#9aa6b7!important;font-size:13px!important;font-weight:400!important;text-align:center!important}
+
+/* FINAL HOME-MATCH THEME: keep the approved login structure, use the same RYZON black/gold palette */
+html,body{background:#030303!important;color:#fff5dc!important}
+body{background:radial-gradient(ellipse at 50% -15%,#39290d 0%,#0a0907 42%,#020202 100%)!important}
+.container{background:transparent!important;border-color:#72551d!important;box-shadow:0 12px 38px #0009!important}
+.brand-banner{background:#080807!important;border-bottom:1px solid #72551d!important}
+.brand-lockup img{filter:drop-shadow(0 0 14px #d9aa4355)!important}
+.brand-name{color:#f4cf70!important;text-shadow:0 0 12px #d99c2e66,0 2px 3px #000!important}
+.brand-tagline{color:#c6b68e!important}
+.top button{background:#12110e!important;border:1px solid #755a25!important;color:#f8e5b5!important}
+.auth-panel{background:#080807!important;color:#fff5dc!important;border:1px solid #72551d!important;border-radius:18px!important;box-shadow:0 8px 24px #0008!important}
+.method-tabs button{background:#12110e!important;border:1px solid #755a25!important;color:#f8e5b5!important}
+.method-tabs button.active{background:linear-gradient(180deg,#ffe17b,#c58a16)!important;color:#171006!important;border-color:#f4d16e!important;box-shadow:0 0 15px #e3b13b55!important}
+.auth-panel input:not([type=checkbox]){background:#11100d!important;border:1px solid #72551d!important;color:#fff5dc!important;box-shadow:inset 0 0 12px #000!important}
+.auth-panel input::placeholder{color:#b8ad91!important}
+.auth-panel input:focus{border-color:#e9bd58!important;box-shadow:0 0 0 2px #d9a83b22!important}
+.auth-panel .remember-row,.auth-panel .note,.auth-panel .description,.auth-panel .bottom-text{color:#c6b68e!important}
+.auth-panel .small-link,.auth-panel .bottom-text a{color:#f2cf6c!important}
+.auth-panel #mainButton,.auth-panel #sendOtpButton,.auth-panel #verifyOtpButton{background:linear-gradient(180deg,#ffe17b 0%,#e9ad25 55%,#b77b10 100%)!important;color:#171006!important;border:1px solid #f5d77e!important;box-shadow:0 4px 15px #d49a2e44!important}
+.auth-panel .password-toggle{color:#e8c66f!important}
+.auth-panel .divider{color:#d4c8aa!important}
+.auth-panel .divider:before,.auth-panel .divider:after{background:#6e5a2b!important}
+.auth-panel .google-button{background:#fff!important;color:#171717!important;border:0!important}
+.auth-panel #phoneSection,.auth-panel #verifiedSection,.auth-panel #otpSection{border-color:#6e5a2b!important}
+.premium-box{background:linear-gradient(145deg,#15120b,#050505 70%)!important;border:2px solid #e2b849!important;box-shadow:0 0 17px #d7a83b22!important}
+.premium-heading{color:#f7d56f!important}
+.premium-subtitle{color:#d3c18d!important}
+.premium-pin{background:#0b0b13!important;border:1px solid #8c7744!important;color:#fff!important}
+.premium-entry .premium-login{background:linear-gradient(180deg,#ffe17b,#d99c1e)!important;color:#1b1406!important;border:1px solid #f5d77e!important}
+.premium-note,#message{background:#19140a!important;border:1px solid #816222!important;color:#ffe6a0!important}
+.footer-links{border-color:#5c4925!important}
+.footer-links a{color:#e8c86e!important}
+#lastLogin{color:#c6b68e!important}
+#successOverlay{background:#030303ee!important}
+.success-card{background:#11100c!important;border:1px solid #d5a73e!important}
+.success-check{background:#176b39!important}
+.success-card h2{color:#f1ce70!important}
+
+/* EXACT COMPACT BLACK-GOLD LOGIN REFERENCE */
+html,body{background:#020202!important;color:#fff!important}
+body{min-height:100vh!important;display:flex!important;justify-content:center!important;align-items:flex-start!important;padding:0 12px 24px!important;font-family:Arial,Helvetica,sans-serif!important;background:
+ radial-gradient(ellipse at 50% 12%,#15120a 0%,#050505 44%,#010101 100%)!important}
+.container{position:relative!important;width:100%!important;max-width:460px!important;margin:0 auto!important;padding:0 16px 18px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:hidden!important}
+.brand-banner{position:relative!important;min-height:190px!important;padding:48px 12px 24px!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;background:
+ linear-gradient(135deg,transparent 0 13%,#b9821a 13.2%,transparent 14.1% 83%,#d7a63c 83.2%,transparent 84%),
+ radial-gradient(ellipse at 50% 60%,#17130a 0%,#050505 70%)!important;border:0!important}
+.brand-lockup{display:flex!important;flex-direction:column!important;align-items:center!important;gap:8px!important}
+.brand-mark{display:none!important}
+.brand-name{font-family:Arial,Helvetica,sans-serif!important;font-size:clamp(39px,10vw,54px)!important;line-height:1!important;font-weight:900!important;letter-spacing:3px!important;color:#f4c85e!important;text-shadow:0 0 12px #d99c2e66,0 2px 3px #000!important}
+.brand-tagline{margin-top:5px!important;color:#f1c94f!important;font-size:11px!important;font-weight:700!important;letter-spacing:2px!important}
+.secure-access{display:none!important}
+.hero-banner{display:none!important}
+.top{position:absolute!important;z-index:5!important;top:10px!important;right:10px!important;margin:0!important}
+.top button{width:auto!important;padding:7px 10px!important;border:1px solid #72551d!important;border-radius:18px!important;background:#101010!important;color:#f4d47c!important;font-size:11px!important}
+.auth-panel{display:flex!important;flex-direction:column!important;margin:0!important;padding:0 14px 18px!important;min-height:0!important;background:transparent!important;color:#fff!important;border:0!important;border-radius:0!important}
+.access-title,.access-subtitle,#subtitle,#accountTabs{display:none!important}
+.method-tabs{display:flex!important;gap:4px!important;margin:0 0 12px!important}
+.method-tabs button{height:49px!important;padding:8px!important;border:1px solid #5c5c5c!important;border-radius:12px!important;background:#111!important;color:#f7f7f7!important;font-size:15px!important;font-weight:700!important}
+.method-tabs button.active{background:linear-gradient(180deg,#ffe17b 0%,#f1b92f 55%,#c98a12 100%)!important;color:#111!important;border:1px solid #f5d77e!important;box-shadow:0 0 12px #dcae3f44!important}
+.field-label{display:none!important}
+.auth-panel input:not([type=checkbox]){height:51px!important;margin:6px 0!important;padding:0 15px 0 48px!important;border:1px solid #777!important;border-radius:13px!important;background-color:#080808!important;color:#fff!important;font-size:15px!important;box-shadow:inset 0 0 8px #000!important}
+#email{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d9d9d9' stroke-width='2'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='m3 7 9 6 9-6'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:14px center!important;background-size:23px!important}
+#password{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d9d9d9' stroke-width='2'%3E%3Crect x='4' y='10' width='16' height='11' rx='2'/%3E%3Cpath d='M8 10V7a4 4 0 0 1 8 0v3'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:14px center!important;background-size:22px!important}
+.auth-panel input::placeholder{color:#c5c5c5!important}
+.auth-panel input:focus{border-color:#e9bd58!important;box-shadow:0 0 0 2px #d9a83b22!important}
+.password-row{margin-top:0!important}
+.auth-panel .password-toggle{top:6px!important;right:6px!important;color:#eee!important;background:transparent!important}
+.login-options{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;margin:3px 0 8px!important}
+.auth-panel .remember-row{display:flex!important;align-items:center!important;gap:7px!important;margin:0!important;color:#eee!important;font-size:14px!important}
+.auth-panel .remember-row input{width:22px!important;height:22px!important;accent-color:#f2c443!important}
+.auth-panel .small-link{margin:0!important;color:#ffe16c!important;font-size:14px!important;font-weight:700!important}
+#forgotLink{position:static!important;min-height:0!important}
+.auth-panel #mainButton,.auth-panel #sendOtpButton,.auth-panel #verifyOtpButton{height:52px!important;margin:5px 0 0!important;background:linear-gradient(180deg,#ffe17b 0%,#f1b92f 55%,#c98a12 100%)!important;color:#111!important;border:1px solid #f5d77e!important;border-radius:13px!important;font-size:19px!important;font-weight:800!important;box-shadow:0 4px 15px #d49a2e44!important}
+.auth-panel .divider{margin:10px 0!important;color:#eee!important;font-size:13px!important}
+.auth-panel .divider:before,.auth-panel .divider:after{background:#777!important}
+.auth-panel .google-button{height:49px!important;margin:0!important;padding:8px!important;background:#fff!important;color:#111!important;border:0!important;border-radius:24px!important;font-size:15px!important;font-weight:700!important}
+.auth-panel .google-button span:first-child{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:25px!important;height:25px!important;margin-right:8px!important;color:#4285f4!important;font-size:22px!important;font-weight:900!important}
+.premium-box{order:5!important;margin:17px 0 0!important;padding:13px!important;border:2px solid #e4b938!important;border-radius:17px!important;background:linear-gradient(145deg,#15120b,#050505 70%)!important;box-shadow:0 0 17px #d7a83b22!important}
+.premium-heading{font-family:Arial,sans-serif!important;font-size:17px!important;color:#f7d239!important;text-shadow:0 0 9px #dcae3f55!important}
+.premium-subtitle{display:none!important}
+.premium-entry{display:flex!important;align-items:center!important;gap:8px!important;margin-top:8px!important}
+.premium-entry .premium-pin{flex:1!important;min-width:0!important;height:42px!important;margin:0!important;padding:0 10px 0 38px!important;border:1px solid #81714d!important;border-radius:12px!important;background-color:#090914!important;color:#fff!important;letter-spacing:2px!important;font-size:14px!important}
+.premium-entry .premium-pin::placeholder{color:#ddd!important;letter-spacing:0!important}
+.premium-entry .premium-login{flex:0 0 34%!important;width:34%!important;height:42px!important;margin:0!important;padding:5px!important;border:1px solid #f5d77e!important;border-radius:10px!important;background:linear-gradient(180deg,#ffe17b,#d99c1e)!important;color:#171006!important;font-size:14px!important}
+.premium-actions{display:flex!important;gap:9px!important;margin-top:9px!important}
+.premium-forgot,.premium-signup{min-height:36px!important;border-radius:12px!important;text-decoration:none!important;background:#050505!important;font-size:12px!important;font-weight:700!important}
+.premium-forgot{flex:1!important;border:2px solid #d93c3c!important;color:#ff7777!important}
+.premium-signup{flex:1!important;border:2px solid #b65be0!important;color:#e1a1ff!important}
+.premium-note{background:#19140a!important;border:1px solid #816222!important;color:#ffe6a0!important}
+.bottom-text{margin-top:17px!important;color:#e7dfc9!important;font-size:13px!important}
+.bottom-text a{color:#f4ce67!important}
+.consent-line{margin-top:17px!important;padding-top:0!important;text-align:center!important;color:#e7dfc9!important;font-size:11px!important}
+.consent-line a{color:#f4ce67!important;text-decoration:underline!important}
+#lastLogin,#message{margin-left:14px!important;margin-right:14px!important}
+#message{background:#19140a!important;border:1px solid #816222!important;color:#ffe6a0!important}
+.footer-links{margin:10px 14px 0!important;padding:10px 0 12px!important;border-color:#5c4925!important}
+.footer-links a{color:#e8c86e!important;font-size:11px!important}
+#successOverlay{background:#030303ee!important}
+.success-card{background:#11100c!important;border:1px solid #d5a73e!important}
+.success-card h2{color:#f1ce70!important}
+@media(max-width:380px){.container{padding-left:9px!important;padding-right:9px!important}.brand-banner{min-height:170px!important}.brand-name{font-size:39px!important}.auth-panel{padding-left:10px!important;padding-right:10px!important}.method-tabs button{font-size:14px!important}}
+
+/* RYZON WORDMARK — TOP RIGHT CORNER */
+.brand-banner{
+ position:relative!important;
+ display:flex!important;
+ justify-content:flex-end!important;
+ align-items:flex-start!important;
+ min-height:145px!important;
+ padding:26px 18px 14px!important;
+}
+.brand-lockup{
+ width:auto!important;
+ margin-left:auto!important;
+ align-items:flex-end!important;
+ text-align:right!important;
+ gap:5px!important;
+}
+.brand-copy{text-align:right!important}
+.brand-name{
+ text-align:right!important;
+ font-size:clamp(34px,8vw,44px)!important;
+ letter-spacing:4px!important;
+}
+.brand-tagline{
+ text-align:right!important;
+ font-size:8px!important;
+ letter-spacing:1.3px!important;
+ text-align:right!important;
+}
+.secure-access{
+ position:absolute!important;
+ left:14px!important;
+ top:16px!important;
+}
+
+
+/* FINAL REFERENCE-MATCH LOGIN LAYOUT — centered RYZON wordmark, black & gold */
+html,body{min-height:100%!important;background:#020306!important}
+body{
+ display:block!important;margin:0!important;padding:0 12px 24px!important;
+ color:#f7f7f7!important;font-family:Arial,Helvetica,sans-serif!important;
+ background:
+  linear-gradient(132deg,transparent 0 9%,#d59b24 9.2%,transparent 9.8% 100%),
+  linear-gradient(312deg,transparent 0 87%,#a97719 87.2%,transparent 88% 100%),
+  radial-gradient(ellipse at 50% 0%,#14243a 0%,#05070b 47%,#000 100%)!important;
+}
+.container{
+ width:100%!important;max-width:460px!important;margin:0 auto!important;
+ padding:0 12px 22px!important;border:0!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important;
+}
+.top{position:absolute!important;top:10px!important;right:12px!important;z-index:5!important;margin:0!important}
+.top button{background:#101b30!important;border:1px solid #8b692b!important;color:#f4d37c!important}
+.logo,h1,.tagline,.hero-banner,.access-title,.access-subtitle,.subtitle,#accountTabs{display:none!important}
+.brand-banner{
+ position:relative!important;width:100%!important;min-height:190px!important;
+ padding:52px 12px 24px!important;margin:0!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ text-align:center!important;border:0!important;border-radius:0!important;
+ background:transparent!important;
+}
+.brand-lockup{
+ width:100%!important;margin:0 auto!important;display:flex!important;
+ flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ gap:5px!important;text-align:center!important;
+}
+.brand-mark{display:none!important}
+.brand-copy{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important}
+.brand-name{
+ display:block!important;margin:0!important;font-family:Arial,Helvetica,sans-serif!important;
+ font-size:clamp(42px,11vw,54px)!important;font-weight:900!important;line-height:1!important;
+ letter-spacing:5px!important;color:#f7c95e!important;
+ text-shadow:0 0 13px #e3a52e99,0 2px 3px #000!important;
+}
+.brand-tagline{
+ margin-top:8px!important;font-size:10px!important;letter-spacing:1.8px!important;
+ color:#f6d77c!important;text-align:center!important;
+}
+.secure-access{display:none!important}
+.auth-panel{
+ width:100%!important;margin:0 auto!important;padding:8px 18px 20px!important;
+ border:1px solid #9b762d!important;border-radius:22px!important;
+ background:linear-gradient(160deg,#080a10f5,#020305f7)!important;
+ box-shadow:0 0 22px #d49c3020,inset 0 0 18px #c18a1c0c!important;
+ color:#f7f7f7!important;
+}
+.tabs,.access-title,.access-subtitle{display:none!important}
+.method-tabs{
+ display:flex!important;width:100%!important;gap:0!important;margin:4px 0 14px!important;
+}
+.method-tabs button{
+ flex:1!important;min-width:0!important;height:49px!important;margin:0!important;
+ border:1px solid #5d5d5d!important;border-radius:13px!important;
+ background:#080a0f!important;color:#f3f3f3!important;font-size:15px!important;font-weight:700!important;
+}
+.method-tabs button.active{
+ background:linear-gradient(180deg,#ffe37a,#f2ad08)!important;
+ color:#080808!important;border:1px solid #ffdb55!important;
+ box-shadow:0 0 12px #e6aa2f55!important;
+}
+.field-label{display:none!important}
+#emailSection input:not([type=checkbox]),#phoneSection input:not([type=checkbox]){
+ width:100%!important;max-width:100%!important;height:51px!important;margin:6px 0!important;
+ padding:0 16px!important;border:1px solid #777!important;border-radius:13px!important;
+ background:linear-gradient(110deg,#11141b,#050609)!important;color:#fff!important;
+ font-size:15px!important;box-shadow:inset 0 1px 5px #000!important;
+}
+.password-row{position:relative!important;display:flex!important;align-items:center!important}
+.password-row input{padding-right:64px!important}
+.password-toggle{
+ position:absolute!important;right:8px!important;top:50%!important;transform:translateY(-50%)!important;
+ width:auto!important;min-width:42px!important;padding:7px!important;margin:0!important;
+ background:transparent!important;color:#eee!important;border:0!important;font-size:12px!important;
+}
+.auth-panel .login-options{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:8px!important;margin:8px 0 14px!important;min-height:28px!important;
+}
+.auth-panel .login-options .remember-row{display:flex!important;align-items:center!important;gap:8px!important;color:#fff!important;font-size:14px!important}
+.auth-panel .login-options .remember-row input{width:19px!important;height:19px!important;accent-color:#f4bd25!important}
+.auth-panel .login-options #forgotLink{color:#ffcf3e!important;font-size:13px!important;font-weight:700!important}
+.auth-panel #mainButton{
+ width:100%!important;height:53px!important;margin:4px 0 0!important;border:1px solid #ffdb5c!important;
+ border-radius:13px!important;background:linear-gradient(180deg,#ffe77a 0%,#ffc21e 48%,#e99b00 100%)!important;
+ color:#090909!important;font-size:18px!important;font-weight:800!important;
+ box-shadow:0 3px 12px #e7a51e44!important;
+}
+.auth-panel .divider{display:flex!important;align-items:center!important;gap:12px!important;margin:14px 0!important;color:#fff!important}
+.auth-panel .divider:before,.auth-panel .divider:after{content:""!important;flex:1!important;height:1px!important;background:#777!important}
+.auth-panel .google-button{
+ display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;
+ width:100%!important;height:48px!important;margin:0!important;border:0!important;border-radius:13px!important;
+ background:#fff!important;color:#111!important;font-size:15px!important;font-weight:700!important;
+}
+.premium-box{
+ margin:17px 0 0!important;padding:14px 12px 12px!important;
+ border:2px solid #e0ae22!important;border-radius:17px!important;
+ background:linear-gradient(145deg,#08080b,#030306)!important;
+ box-shadow:0 0 13px #e0ae2233,inset 0 0 12px #d6a31c12!important;
+}
+.premium-heading{margin:0 0 10px!important;text-align:center!important;color:#ffd33f!important;font-size:17px!important;font-weight:900!important}
+.premium-subtitle{display:none!important}
+.premium-entry{display:flex!important;align-items:center!important;gap:8px!important}
+.premium-entry .premium-pin{
+ flex:1 1 auto!important;min-width:0!important;height:43px!important;margin:0!important;
+ border:1px solid #777!important;border-radius:11px!important;background:#090b16!important;
+ color:#fff!important;font-size:13px!important;padding:0 12px!important;
+}
+.premium-entry .premium-login{
+ flex:0 0 auto!important;width:auto!important;min-width:105px!important;height:43px!important;
+ margin:0!important;border:1px solid #ffdc58!important;border-radius:10px!important;
+ background:linear-gradient(180deg,#ffe77a,#f2ad08)!important;color:#090909!important;
+ font-weight:900!important;
+}
+.premium-actions{display:flex!important;gap:9px!important;margin-top:9px!important}
+.premium-actions>div{
+ flex:1!important;min-width:0!important;text-align:center!important;padding:8px 5px!important;
+ border-radius:11px!important;font-size:12px!important;font-weight:700!important;
+}
+.premium-forgot{border:1px solid #e51b35!important;color:#ff5368!important}
+.premium-signup{border:1px solid #c23cdd!important;color:#e78cff!important}
+.bottom-text{display:block!important;text-align:center!important;margin:12px 0 6px!important;color:#ddd!important;font-size:12px!important}
+.bottom-text a{color:#ffcf3e!important}
+.consent-line{margin:12px 0 0!important;text-align:center!important;color:#ddd!important;font-size:11px!important}
+.consent-line a{color:#ffcf3e!important}
+.footer-links{display:none!important}
+#lastLogin:empty,#message:empty{display:none!important}
+@media(max-width:380px){
+ .brand-banner{min-height:160px!important;padding-top:43px!important}
+ .auth-panel{padding-left:13px!important;padding-right:13px!important}
+ .method-tabs button{height:46px!important;font-size:14px!important}
+ .premium-heading{font-size:15px!important}
+ .premium-entry .premium-login{min-width:90px!important}
+}
+
+
+/* MOBILE ONE-SCREEN FIT — keep the complete default login UI inside the viewport */
+*,*::before,*::after{box-sizing:border-box}
+html,body{
+ width:100%!important;min-height:100%!important;margin:0!important;
+}
+body{
+ min-height:100svh!important;padding:0 10px 8px!important;
+ overflow-x:hidden!important;overflow-y:auto!important;
+}
+.container{
+ width:100%!important;max-width:440px!important;min-height:100svh!important;
+ margin:0 auto!important;padding:0 10px 10px!important;
+ display:flex!important;flex-direction:column!important;justify-content:center!important;
+}
+.top{top:7px!important;right:10px!important}
+.brand-banner{
+ flex:0 0 auto!important;min-height:0!important;height:clamp(112px,18svh,150px)!important;
+ padding:24px 8px 10px!important;margin:0!important;
+}
+.brand-name{font-size:clamp(37px,9.5vw,49px)!important;letter-spacing:4px!important}
+.brand-tagline{margin-top:5px!important;font-size:9px!important;letter-spacing:1.35px!important}
+.auth-panel{
+ flex:0 0 auto!important;margin:0 auto!important;padding:8px 14px 11px!important;
+ border-radius:18px!important;
+}
+.method-tabs{margin:2px 0 8px!important}
+.method-tabs button{height:42px!important;border-radius:11px!important}
+#emailSection input:not([type=checkbox]),#phoneSection input:not([type=checkbox]){
+ height:43px!important;margin:3px 0!important;padding:0 13px!important;font-size:14px!important;
+}
+.password-row{margin:0!important}
+.auth-panel .login-options{margin:4px 0 8px!important;min-height:24px!important}
+.auth-panel .login-options .remember-row{font-size:13px!important}
+.auth-panel .login-options .remember-row input{width:17px!important;height:17px!important}
+.auth-panel .login-options #forgotLink{font-size:12px!important}
+.auth-panel #mainButton{height:46px!important;margin:2px 0 0!important;font-size:16px!important}
+.auth-panel .divider{margin:7px 0!important;font-size:13px!important}
+.auth-panel .google-button{height:41px!important;font-size:14px!important}
+.premium-box{margin:10px 0 0!important;padding:9px 10px 8px!important;border-radius:14px!important}
+.premium-heading{margin:0 0 7px!important;font-size:15px!important}
+.premium-entry .premium-pin,.premium-entry .premium-login{height:37px!important}
+.premium-entry .premium-login{min-width:92px!important;font-size:13px!important}
+.premium-actions{gap:7px!important;margin-top:7px!important}
+.premium-actions>div{padding:6px 4px!important;font-size:11px!important}
+.bottom-text{margin:7px 0 3px!important;font-size:11px!important}
+.consent-line{margin:7px 0 0!important;font-size:10px!important;line-height:1.35!important}
+#lastLogin:empty,#message:empty{display:none!important}
+/* Very short phones: compact spacing further; allow scroll only if genuinely required. */
+@media(max-height:720px){
+ .container{justify-content:flex-start!important;padding-top:22px!important}
+ .brand-banner{height:100px!important;padding-top:16px!important}
+ .brand-name{font-size:36px!important}
+ .brand-tagline{font-size:8px!important;margin-top:3px!important}
+ .auth-panel{padding:6px 11px 8px!important}
+ .method-tabs{margin-bottom:5px!important}
+ .method-tabs button{height:38px!important}
+ #emailSection input:not([type=checkbox]),#phoneSection input:not([type=checkbox]){height:39px!important;margin:2px 0!important}
+ .auth-panel .login-options{margin:3px 0 5px!important}
+ .auth-panel #mainButton{height:42px!important}
+ .auth-panel .divider{margin:5px 0!important}
+ .auth-panel .google-button{height:37px!important}
+ .premium-box{margin-top:7px!important;padding:7px 8px!important}
+ .premium-heading{font-size:13px!important;margin-bottom:5px!important}
+ .premium-entry .premium-pin,.premium-entry .premium-login{height:34px!important}
+ .premium-actions{margin-top:5px!important}
+ .premium-actions>div{padding:5px 3px!important}
+ .bottom-text{margin:5px 0 2px!important}
+ .consent-line{margin-top:5px!important}
+}
+@media(min-height:721px) and (max-height:850px){
+ .container{justify-content:center!important}
+ .brand-banner{height:clamp(105px,15svh,128px)!important}
+}
+
+
+
+/* FINAL CENTERED BLACK & GOLD REFERENCE LAYOUT */
+html,body{width:100%;min-height:100%;margin:0;background:#020306!important}
+body{
+ display:block!important;min-height:100svh!important;padding:0 10px 18px!important;
+ overflow-x:hidden!important;overflow-y:auto!important;color:#f7f7f7!important;
+ background:
+  radial-gradient(ellipse at 50% 8%,#18253b 0%,#07090e 42%,#000 100%)!important;
+}
+.container{
+ width:100%!important;max-width:460px!important;min-height:100svh!important;
+ margin:0 auto!important;padding:0 12px 20px!important;
+ display:flex!important;flex-direction:column!important;justify-content:center!important;
+ border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
+}
+.top{position:absolute!important;top:10px!important;right:max(12px,calc((100vw - 440px)/2))!important;z-index:10!important}
+.top button{border:1px solid #92702d!important;border-radius:20px!important;background:#0b1220!important;color:#f4d37c!important}
+.logo,h1,.tagline,.hero-banner,.access-title,.access-subtitle,.subtitle,#accountTabs{display:none!important}
+.brand-banner{
+ order:0!important;display:flex!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;height:clamp(125px,19svh,165px)!important;min-height:0!important;
+ margin:0!important;padding:36px 8px 12px!important;border:0!important;border-radius:0!important;
+ background:transparent!important;text-align:center!important;
+}
+.brand-lockup{
+ display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;margin:0 auto!important;gap:7px!important;text-align:center!important;
+}
+.brand-mark,.secure-access{display:none!important}
+.brand-copy{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important}
+.brand-name{
+ display:flex!important;justify-content:center!important;align-items:center!important;gap:0!important;
+ margin:0!important;font-family:Arial,Helvetica,sans-serif!important;
+ font-size:clamp(43px,11vw,56px)!important;font-weight:900!important;line-height:1!important;
+ letter-spacing:4px!important;color:#f6c95d!important;
+ text-shadow:0 0 10px #e6a72c99,0 2px 3px #000!important;
+}
+.brand-y{color:#fff!important;text-shadow:0 0 8px #fff!important;position:relative!important}
+.brand-y:after{
+ content:"";position:absolute;left:27%;top:14%;width:44%;height:23%;
+ border-left:3px solid #18d66b;border-bottom:3px solid #18d66b;transform:rotate(-45deg);
+}
+.brand-tagline{
+ display:block!important;margin:8px 0 0!important;text-align:center!important;
+ color:#f5d46f!important;font-size:clamp(8px,2.3vw,11px)!important;letter-spacing:1.5px!important;
+}
+.auth-panel{
+ order:1!important;display:block!important;width:100%!important;max-width:100%!important;
+ margin:0 auto!important;padding:10px 16px 16px!important;
+ border:1px solid #8d6a2c!important;border-radius:20px!important;
+ background:linear-gradient(160deg,#080a10f5,#020305f8)!important;
+ box-shadow:0 0 20px #d49c3020,inset 0 0 16px #c18a1c0c!important;color:#f7f7f7!important;
+}
+.tabs,#accountTabs,.access-title,.access-subtitle{display:none!important}
+.method-tabs{display:flex!important;width:100%!important;gap:0!important;margin:3px 0 13px!important}
+.method-tabs button{
+ flex:1 1 50%!important;min-width:0!important;height:48px!important;margin:0!important;
+ border:1px solid #555!important;border-radius:12px!important;background:#080a0f!important;
+ color:#f4f4f4!important;font-size:15px!important;font-weight:700!important;
+}
+.method-tabs button.active{
+ border-color:#ffdb55!important;background:linear-gradient(180deg,#ffe77a,#f2ad08)!important;
+ color:#080808!important;box-shadow:0 0 12px #e6aa2f55!important;
+}
+.field-label{display:none!important}
+#emailSection input:not([type=checkbox]),#phoneSection input:not([type=checkbox]){
+ display:block!important;width:100%!important;max-width:100%!important;height:50px!important;
+ margin:6px 0!important;padding:0 15px!important;border:1px solid #777!important;border-radius:13px!important;
+ background:linear-gradient(110deg,#11141b,#050609)!important;color:#fff!important;
+ font-size:15px!important;box-shadow:inset 0 1px 5px #000!important;
+}
+.password-row{position:relative!important;display:flex!important;align-items:center!important}
+.password-row input{padding-right:64px!important}
+.password-toggle{
+ position:absolute!important;right:8px!important;top:50%!important;transform:translateY(-50%)!important;
+ width:auto!important;min-width:42px!important;padding:7px!important;margin:0!important;
+ border:0!important;background:transparent!important;color:#eee!important;font-size:12px!important;
+}
+.auth-panel .login-options{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:8px!important;margin:8px 0 13px!important;min-height:28px!important;
+}
+.auth-panel .login-options .remember-row{display:flex!important;align-items:center!important;gap:8px!important;color:#fff!important;font-size:14px!important}
+.auth-panel .login-options .remember-row input{width:19px!important;height:19px!important;accent-color:#f4bd25!important}
+.auth-panel .login-options #forgotLink{color:#ffcf3e!important;font-size:13px!important;font-weight:700!important}
+.auth-panel #mainButton{
+ display:block!important;width:100%!important;height:51px!important;margin:4px 0 0!important;
+ border:1px solid #ffdb5c!important;border-radius:13px!important;
+ background:linear-gradient(180deg,#ffe77a 0%,#ffc21e 48%,#e99b00 100%)!important;
+ color:#090909!important;font-size:18px!important;font-weight:800!important;box-shadow:0 3px 12px #e7a51e44!important;
+}
+.auth-panel .divider{display:flex!important;align-items:center!important;gap:12px!important;margin:13px 0!important;color:#fff!important}
+.auth-panel .divider:before,.auth-panel .divider:after{content:""!important;flex:1!important;height:1px!important;background:#777!important}
+.auth-panel .google-button{
+ display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;
+ width:100%!important;height:47px!important;margin:0!important;border:0!important;border-radius:13px!important;
+ background:#fff!important;color:#111!important;font-size:15px!important;font-weight:700!important;
+}
+.premium-box{
+ display:block!important;margin:15px 0 0!important;padding:13px 11px 11px!important;
+ border:2px solid #e0ae22!important;border-radius:17px!important;
+ background:linear-gradient(145deg,#08080b,#030306)!important;
+ box-shadow:0 0 13px #e0ae2233,inset 0 0 12px #d6a31c12!important;
+}
+.premium-heading{display:block!important;margin:0 0 10px!important;text-align:center!important;color:#ffd33f!important;font-size:17px!important;font-weight:900!important}
+.premium-subtitle{display:none!important}
+.premium-entry{display:flex!important;align-items:center!important;gap:8px!important}
+.premium-entry .premium-pin{
+ flex:1 1 auto!important;min-width:0!important;height:43px!important;margin:0!important;
+ border:1px solid #777!important;border-radius:11px!important;background:#090b16!important;
+ color:#fff!important;font-size:13px!important;padding:0 12px!important;
+}
+.premium-entry .premium-login{
+ flex:0 0 auto!important;width:auto!important;min-width:100px!important;height:43px!important;
+ margin:0!important;border:1px solid #ffdc58!important;border-radius:10px!important;
+ background:linear-gradient(180deg,#ffe77a,#f2ad08)!important;color:#090909!important;font-weight:900!important;
+}
+.premium-actions{display:flex!important;gap:9px!important;margin-top:9px!important}
+.premium-actions>div{
+ flex:1!important;min-width:0!important;text-align:center!important;padding:8px 5px!important;
+ border-radius:11px!important;font-size:12px!important;font-weight:700!important;
+}
+.premium-forgot{border:1px solid #e51b35!important;color:#ff5368!important}
+.premium-signup{border:1px solid #c23cdd!important;color:#e78cff!important}
+.bottom-text{display:block!important;text-align:center!important;margin:10px 0 4px!important;color:#ddd!important;font-size:11px!important}
+.bottom-text a{color:#ffcf3e!important}
+.consent-line{display:block!important;margin:8px 0 0!important;text-align:center!important;color:#ddd!important;font-size:11px!important;line-height:1.4!important}
+.consent-line a{color:#ffcf3e!important;text-decoration:underline!important}
+.footer-links{display:none!important}
+#lastLogin:empty,#message:empty{display:none!important}
+@media(max-width:380px){
+ .container{padding-left:8px!important;padding-right:8px!important}
+ .brand-banner{height:clamp(112px,16svh,135px)!important}
+ .brand-name{font-size:clamp(38px,10vw,44px)!important;letter-spacing:3px!important}
+ .auth-panel{padding:8px 11px 12px!important}
+ .method-tabs button{height:44px!important;font-size:14px!important}
+ #emailSection input:not([type=checkbox]),#phoneSection input:not([type=checkbox]){height:46px!important}
+ .auth-panel #mainButton{height:47px!important}
+ .premium-heading{font-size:15px!important}
+ .premium-entry .premium-login{min-width:88px!important}
+}
+@media(max-height:720px){
+ .container{justify-content:flex-start!important;padding-top:18px!important}
+ .brand-banner{height:100px!important;padding-top:22px!important}
+ .brand-name{font-size:37px!important}
+ .brand-tagline{margin-top:4px!important;font-size:8px!important}
+ .auth-panel{padding:6px 11px 9px!important}
+ .method-tabs{margin-bottom:6px!important}
+ .method-tabs button{height:39px!important}
+ #emailSection input:not([type=checkbox]),#phoneSection input:not([type=checkbox]){height:39px!important;margin:3px 0!important}
+ .auth-panel .login-options{margin:4px 0 6px!important}
+ .auth-panel #mainButton{height:42px!important}
+ .auth-panel .divider{margin:6px 0!important}
+ .auth-panel .google-button{height:38px!important}
+ .premium-box{margin-top:8px!important;padding:7px 8px!important}
+ .premium-heading{font-size:13px!important;margin-bottom:6px!important}
+ .premium-entry .premium-pin,.premium-entry .premium-login{height:35px!important}
+ .premium-actions{margin-top:6px!important}
+ .premium-actions>div{padding:5px 3px!important}
+ .bottom-text,.consent-line{margin-top:5px!important}
+}
+
+</style>
+<script src="./ryzon-branding.js" defer></script>
+<link rel="stylesheet" href="./responsive-system.css">
+</head>
+
+<body>
+<div id="ryzonSplash" aria-label="RYZON loading screen">
+ <div class="splash-rays"></div>
+ <img src="./assets/ryzon-logo.svg" alt="RYZON">
+ <div class="splash-word">RYZON</div>
+ <div class="splash-tag">ONE APP, ENDLESS POSSIBILITIES</div>
+ <div class="splash-planet"><div class="planet-lights"></div></div>
+ <div class="splash-loader"><span></span><small>Loading...</small></div>
+</div>
+
+<main class="container">
+
+ <div class="top">
+  <button type="button" data-ryzon-language-toggle
+   onclick="if(typeof toggleRYZONLanguage==='function'){toggleRYZONLanguage();window.dispatchEvent(new Event('ryzon-language-changed'))}">
+   🌐 English
+  </button>
+ </div>
+
+ <div class="logo">R</div>
+ <h1>RYZON</h1>
+ <div class="tagline">One App, Endless Possibilities!</div>
+
+
+ <section class="brand-banner" aria-label="RYZON">
+  <div class="brand-lockup">
+   <div class="brand-mark" aria-hidden="true">R</div>
+   <div class="brand-copy">
+    <div class="brand-name"><span>R</span><span class="brand-y">Y</span><span>ZON</span></div>
+    <div class="brand-tagline">ONE APP, ENDLESS POSSIBILITIES.</div>
+   </div>
+  </div>
+  <span class="secure-access">SECURE ACCESS</span>
+ </section>
+ <section class="hero-banner" aria-label="Welcome">
+  <strong>Your world.<br><span>Your RYZON.</span></strong>
+  <small>Sign in your way. Get back to what matters.</small>
+ </section>
+
+ <section class="auth-panel">
+  <div class="access-title">CHOOSE YOUR ACCESS</div>
+  <div class="access-subtitle">Quick PIN or create your Premium account</div>
+ <div class="subtitle" id="subtitle" data-ryzon-text="welcomeBack">Welcome Back! Login to continue</div>
+
+ <div class="tabs" id="accountTabs">
+  <button id="loginTab" class="active" type="button" data-ryzon-text="login">Login</button>
+  <button id="signupTab" type="button" data-ryzon-text="signUp">Sign Up</button>
+ </div>
+
+ <div class="method-tabs" id="methodTabs">
+  <button id="emailTab" class="active" type="button" data-ryzon-text="email">Email</button>
+  <button id="mobileTab" type="button" data-ryzon-text="mobile">Mobile</button>
+ </div>
+
+ <section id="emailSection">
+  <div id="emailFields">
+   <label class="field-label" for="email">EMAIL ADDRESS</label>
+   <input id="email" type="email" data-ryzon-placeholder="emailPlaceholder" placeholder="Enter your email" autocomplete="email">
+
+   <label class="field-label" for="password">PASSWORD</label>
+   <div class="password-row">
+    <input id="password" type="password" data-ryzon-placeholder="passwordPlaceholder" placeholder="Enter password" autocomplete="current-password">
+    <button class="password-toggle" id="togglePassword" type="button" data-ryzon-text="show">Show</button>
+   </div>
+
+   <div id="signupFields" class="hidden">
+    <input id="confirmPassword" type="password" data-ryzon-placeholder="confirmPassword" placeholder="Confirm Password" autocomplete="new-password">
+    <p class="note" data-ryzon-text="passwordNote">Create a separate account using your email. Verify your email using the verification link.</p>
+   </div>
+
+   <div class="login-options" id="loginOptions">
+    <label class="remember-row" id="rememberRow">
+     <input id="rememberMe" type="checkbox" checked>
+     <span data-ryzon-text="rememberMe">Remember Me</span>
+    </label>
+    <span id="forgotLink" class="small-link" data-ryzon-text="forgotPassword">Forgot Password?</span>
+   </div>
+
+   <button id="mainButton" type="button" data-ryzon-text="loginEmail">Login with Email</button>
+  </div>
+ </section>
+
+ <section id="phoneSection">
+  <p><b id="phoneTitle" data-ryzon-text="mobileLogin">Mobile OTP Login</b></p>
+  <p class="description" id="phoneDescription" data-ryzon-text="phoneDescription">Enter your mobile number to receive an OTP.</p>
+  <input id="loginPhone" type="tel" data-ryzon-placeholder="phonePlaceholder" placeholder="Mobile Number" autocomplete="tel">
+  <p class="note" data-ryzon-text="countryNote">Select the flag to choose your country code.</p>
+  <div id="recaptcha-container"></div>
+  <button id="sendOtpButton" type="button" data-ryzon-text="sendOtp">Send OTP</button>
+
+  <div id="otpSection">
+   <input id="otpCode" type="text" inputmode="numeric" maxlength="6" data-ryzon-placeholder="otpPlaceholder" placeholder="Enter 6-digit OTP">
+   <p id="otpTimer"></p>
+   <button id="verifyOtpButton" type="button" data-ryzon-text="verifyOtp">Verify OTP</button>
+   <button id="resendOtpButton" class="secondary" type="button" disabled data-ryzon-text="resendOtp">Resend OTP</button>
+  </div>
+ </section>
+
+ <section id="verifiedSection">
+  <p id="verificationText" class="description" data-ryzon-text="verificationText">Open your email and click the verification link.</p>
+  <button id="checkEmailButton" type="button" data-ryzon-text="verifyEmail">I Have Verified My Email</button>
+ </section>
+
+ <div class="divider" id="divider" data-ryzon-text="or">OR</div>
+ <button id="googleButton" class="google-button" type="button"><span>G</span><span data-ryzon-text="googleLogin">Continue with Google</span></button>
+ <section class="premium-box" id="premiumSection">
+  <div class="premium-heading" id="premiumHeading">👑 PREMIUM QUICK LOGIN</div>
+  <div class="premium-subtitle" id="premiumSubtitle">Exclusive RYZON Premium Members</div>
+
+  <div class="premium-entry">
+  <input id="premiumPin" class="premium-pin" type="password" inputmode="numeric"
+   maxlength="8" placeholder="ENTER PREMIUM PIN" autocomplete="off" aria-label="Premium PIN">
+  <button type="button" class="premium-login" id="premiumLoginButton">👑 LOGIN</button>
+  </div>
+
+  <div class="premium-actions">
+   <div class="premium-forgot" id="premiumForgot" role="button" tabindex="0">Forget PIN?</div>
+   <div class="premium-signup" id="premiumSignup" role="button" tabindex="0">Premium Sign Up</div>
+  </div>
+
+  <div class="premium-note" id="premiumNote" role="status"></div>
+ </section>
+
+ <!-- PREMIUM QUICK LOGIN -->
+
+
+
+ <div class="bottom-text" id="accountPrompt">
+  <span data-ryzon-text="noAccount">Don't have an account?</span>
+  <a href="#" id="signupLink" data-ryzon-text="signUp">Sign Up</a>
+ </div>
+
+ <div class="consent-line">By continuing, you agree to our <a href="./terms.html">Terms</a> & <a href="./privacy.html">Privacy Policy</a>.</div>
+ </section>
+
+
+ <div id="lastLogin"></div>
+ <div id="message"></div>
+
+ <div class="footer-links">
+  <a href="./terms.html" data-ryzon-text="terms">Terms & Conditions</a>
+  <a href="./privacy.html" data-ryzon-text="privacy">Privacy Policy</a>
+ </div>
+</main>
+
+<div id="successOverlay">
+ <div class="success-card">
+  <div class="success-check">✓</div>
+  <h2 data-ryzon-text="successTitle">Login Successful!</h2>
+  <p data-ryzon-text="successWelcome">Welcome to RYZON</p>
+  <p>One App, Endless Possibilities!</p>
+ </div>
+</div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import {
+ getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,
+ sendEmailVerification,sendPasswordResetEmail,reload,RecaptchaVerifier,
+ signInWithPhoneNumber,GoogleAuthProvider,signInWithPopup,setPersistence,
+ browserLocalPersistence,browserSessionPersistence
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyCpMeChXryE3KXE7-xUk_iKZGqRaknYcsw",
+ authDomain:"seavora-5be21.firebaseapp.com",
+ projectId:"seavora-5be21",
+ storageBucket:"seavora-5be21.firebasestorage.app",
+ messagingSenderId:"41187328725",
+ appId:"1:41187328725:web:07ca55487383bc5798d85c",
+ measurementId:"G-PDY0RZRDDH"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const googleProvider=new GoogleAuthProvider();
+const $=id=>document.getElementById(id);
+const T=key=>typeof window.getRYZONText==="function"?window.getRYZONText(key):key;
+
+let mode="login",method="email";
+let confirmationResult=null,recaptchaVerifier=null;
+let otpExpiryTime=0,resendAvailableTime=0,otpInterval=null,otpExpired=false,currentPhone="";
+let phonePicker=null;
+
+/* PREMIUM TRANSLATIONS: 23 LANGUAGES
+   Order: heading, members, PIN placeholder, login, forgot, signup,
+   invalid PIN, login pending, recovery pending, signup pending.
+*/
+const premiumTranslations={
+ en:["👑 PREMIUM QUICK LOGIN","Exclusive RYZON Premium Members","ENTER PREMIUM PIN","👑 LOGIN","Forget PIN?","Premium Sign Up","Please enter a valid 4–8 digit Premium PIN.","Premium PIN Login is not activated yet. Secure server verification must be connected first. Please use Email, Google or Mobile OTP Login.","Premium PIN recovery is not activated yet. Secure Premium account verification and recovery must be connected first.","Premium Sign Up is not activated yet. Secure PIN registration, membership verification and Premium activation must be connected first."],
+ ta:["👑 பிரீமியம் விரைவு உள்நுழைவு","RYZON பிரீமியம் உறுப்பினர்களுக்கு மட்டும்","பிரீமியம் PIN உள்ளிடவும்","👑 உள்நுழை","PIN மறந்துவிட்டதா?","பிரீமியம் பதிவு","சரியான 4–8 இலக்க பிரீமியம் PIN உள்ளிடவும்.","பிரீமியம் PIN உள்நுழைவு இன்னும் செயல்படுத்தப்படவில்லை. பாதுகாப்பான சர்வர் சரிபார்ப்பு தேவை. Email, Google அல்லது Mobile OTP மூலம் உள்நுழையவும்.","பிரீமியம் PIN மீட்பு இன்னும் செயல்படுத்தப்படவில்லை. பாதுகாப்பான கணக்கு சரிபார்ப்பு தேவை.","பிரீமியம் பதிவு இன்னும் செயல்படுத்தப்படவில்லை. பாதுகாப்பான PIN பதிவு மற்றும் உறுப்பினர் சரிபார்ப்பு தேவை."],
+ hi:["👑 प्रीमियम क्विक लॉगिन","केवल RYZON प्रीमियम सदस्यों के लिए","प्रीमियम PIN दर्ज करें","👑 लॉगिन","PIN भूल गए?","प्रीमियम साइन अप","कृपया 4–8 अंकों का सही PIN दर्ज करें।","प्रीमियम PIN लॉगिन अभी सक्रिय नहीं है। सुरक्षित सर्वर सत्यापन आवश्यक है। कृपया Email, Google या Mobile OTP से लॉगिन करें।","प्रीमियम PIN रिकवरी अभी सक्रिय नहीं है। सुरक्षित खाता सत्यापन आवश्यक है।","प्रीमियम साइन अप अभी सक्रिय नहीं है। सुरक्षित PIN पंजीकरण और सदस्यता सत्यापन आवश्यक है।"],
+ te:["👑 ప్రీమియం త్వరిత లాగిన్","RYZON ప్రీమియం సభ్యులకు మాత్రమే","ప్రీమియం PIN నమోదు చేయండి","👑 లాగిన్","PIN మర్చిపోయారా?","ప్రీమియం సైన్ అప్","దయచేసి సరైన 4–8 అంకెల PIN నమోదు చేయండి.","ప్రీమియం PIN లాగిన్ ఇంకా ప్రారంభించబడలేదు. సురక్షిత సర్వర్ ధృవీకరణ అవసరం. Email, Google లేదా Mobile OTP ఉపయోగించండి.","ప్రీమియం PIN రికవరీ ఇంకా ప్రారంభించబడలేదు. సురక్షిత ఖాతా ధృవీకరణ అవసరం.","ప్రీమియం సైన్ అప్ ఇంకా ప్రారంభించబడలేదు. సురక్షిత PIN నమోదు మరియు సభ్యత్వ ధృవీకరణ అవసరం."],
+ ml:["👑 പ്രീമിയം ക്വിക്ക് ലോഗിൻ","RYZON പ്രീമിയം അംഗങ്ങൾക്ക് മാത്രം","പ്രീമിയം PIN നൽകുക","👑 ലോഗിൻ","PIN മറന്നോ?","പ്രീമിയം സൈൻ അപ്പ്","ശരിയായ 4–8 അക്ക പ്രീമിയം PIN നൽകുക.","പ്രീമിയം PIN ലോഗിൻ ഇതുവരെ സജീവമാക്കിയിട്ടില്ല. സുരക്ഷിത സെർവർ പരിശോധന ആവശ്യമാണ്. Email, Google അല്ലെങ്കിൽ Mobile OTP ഉപയോഗിക്കുക.","പ്രീമിയം PIN വീണ്ടെടുക്കൽ ഇതുവരെ സജീവമാക്കിയിട്ടില്ല. സുരക്ഷിത അക്കൗണ്ട് പരിശോധന ആവശ്യമാണ്.","പ്രീമിയം സൈൻ അപ്പ് ഇതുവരെ സജീവമാക്കിയിട്ടില്ല. സുരക്ഷിത PIN രജിസ്ട്രേഷനും അംഗത്വ പരിശോധനയും ആവശ്യമാണ്."],
+ kn:["👑 ಪ್ರೀಮಿಯಂ ತ್ವರಿತ ಲಾಗಿನ್","RYZON ಪ್ರೀಮಿಯಂ ಸದಸ್ಯರಿಗೆ ಮಾತ್ರ","ಪ್ರೀಮಿಯಂ PIN ನಮೂದಿಸಿ","👑 ಲಾಗಿನ್","PIN ಮರೆತಿರಾ?","ಪ್ರೀಮಿಯಂ ಸೈನ್ ಅಪ್","ದಯವಿಟ್ಟು ಸರಿಯಾದ 4–8 ಅಂಕಿಯ PIN ನಮೂದಿಸಿ.","ಪ್ರೀಮಿಯಂ PIN ಲಾಗಿನ್ ಇನ್ನೂ ಸಕ್ರಿಯವಾಗಿಲ್ಲ. ಸುರಕ್ಷಿತ ಸರ್ವರ್ ಪರಿಶೀಲನೆ ಅಗತ್ಯ. Email, Google ಅಥವಾ Mobile OTP ಬಳಸಿ.","ಪ್ರೀಮಿಯಂ PIN ಮರುಪಡೆಯುವಿಕೆ ಇನ್ನೂ ಸಕ್ರಿಯವಾಗಿಲ್ಲ. ಸುರಕ್ಷಿತ ಖಾತೆ ಪರಿಶೀಲನೆ ಅಗತ್ಯ.","ಪ್ರೀಮಿಯಂ ಸೈನ್ ಅಪ್ ಇನ್ನೂ ಸಕ್ರಿಯವಾಗಿಲ್ಲ. ಸುರಕ್ಷಿತ PIN ನೋಂದಣಿ ಮತ್ತು ಸದಸ್ಯತ್ವ ಪರಿಶೀಲನೆ ಅಗತ್ಯ."],
+ bn:["👑 প্রিমিয়াম কুইক লগইন","শুধুমাত্র RYZON প্রিমিয়াম সদস্যদের জন্য","প্রিমিয়াম PIN লিখুন","👑 লগইন","PIN ভুলে গেছেন?","প্রিমিয়াম সাইন আপ","সঠিক ৪–৮ সংখ্যার প্রিমিয়াম PIN লিখুন।","প্রিমিয়াম PIN লগইন এখনও চালু হয়নি। নিরাপদ সার্ভার যাচাইকরণ প্রয়োজন। Email, Google বা Mobile OTP ব্যবহার করুন।","প্রিমিয়াম PIN পুনরুদ্ধার এখনও চালু হয়নি। নিরাপদ অ্যাকাউন্ট যাচাইকরণ প্রয়োজন।","প্রিমিয়াম সাইন আপ এখনও চালু হয়নি। নিরাপদ PIN নিবন্ধন ও সদস্যপদ যাচাইকরণ প্রয়োজন।"],
+ mr:["👑 प्रीमियम क्विक लॉगिन","फक्त RYZON प्रीमियम सदस्यांसाठी","प्रीमियम PIN टाका","👑 लॉगिन","PIN विसरलात?","प्रीमियम साइन अप","कृपया योग्य 4–8 अंकी PIN टाका.","प्रीमियम PIN लॉगिन अद्याप सुरू नाही. सुरक्षित सर्व्हर पडताळणी आवश्यक आहे. Email, Google किंवा Mobile OTP वापरा.","प्रीमियम PIN पुनर्प्राप्ती अद्याप सुरू नाही. सुरक्षित खाते पडताळणी आवश्यक आहे.","प्रीमियम साइन अप अद्याप सुरू नाही. सुरक्षित PIN नोंदणी आणि सदस्यत्व पडताळणी आवश्यक आहे."],
+ gu:["👑 પ્રીમિયમ ક્વિક લૉગિન","ફક્ત RYZON પ્રીમિયમ સભ્યો માટે","પ્રીમિયમ PIN દાખલ કરો","👑 લૉગિન","PIN ભૂલી ગયા?","પ્રીમિયમ સાઇન અપ","કૃપા કરીને યોગ્ય 4–8 અંકનો PIN દાખલ કરો.","પ્રીમિયમ PIN લૉગિન હજી સક્રિય નથી. સુરક્ષિત સર્વર ચકાસણી જરૂરી છે. Email, Google અથવા Mobile OTP વાપરો.","પ્રીમિયમ PIN પુનઃપ્રાપ્તિ હજી સક્રિય નથી. સુરક્ષિત એકાઉન્ટ ચકાસણી જરૂરી છે.","પ્રીમિયમ સાઇન અપ હજી સક્રિય નથી. સુરક્ષિત PIN નોંધણી અને સભ્યપદ ચકાસણી જરૂરી છે."],
+ pa:["👑 ਪ੍ਰੀਮੀਅਮ ਕਵਿੱਕ ਲੌਗਇਨ","ਸਿਰਫ਼ RYZON ਪ੍ਰੀਮੀਅਮ ਮੈਂਬਰਾਂ ਲਈ","ਪ੍ਰੀਮੀਅਮ PIN ਦਰਜ ਕਰੋ","👑 ਲੌਗਇਨ","PIN ਭੁੱਲ ਗਏ?","ਪ੍ਰੀਮੀਅਮ ਸਾਈਨ ਅੱਪ","ਕਿਰਪਾ ਕਰਕੇ ਸਹੀ 4–8 ਅੰਕਾਂ ਦਾ PIN ਦਰਜ ਕਰੋ।","ਪ੍ਰੀਮੀਅਮ PIN ਲੌਗਇਨ ਹਾਲੇ ਚਾਲੂ ਨਹੀਂ ਹੈ। ਸੁਰੱਖਿਅਤ ਸਰਵਰ ਜਾਂਚ ਲੋੜੀਂਦੀ ਹੈ। Email, Google ਜਾਂ Mobile OTP ਵਰਤੋ।","ਪ੍ਰੀਮੀਅਮ PIN ਰਿਕਵਰੀ ਹਾਲੇ ਚਾਲੂ ਨਹੀਂ ਹੈ। ਸੁਰੱਖਿਅਤ ਖਾਤਾ ਜਾਂਚ ਲੋੜੀਂਦੀ ਹੈ।","ਪ੍ਰੀਮੀਅਮ ਸਾਈਨ ਅੱਪ ਹਾਲੇ ਚਾਲੂ ਨਹੀਂ ਹੈ। ਸੁਰੱਖਿਅਤ PIN ਰਜਿਸਟ੍ਰੇਸ਼ਨ ਅਤੇ ਮੈਂਬਰਸ਼ਿਪ ਜਾਂਚ ਲੋੜੀਂਦੀ ਹੈ।"],
+ ur:["👑 پریمیم فوری لاگ اِن","صرف RYZON پریمیم اراکین کے لیے","پریمیم PIN درج کریں","👑 لاگ اِن","PIN بھول گئے؟","پریمیم سائن اَپ","براہِ کرم درست 4–8 ہندسوں کا PIN درج کریں۔","پریمیم PIN لاگ اِن ابھی فعال نہیں ہے۔ محفوظ سرور تصدیق ضروری ہے۔ Email، Google یا Mobile OTP استعمال کریں۔","پریمیم PIN کی بازیابی ابھی فعال نہیں ہے۔ محفوظ اکاؤنٹ تصدیق ضروری ہے۔","پریمیم سائن اَپ ابھی فعال نہیں ہے۔ محفوظ PIN رجسٹریشن اور رکنیت کی تصدیق ضروری ہے۔"],
+ or:["👑 ପ୍ରିମିୟମ୍ କ୍ୱିକ୍ ଲଗଇନ୍","କେବଳ RYZON ପ୍ରିମିୟମ୍ ସଦସ୍ୟଙ୍କ ପାଇଁ","ପ୍ରିମିୟମ୍ PIN ଦିଅନ୍ତୁ","👑 ଲଗଇନ୍","PIN ଭୁଲିଗଲେ?","ପ୍ରିମିୟମ୍ ସାଇନ୍ ଅପ୍","ଦୟାକରି ସଠିକ୍ 4–8 ଅଙ୍କର PIN ଦିଅନ୍ତୁ।","ପ୍ରିମିୟମ୍ PIN ଲଗଇନ୍ ଏପର୍ଯ୍ୟନ୍ତ ସକ୍ରିୟ ହୋଇନାହିଁ। ସୁରକ୍ଷିତ ସର୍ଭର ଯାଞ୍ଚ ଆବଶ୍ୟକ। Email, Google କିମ୍ବା Mobile OTP ବ୍ୟବହାର କରନ୍ତୁ।","ପ୍ରିମିୟମ୍ PIN ପୁନରୁଦ୍ଧାର ଏପର୍ଯ୍ୟନ୍ତ ସକ୍ରିୟ ହୋଇନାହିଁ। ସୁରକ୍ଷିତ ଆକାଉଣ୍ଟ ଯାଞ୍ଚ ଆବଶ୍ୟକ।","ପ୍ରିମିୟମ୍ ସାଇନ୍ ଅପ୍ ଏପର୍ଯ୍ୟନ୍ତ ସକ୍ରିୟ ହୋଇନାହିଁ। ସୁରକ୍ଷିତ PIN ପଞ୍ଜୀକରଣ ଓ ସଦସ୍ୟତା ଯାଞ୍ଚ ଆବଶ୍ୟକ।"],
+ as:["👑 প্ৰিমিয়াম কুইক লগইন","কেৱল RYZON প্ৰিমিয়াম সদস্যৰ বাবে","প্ৰিমিয়াম PIN দিয়ক","👑 লগইন","PIN পাহৰিলে নেকি?","প্ৰিমিয়াম ছাইন আপ","অনুগ্ৰহ কৰি সঠিক 4–8 সংখ্যাৰ PIN দিয়ক।","প্ৰিমিয়াম PIN লগইন এতিয়াও সক্ৰিয় হোৱা নাই। সুৰক্ষিত ছাৰ্ভাৰ পৰীক্ষা প্ৰয়োজন। Email, Google বা Mobile OTP ব্যৱহাৰ কৰক।","প্ৰিমিয়াম PIN পুনৰুদ্ধাৰ এতিয়াও সক্ৰিয় হোৱা নাই। সুৰক্ষিত একাউণ্ট পৰীক্ষা প্ৰয়োজন।","প্ৰিমিয়াম ছাইন আপ এতিয়াও সক্ৰিয় হোৱা নাই। সুৰক্ষিত PIN পঞ্জীয়ন আৰু সদস্যপদ পৰীক্ষা প্ৰয়োজন।"],
+ ne:["👑 प्रिमियम क्विक लगइन","RYZON प्रिमियम सदस्यहरूका लागि मात्र","प्रिमियम PIN राख्नुहोस्","👑 लगइन","PIN बिर्सनुभयो?","प्रिमियम साइन अप","कृपया सही 4–8 अंकको PIN राख्नुहोस्।","प्रिमियम PIN लगइन अझै सक्रिय छैन। सुरक्षित सर्भर प्रमाणीकरण आवश्यक छ। Email, Google वा Mobile OTP प्रयोग गर्नुहोस्।","प्रिमियम PIN पुनःप्राप्ति अझै सक्रिय छैन। सुरक्षित खाता प्रमाणीकरण आवश्यक छ।","प्रिमियम साइन अप अझै सक्रिय छैन। सुरक्षित PIN दर्ता र सदस्यता प्रमाणीकरण आवश्यक छ।"],
+ si:["👑 ප්‍රිමියම් ඉක්මන් පිවිසුම","RYZON ප්‍රිමියම් සාමාජිකයන්ට පමණයි","ප්‍රිමියම් PIN ඇතුළත් කරන්න","👑 පිවිසෙන්න","PIN අමතකද?","ප්‍රිමියම් ලියාපදිංචිය","කරුණාකර නිවැරදි ඉලක්කම් 4–8 PIN එකක් ඇතුළත් කරන්න.","ප්‍රිමියම් PIN පිවිසුම තවම සක්‍රිය කර නැත. ආරක්ෂිත සේවාදායක සත්‍යාපනය අවශ්‍යයි. Email, Google හෝ Mobile OTP භාවිතා කරන්න.","ප්‍රිමියම් PIN නැවත ලබාගැනීම තවම සක්‍රිය කර නැත. ආරක්ෂිත ගිණුම් සත්‍යාපනය අවශ්‍යයි.","ප්‍රිමියම් ලියාපදිංචිය තවම සක්‍රිය කර නැත. ආරක්ෂිත PIN ලියාපදිංචිය සහ සාමාජිකත්ව සත්‍යාපනය අවශ්‍යයි."],
+ ar:["👑 تسجيل دخول بريميوم سريع","لأعضاء RYZON بريميوم فقط","أدخل رمز PIN بريميوم","👑 تسجيل الدخول","هل نسيت PIN؟","التسجيل في بريميوم","يرجى إدخال PIN صحيح من 4 إلى 8 أرقام.","تسجيل الدخول برمز PIN بريميوم غير مفعل بعد. يلزم التحقق الآمن من الخادم. استخدم البريد الإلكتروني أو Google أو OTP للهاتف.","استعادة PIN بريميوم غير مفعلة بعد. يلزم التحقق الآمن من الحساب.","التسجيل في بريميوم غير مفعل بعد. يلزم تسجيل PIN والتحقق من العضوية بشكل آمن."],
+ fr:["👑 CONNEXION PREMIUM RAPIDE","Réservé aux membres RYZON Premium","SAISIR LE PIN PREMIUM","👑 CONNEXION","PIN oublié ?","Inscription Premium","Veuillez saisir un PIN Premium valide de 4 à 8 chiffres.","La connexion par PIN Premium n’est pas encore activée. Une vérification sécurisée du serveur est nécessaire. Utilisez Email, Google ou OTP mobile.","La récupération du PIN Premium n’est pas encore activée. Une vérification sécurisée du compte est nécessaire.","L’inscription Premium n’est pas encore activée. L’enregistrement sécurisé du PIN et la vérification de l’adhésion sont nécessaires."],
+ de:["👑 PREMIUM-SCHNELLANMELDUNG","Exklusiv für RYZON-Premium-Mitglieder","PREMIUM-PIN EINGEBEN","👑 ANMELDEN","PIN vergessen?","Premium anmelden","Bitte gib eine gültige Premium-PIN mit 4–8 Ziffern ein.","Die Premium-PIN-Anmeldung ist noch nicht aktiviert. Eine sichere Serverprüfung ist erforderlich. Bitte nutze E-Mail, Google oder Mobile OTP.","Die Wiederherstellung der Premium-PIN ist noch nicht aktiviert. Eine sichere Kontoprüfung ist erforderlich.","Die Premium-Anmeldung ist noch nicht aktiviert. Eine sichere PIN-Registrierung und Mitgliedschaftsprüfung sind erforderlich."],
+ es:["👑 INICIO RÁPIDO PREMIUM","Exclusivo para miembros RYZON Premium","INTRODUCE EL PIN PREMIUM","👑 INICIAR SESIÓN","¿Olvidaste tu PIN?","Registro Premium","Introduce un PIN Premium válido de 4 a 8 dígitos.","El acceso con PIN Premium aún no está activado. Se necesita una verificación segura del servidor. Usa Email, Google o Mobile OTP.","La recuperación del PIN Premium aún no está activada. Se necesita una verificación segura de la cuenta.","El registro Premium aún no está activado. Se necesita un registro seguro del PIN y una verificación de membresía."],
+ pt:["👑 LOGIN RÁPIDO PREMIUM","Exclusivo para membros RYZON Premium","DIGITE O PIN PREMIUM","👑 ENTRAR","Esqueceu o PIN?","Inscrição Premium","Digite um PIN Premium válido de 4 a 8 dígitos.","O login com PIN Premium ainda não está ativado. É necessária uma verificação segura no servidor. Use Email, Google ou Mobile OTP.","A recuperação do PIN Premium ainda não está ativada. É necessária uma verificação segura da conta.","A inscrição Premium ainda não está ativada. É necessário um registro seguro do PIN e uma verificação da assinatura."],
+ zh:["👑 高级会员快速登录","仅限 RYZON 高级会员","输入高级会员 PIN","👑 登录","忘记 PIN？","注册高级会员","请输入有效的 4–8 位高级 PIN。","高级 PIN 登录尚未启用，需要连接安全服务器进行验证。请使用电子邮件、Google 或手机 OTP 登录。","高级 PIN 找回功能尚未启用，需要安全的账户验证。","高级会员注册尚未启用，需要安全的 PIN 注册和会员资格验证。"],
+ ja:["👑 プレミアムクイックログイン","RYZONプレミアム会員限定","プレミアムPINを入力","👑 ログイン","PINを忘れましたか？","プレミアム登録","4～8桁の有効なプレミアムPINを入力してください。","プレミアムPINログインはまだ有効ではありません。安全なサーバー認証が必要です。メール、Google、またはモバイルOTPをご利用ください。","プレミアムPINの再設定はまだ有効ではありません。安全なアカウント認証が必要です。","プレミアム登録はまだ有効ではありません。安全なPIN登録と会員確認が必要です。"],
+ ko:["👑 프리미엄 빠른 로그인","RYZON 프리미엄 회원 전용","프리미엄 PIN 입력","👑 로그인","PIN을 잊으셨나요?","프리미엄 가입","올바른 4~8자리 프리미엄 PIN을 입력하세요.","프리미엄 PIN 로그인은 아직 활성화되지 않았습니다. 안전한 서버 인증이 필요합니다. 이메일, Google 또는 모바일 OTP를 이용하세요.","프리미엄 PIN 복구는 아직 활성화되지 않았습니다. 안전한 계정 인증이 필요합니다.","프리미엄 가입은 아직 활성화되지 않았습니다. 안전한 PIN 등록 및 회원 인증이 필요합니다."]
+};
+
+const premiumKeys=["heading","members","placeholder","login","forgot","signup","invalidPin","loginPending","recoveryPending","signupPending"];
+let premiumMessageKey="";
+
+function currentLanguage(){
+ const lang=typeof window.getRYZONLanguage==="function"
+  ?window.getRYZONLanguage()
+  :(localStorage.getItem("ryzonLanguage")||"en");
+ return premiumTranslations[lang]?lang:"en";
+}
+
+function PT(key){
+ const index=premiumKeys.indexOf(key);
+ return index<0?key:premiumTranslations[currentLanguage()][index];
+}
+
+function updatePremiumLanguage(){
+ $("premiumHeading").textContent=PT("heading");
+ $("premiumSubtitle").textContent=PT("members");
+ $("premiumPin").placeholder=PT("placeholder");
+ $("premiumPin").setAttribute("aria-label",PT("placeholder"));
+ $("premiumLoginButton").textContent=PT("login");
+ $("premiumForgot").textContent=PT("forgot");
+ $("premiumSignup").textContent=PT("signup");
+ if(premiumMessageKey){
+  premiumNote.textContent=PT(premiumMessageKey);
+ }
+}
+
+/* LANGUAGE */
+function applyLanguage(){
+ if(typeof window.applyRYZONLanguage==="function")window.applyRYZONLanguage();
+ updateModeLabels();
+ updatePremiumLanguage();
+ updateLastLogin();
+}
+function updateModeLabels(){
+ $("subtitle").textContent=mode==="signup"?T("createAccountTitle"):T("welcomeBack");
+ $("mainButton").textContent=mode==="signup"?T("createAccount"):T("loginEmail");
+ $("phoneTitle").textContent=mode==="signup"?T("mobileSignup"):T("mobileLogin");
+ $("phoneDescription").textContent=mode==="signup"?T("phoneSignupDescription"):T("phoneDescription");
+ $("sendOtpButton").textContent=mode==="signup"?T("sendOtp")+" & "+T("signUp"):T("sendOtp");
+ $("togglePassword").textContent=$("password").type==="password"?T("show"):T("hide");
+ if($("otpSection").style.display==="block"&&confirmationResult)updateOtpTimer();
+}
+
+/* PHONE INPUT */
+try{
+ if(typeof window.intlTelInput==="function"){
+  phonePicker=window.intlTelInput($("loginPhone"),{
+   initialCountry:"auto",separateDialCode:true,nationalMode:true,
+   geoIpLookup:callback=>{
+    fetch("https://ipapi.co/json/").then(r=>r.json())
+     .then(d=>callback(d?.country_code?.toLowerCase()||"in"))
+     .catch(()=>callback("in"));
+   },
+   loadUtils:()=>import("https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/utils.js")
+  });
+ }
+}catch(e){console.warn("Phone input library unavailable:",e)}
+
+/* MESSAGE */
+function message(text,success=false){
+ $("message").textContent=text;$("message").style.display="block";
+ $("message").style.color=success?"#75f0a5":"#ffb4b4";
+}
+function hideMessage(){$("message").style.display="none"}
+function invalid(field){field.classList.add("input-error")}
+function valid(field){field.classList.remove("input-error")}
+["email","password","confirmPassword","loginPhone","otpCode"].forEach(id=>{
+ $(id).addEventListener("input",()=>valid($(id)));
+});
+
+/* BUTTON LOADING */
+function busy(button,on,text){
+ if(on){
+  if(!button.dataset.oldText)button.dataset.oldText=button.textContent;
+  button.disabled=true;button.textContent=text||T("pleaseWait");
+ }else{
+  button.disabled=false;
+  if(button.dataset.oldText){button.textContent=button.dataset.oldText;delete button.dataset.oldText}
+  updateModeLabels();
+  updatePremiumLanguage();
+ }
+}
+
+/* LOGIN PERSISTENCE */
+async function setLoginPersistence(){
+ await setPersistence(auth,$("rememberMe").checked?browserLocalPersistence:browserSessionPersistence);
+}
+
+/* PHONE VALIDATION */
+async function validPhone(){
+ const raw=$("loginPhone").value.trim();
+ if(!raw){invalid($("loginPhone"));throw new Error(T("mobileRequired"))}
+ if(phonePicker){
+  try{
+   await phonePicker.promise;
+   if(!phonePicker.isValidNumber()){invalid($("loginPhone"));throw new Error(T("invalidPhone"))}
+   valid($("loginPhone"));return phonePicker.getNumber();
+  }catch(e){
+   if(e.message===T("invalidPhone"))throw e;
+   console.warn("Phone utility unavailable:",e);
+  }
+ }
+ let cleaned=raw.replace(/[^\d+]/g,"");
+ if(/^\d{10}$/.test(cleaned))cleaned="+91"+cleaned;
+ else if(/^\d{12}$/.test(cleaned)&&cleaned.startsWith("91"))cleaned="+"+cleaned;
+ else if(/^\d{8,15}$/.test(cleaned))cleaned="+"+cleaned;
+ if(!/^\+[1-9]\d{7,14}$/.test(cleaned)){invalid($("loginPhone"));throw new Error(T("invalidPhone"))}
+ valid($("loginPhone"));return cleaned;
+}
+
+/* LAST LOGIN */
+function updateLastLogin(){
+ const last=localStorage.getItem("ryzonLastLogin");
+ $("lastLogin").textContent=last?T("lastLogin")+" "+last:"";
+}
+
+/* SUCCESS */
+function successLogin(){
+ localStorage.setItem("ryzonLastLogin",new Date().toLocaleString());
+ updateLastLogin();
+ $("successOverlay").style.display="flex";
+ const action=sessionStorage.getItem("ryzonNextAction");
+ setTimeout(()=>{
+  sessionStorage.removeItem("ryzonNextAction");
+  location.replace(action==="randomChat"?"random-chat.html":"home.html");
+ },1600);
+}
+
+/* LOGIN ATTEMPT LOCKOUT - CLIENT-SIDE CONVENIENCE ONLY */
+const MAX_ATTEMPTS=5,LOCK_TIME=300000;
+function lockIdentity(){return method==="phone"?(currentPhone||$("loginPhone").value.trim()):$("email").value.trim().toLowerCase()}
+function lockKey(){return "ryzonLoginLock_"+(lockIdentity()||"unknown")}
+function attempts(){
+ try{return JSON.parse(localStorage.getItem(lockKey()))||{count:0,until:0}}
+ catch(e){return {count:0,until:0}}
+}
+function isLocked(){
+ const data=attempts();
+ if(data.until>Date.now()){
+  message("Login locked. Try again in "+Math.ceil((data.until-Date.now())/1000)+" seconds.");return true;
+ }
+ if(data.until)localStorage.removeItem(lockKey());
+ return false;
+}
+function failedAttempt(){
+ const data=attempts();data.count++;
+ if(data.count>=MAX_ATTEMPTS){
+  data.count=0;data.until=Date.now()+LOCK_TIME;
+  localStorage.setItem(lockKey(),JSON.stringify(data));
+  message("5 failed attempts. Login locked for 5 minutes.");
+ }else{
+  localStorage.setItem(lockKey(),JSON.stringify(data));
+  message("Login details are incorrect. Remaining attempts: "+(MAX_ATTEMPTS-data.count));
+ }
+}
+function clearAttempts(){localStorage.removeItem(lockKey())}
+
+/* FIREBASE ERROR MESSAGES */
+function showError(error){
+ const code=error?.code||"";
+ const errors={
+  "auth/email-already-in-use":"emailAlreadyUsed","auth/invalid-email":"invalidEmail",
+  "auth/weak-password":"weakPassword","auth/invalid-credential":"invalidCredentials",
+  "auth/user-not-found":"invalidCredentials","auth/wrong-password":"invalidCredentials",
+  "auth/too-many-requests":"tooManyRequests","auth/invalid-phone-number":"invalidPhone",
+  "auth/phone-number-already-exists":"phoneAlreadyUsed","auth/credential-already-in-use":"phoneAlreadyUsed",
+  "auth/code-expired":"expiredOtp","auth/session-expired":"expiredOtp",
+  "auth/invalid-verification-code":"wrongOtp","auth/operation-not-allowed":"operationNotAllowed",
+  "auth/captcha-check-failed":"captchaFailed","auth/popup-closed-by-user":"popupClosed",
+  "auth/popup-blocked":"popupBlocked","auth/unauthorized-domain":"unauthorizedDomain",
+  "auth/quota-exceeded":"quotaExceeded","auth/billing-not-enabled":"billingRequired",
+  "auth/network-request-failed":"networkError","auth/missing-phone-number":"mobileRequired"
+ };
+ if(["auth/invalid-credential","auth/wrong-password","auth/user-not-found"].includes(code)){
+  failedAttempt();
+ }else{
+  const readable=errors[code]?T(errors[code]):(error?.message||"An error occurred.");
+  // Show Firebase's exact error code to make Phone Auth failures diagnosable.
+  message(code?readable+" ("+code+")":readable);
+ }
+ console.error(error);
+}
+
+/* OTP TIMER */
+function clearOtpTimer(){
+ if(otpInterval){clearInterval(otpInterval);otpInterval=null}
+ otpExpiryTime=0;resendAvailableTime=0;otpExpired=false;
+ $("otpTimer").textContent="";
+ $("resendOtpButton").disabled=true;
+ $("resendOtpButton").textContent=T("resendOtp");
+ $("verifyOtpButton").disabled=false;
+}
+function updateOtpTimer(){
+ const now=Date.now();
+ const expiry=Math.max(0,Math.ceil((otpExpiryTime-now)/1000));
+ const resend=Math.max(0,Math.ceil((resendAvailableTime-now)/1000));
+ if(expiry<=0){
+  otpExpired=true;$("verifyOtpButton").disabled=true;$("otpTimer").textContent=T("otpExpired");
+ }else{
+  $("verifyOtpButton").disabled=false;$("otpTimer").textContent=T("otpExpires")+" "+expiry+" seconds";
+ }
+ if(resend<=0){
+  $("resendOtpButton").disabled=false;$("resendOtpButton").textContent=T("resendOtp");
+ }else{
+  $("resendOtpButton").disabled=true;$("resendOtpButton").textContent=T("resendIn")+" "+resend+"s";
+ }
+ if(expiry<=0&&resend<=0){clearInterval(otpInterval);otpInterval=null}
+}
+function startOtpTimer(){
+ clearOtpTimer();otpExpiryTime=Date.now()+60000;resendAvailableTime=Date.now()+30000;
+ $("otpSection").style.display="block";updateOtpTimer();
+ otpInterval=setInterval(updateOtpTimer,1000);
+}
+
+/* LOGIN METHOD DISPLAY */
+function showMethod(){
+ $("emailSection").style.display=method==="email"?"block":"none";
+ $("phoneSection").style.display=method==="phone"?"block":"none";
+ $("emailTab").classList.toggle("active",method==="email");
+ $("mobileTab").classList.toggle("active",method==="phone");
+ $("signupFields").classList.toggle("hidden",!(mode==="signup"&&method==="email"));
+ $("rememberRow").style.display=mode==="login"&&method==="email"?"flex":"none";
+ $("forgotLink").style.display=mode==="login"&&method==="email"?"block":"none";
+ updateModeLabels();
+}
+function selectMethod(value){
+ method=value;confirmationResult=null;currentPhone="";
+ clearOtpTimer();$("otpSection").style.display="none";$("otpCode").value="";
+ $("verifiedSection").style.display="none";hideMessage();showMethod();
+}
+
+/* LOGIN MODE */
+function openLogin(){
+ mode="login";
+ $("loginTab").classList.add("active");$("signupTab").classList.remove("active");
+ $("accountTabs").style.display="flex";$("methodTabs").style.display="flex";
+ $("googleButton").style.display="block";$("accountPrompt").style.display="block";
+ $("accountPrompt").innerHTML='<span data-ryzon-text="noAccount">'+T("noAccount")+'</span> <a href="#" id="signupLink">'+T("signUp")+'</a>';
+ $("signupLink").onclick=e=>{e.preventDefault();openSignup()};
+ selectMethod(method);
+}
+
+/* SIGNUP MODE */
+function openSignup(){
+ mode="signup";
+ $("loginTab").classList.remove("active");$("signupTab").classList.add("active");
+ $("accountTabs").style.display="flex";$("methodTabs").style.display="flex";
+ $("googleButton").style.display="block";$("accountPrompt").style.display="block";
+ $("accountPrompt").innerHTML='<span data-ryzon-text="alreadyAccount">'+T("alreadyAccount")+'</span> <a href="#" id="loginLink">'+T("login")+'</a>';
+ $("loginLink").onclick=e=>{e.preventDefault();openLogin()};
+ selectMethod("email");
+}
+$("loginTab").onclick=openLogin;
+$("signupTab").onclick=openSignup;
+$("emailTab").onclick=()=>selectMethod("email");
+$("mobileTab").onclick=()=>selectMethod("phone");
+$("signupLink").onclick=e=>{e.preventDefault();openSignup()};
+
+/* PASSWORD SHOW/HIDE */
+$("togglePassword").onclick=()=>{
+ const field=$("password");
+ field.type=field.type==="password"?"text":"password";
+ $("togglePassword").textContent=field.type==="password"?T("show"):T("hide");
+};
+
+/* EMAIL LOGIN / SIGNUP */
+$("mainButton").onclick=async()=>{
+ const button=$("mainButton");
+ const email=$("email").value.trim(),password=$("password").value;
+ hideMessage();let ok=true;
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){invalid($("email"));ok=false}else valid($("email"));
+ if(!password){invalid($("password"));ok=false}else valid($("password"));
+ if(!ok){message(T("invalidEmail")+" "+T("invalidPassword"));return}
+ if(mode==="login"&&isLocked())return;
+ if(mode==="signup"){
+  if(password!==$("confirmPassword").value){invalid($("confirmPassword"));message(T("passwordMismatch"));return}
+  valid($("confirmPassword"));
+  if(password.length<6){message(T("weakPassword"));return}
+ }
+ busy(button,true);
+ try{
+  await setLoginPersistence();
+  if(mode==="signup"){
+   const result=await createUserWithEmailAndPassword(auth,email,password);
+   await sendEmailVerification(result.user);
+   $("verificationText").textContent=T("verificationText");
+   $("emailSection").style.display="none";$("phoneSection").style.display="none";
+   $("accountTabs").style.display="none";$("methodTabs").style.display="none";
+   $("verifiedSection").style.display="block";$("googleButton").style.display="none";
+   $("accountPrompt").style.display="none";message(T("emailCreated"),true);
+  }else{
+   const result=await signInWithEmailAndPassword(auth,email,password);
+   await reload(result.user);
+   // Existing email/password accounts may sign in without repeating email verification.
+   // Email verification is sent only during new email-account registration.
+   clearAttempts();successLogin();
+  }
+ }catch(error){showError(error)}
+ finally{busy(button,false)}
+};
+
+/* EMAIL VERIFICATION */
+$("checkEmailButton").onclick=async()=>{
+ const button=$("checkEmailButton");busy(button,true);
+ try{
+  if(!auth.currentUser)throw new Error("Please login again.");
+  await reload(auth.currentUser);
+  if(!auth.currentUser.emailVerified){message(T("emailNotVerified"));return}
+  successLogin();
+ }catch(error){showError(error)}
+ finally{busy(button,false)}
+};
+
+/* GOOGLE LOGIN */
+$("googleButton").onclick=async()=>{
+ const button=$("googleButton");busy(button,true,T("connectingGoogle"));
+ try{await setLoginPersistence();await signInWithPopup(auth,googleProvider);successLogin()}
+ catch(error){showError(error)}
+ finally{busy(button,false)}
+};
+
+/* RECAPTCHA */
+async function createRecaptcha(){
+ // Keep the existing verifier so a solved reCAPTCHA is not discarded
+ // when the user taps Send OTP after completing the challenge.
+ if(recaptchaVerifier){
+  try{
+   await recaptchaVerifier.render();
+   return;
+  }catch(e){
+   console.warn("Reusing reCAPTCHA verifier failed; creating a fresh one:",e);
+   try{recaptchaVerifier.clear()}catch(clearError){console.warn(clearError)}
+   recaptchaVerifier=null;
+  }
+ }
+ $("recaptcha-container").innerHTML="";
+ recaptchaVerifier=new RecaptchaVerifier(auth,"recaptcha-container",{size:"normal"});
+ await recaptchaVerifier.render();
+}
+
+/* SEND OTP */
+async function sendOtp(){
+ const button=$("sendOtpButton");hideMessage();
+ let phone;
+ try{phone=await validPhone();currentPhone=phone}
+ catch(error){message(error.message);return}
+ if(mode==="login"&&isLocked())return;
+ busy(button,true);
+ try{
+  await setLoginPersistence();
+  if(!recaptchaVerifier)await createRecaptcha();
+  confirmationResult=await signInWithPhoneNumber(auth,phone,recaptchaVerifier);
+  $("otpCode").value="";startOtpTimer();message(T("otpSent"),true);
+ }catch(error){confirmationResult=null;showError(error)}
+ finally{busy(button,false)}
+}
+$("sendOtpButton").onclick=sendOtp;
+
+/* RESEND OTP */
+$("resendOtpButton").onclick=async()=>{
+ if(Date.now()<resendAvailableTime)return;
+ confirmationResult=null;clearOtpTimer();$("otpCode").value="";
+ await sendOtp();
+};
+
+/* VERIFY OTP */
+$("verifyOtpButton").onclick=async()=>{
+ const button=$("verifyOtpButton"),code=$("otpCode").value.trim();
+ if(!confirmationResult){invalid($("otpCode"));message(T("enterOtpFirst"));return}
+ if(otpExpired||Date.now()>=otpExpiryTime){
+  otpExpired=true;button.disabled=true;message(T("expiredOtp"));return;
+ }
+ if(!/^\d{6}$/.test(code)){invalid($("otpCode"));message(T("enterOtp"));return}
+ valid($("otpCode"));
+ if(mode==="login"&&isLocked())return;
+ busy(button,true);
+ try{
+  const result=await confirmationResult.confirm(code);
+  confirmationResult=null;clearOtpTimer();
+  if(!result.user)throw new Error("Mobile verification failed.");
+  clearAttempts();successLogin();
+ }catch(error){
+  if(error?.code==="auth/invalid-verification-code")failedAttempt();
+  else showError(error);
+ }finally{
+  busy(button,false);
+  if(otpExpired)button.disabled=true;
+ }
+};
+
+/* FORGOT EMAIL PASSWORD */
+$("forgotLink").onclick=async()=>{
+ const email=$("email").value.trim();
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+  invalid($("email"));message(T("enterEmail"));$("email").focus();return;
+ }
+ valid($("email"));
+ try{await sendPasswordResetEmail(auth,email);message(T("resetSent"),true)}
+ catch(error){showError(error)}
+};
+
+/* PREMIUM QUICK LOGIN
+   UI demonstration only. PIN is not stored or authenticated.
+*/
+const premiumNote=$("premiumNote");
+function showPremiumNote(key){
+ premiumMessageKey=key;
+ premiumNote.textContent=PT(key);
+ premiumNote.style.display="block";
+}
+$("premiumPin").addEventListener("input",function(){
+ this.value=this.value.replace(/\D/g,"").slice(0,8);
+ valid(this);premiumMessageKey="";premiumNote.style.display="none";
+});
+
+/* PREMIUM LOGIN */
+$("premiumLoginButton").onclick=()=>{
+ const pin=$("premiumPin").value;
+ if(!/^\d{4,8}$/.test(pin)){
+  invalid($("premiumPin"));showPremiumNote("invalidPin");return;
+ }
+ valid($("premiumPin"));showPremiumNote("loginPending");
+};
+
+/* FORGET PREMIUM PIN */
+function premiumForgotAction(){showPremiumNote("recoveryPending")}
+$("premiumForgot").onclick=premiumForgotAction;
+$("premiumForgot").onkeydown=e=>{
+ if(e.key==="Enter"||e.key===" "){e.preventDefault();premiumForgotAction()}
+};
+
+/* PREMIUM SIGNUP */
+function premiumSignupAction(){showPremiumNote("signupPending")}
+$("premiumSignup").onclick=premiumSignupAction;
+$("premiumSignup").onkeydown=e=>{
+ if(e.key==="Enter"||e.key===" "){e.preventDefault();premiumSignupAction()}
+};
+
+/* START */
+updateLastLogin();
+openLogin();
+applyLanguage();
+window.addEventListener("storage",applyLanguage);
+window.addEventListener("ryzon-language-changed",applyLanguage);
+</script>
+
+<script>
+if("serviceWorker" in navigator){
+ window.addEventListener("load",()=>{
+  navigator.serviceWorker.register("./service-worker.js",{scope:"./"})
+   .then(registration=>console.log("RYZON Service Worker registered:",registration.scope))
+   .catch(error=>console.error("RYZON Service Worker registration failed:",error));
+ });
+}
+</script>
+<script>
+window.addEventListener("load",function(){
+ const splash=document.getElementById("ryzonSplash");
+ if(splash){setTimeout(()=>{splash.classList.add("hide");setTimeout(()=>splash.remove(),600)},1350)}
+});
+</script>
+</body>
+</html>
