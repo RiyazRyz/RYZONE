@@ -1,4 +1,4 @@
-# RYZON Find Friend API Contract
+# RYZONE Find Friend API Contract
 
 Status: implementation specification and source audit. No production Worker deployment is performed from this repository.
 
@@ -91,7 +91,7 @@ This returns actual table definitions so implementation matches the live schema.
 5. Concurrent transfers cannot create a negative balance; retries are idempotent.
 6. Free Coin transfers and unsupported spending categories are rejected.
 7. Existing Random Chat find/status/send/messages/end/block/report flows continue to pass regression tests.
-8. CORS allows only the configured RYZON app origin(s).
+8. CORS allows only the configured RYZONE app origin(s).
 
 ## Deployment safety
 
