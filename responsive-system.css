@@ -1,4 +1,4 @@
-/* RYZON All-Device Responsive System
+/* RYZONE All-Device Responsive System
    Shared layout layer for phones, tablets, laptops and desktops.
    Existing page-specific styles remain in place; this file only adds
    responsive safety and shared layout behavior. */
@@ -46,7 +46,7 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
-/* RYZON LOGIN PAGE LAYOUT
+/* RYZONE LOGIN PAGE LAYOUT
    Scoped to otp.html by its unique success overlay; other pages are unchanged. */
 body:has(#successOverlay){
   min-height:100vh;
