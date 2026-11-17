@@ -251,12 +251,34 @@ body{min-height:100vh;align-items:flex-start!important;justify-content:center!im
 .footer-links{margin:15px 18px 0!important;padding:13px 0 18px!important;border-color:#5c4925!important}.footer-links a{color:#e8c86e!important}
 #successOverlay{background:#030303ee!important}.success-card{background:#11100c!important;border:1px solid #d5a73e!important}.success-check{background:#176b39!important}.success-card h2{color:#f1ce70!important}
 @media(max-width:360px){.brand-banner{padding-top:42px!important}.brand-lockup img{width:76px;height:76px}.brand-name{font-size:34px!important}.auth-panel{padding-left:14px!important;padding-right:14px!important}.premium-entry .premium-login{font-size:12px!important}}
+/* RYZON BLACK-GOLD SPLASH SCREEN */
+#ryzonSplash{position:fixed;inset:0;z-index:100000;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#241907 0%,#090806 43%,#020202 78%);color:#f5d477;transition:opacity .55s ease,visibility .55s ease}
+#ryzonSplash.hide{opacity:0;visibility:hidden;pointer-events:none}
+#ryzonSplash>img{position:relative;z-index:3;width:104px;height:104px;object-fit:contain;filter:drop-shadow(0 0 20px #e6b64288)}
+.splash-word{position:relative;z-index:3;margin-top:8px;font:700 clamp(40px,11vw,58px)/1 Georgia,'Times New Roman',serif;letter-spacing:7px;color:#f5ce6b;text-shadow:0 0 18px #dba52f88,0 3px 3px #000}
+.splash-tag{position:relative;z-index:3;margin-top:9px;font:600 9px Arial,sans-serif;letter-spacing:2.1px;color:#f0d48a;text-align:center}
+.splash-planet{position:absolute;left:-25%;right:-25%;bottom:-29%;height:48%;border-radius:50% 50% 0 0/34% 34% 0 0;border-top:3px solid #ffdc76;background:radial-gradient(ellipse at 50% 0%,#d89c2c55 0%,#70470d22 26%,#070604 68%);box-shadow:0 -8px 28px #e9b23e55,0 -28px 80px #c88b2430}
+.splash-planet:before{content:"";position:absolute;left:8%;right:8%;top:12px;height:2px;background:linear-gradient(90deg,transparent,#ffe28a,transparent);filter:blur(2px)}
+.planet-lights{position:absolute;left:18%;right:18%;top:23%;height:36%;opacity:.5;background:repeating-linear-gradient(90deg,transparent 0 13px,#dca63a55 14px 15px,transparent 16px 25px);mask-image:linear-gradient(180deg,#000,transparent)}
+.splash-rays{position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 48%,transparent 0deg 17deg,#e8b94a0b 18deg 18.5deg,transparent 19deg 35deg);mask-image:radial-gradient(ellipse at center,#000,transparent 72%)}
+.splash-loader{position:absolute;z-index:4;bottom:18%;display:flex;flex-direction:column;align-items:center;gap:8px;color:#fff1c5;font:12px Arial,sans-serif}
+.splash-loader span{width:31px;height:31px;border-radius:50%;border:3px solid #7b602a;border-top-color:#ffe17b;border-right-color:#e7b33d;animation:ryzonSplashSpin .85s linear infinite;box-shadow:0 0 12px #e7b33d55}
+@keyframes ryzonSplashSpin{to{transform:rotate(360deg)}}
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
 </head>
 
 <body>
+<div id="ryzonSplash" aria-label="RYZON loading screen">
+ <div class="splash-rays"></div>
+ <img src="./assets/ryzon-logo.svg" alt="RYZON">
+ <div class="splash-word">RYZON</div>
+ <div class="splash-tag">ONE APP, ENDLESS POSSIBILITIES</div>
+ <div class="splash-planet"><div class="planet-lights"></div></div>
+ <div class="splash-loader"><span></span><small>Loading...</small></div>
+</div>
+
 <main class="container">
 
  <div class="top">
@@ -904,6 +926,12 @@ if("serviceWorker" in navigator){
    .catch(error=>console.error("RYZON Service Worker registration failed:",error));
  });
 }
+</script>
+<script>
+window.addEventListener("load",function(){
+ const splash=document.getElementById("ryzonSplash");
+ if(splash){setTimeout(()=>{splash.classList.add("hide");setTimeout(()=>splash.remove(),600)},1350)}
+});
 </script>
 </body>
 </html>
