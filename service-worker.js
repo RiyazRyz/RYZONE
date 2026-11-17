@@ -21,7 +21,8 @@ const APP_FILES = [
   "./admin-dashboard.html",
   "./help.html",
   "./manifest.json",
-  "./responsive-system.css"
+  "./responsive-system.css",
+  "./assets/ryzon-logo.svg"
 ];
 
 // INSTALL: Cache the latest app files
