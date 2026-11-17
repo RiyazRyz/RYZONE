@@ -110,6 +110,12 @@ button:disabled {
   cursor: not-allowed;
 }
 
+#randomChatButton {
+  background: linear-gradient(135deg, #078bd0, #071a30);
+  border: 1px solid #55dcff;
+  margin-top: 10px;
+}
+
 #message {
   font-weight: bold;
   text-align: center;
@@ -173,6 +179,10 @@ footer {
     Continue
   </button>
 
+  <button id="randomChatButton" type="button" onclick="startRandomChat()">
+    Random Chat
+  </button>
+
   <p id="message"></p>
 
 </div>
@@ -182,6 +192,26 @@ footer {
 </footer>
 
 <script>
+function startRandomChat() {
+  const language = document.getElementById("language").value;
+  const message = document.getElementById("message");
+
+  if (!language) {
+    message.style.color = "red";
+    message.textContent = "Please select a language first.";
+    return;
+  }
+
+  localStorage.setItem("ryzonLanguage", language);
+  localStorage.removeItem("ryzonTemporaryEnglish");
+  sessionStorage.setItem("ryzonNextAction", "randomChat");
+  message.style.color = "green";
+  message.textContent = "Opening Random Chat login...";
+  setTimeout(function() {
+    window.location.href = "otp.html";
+  }, 300);
+}
+
 function continueApp() {
   const language = document.getElementById("language").value;
   const message = document.getElementById("message");
