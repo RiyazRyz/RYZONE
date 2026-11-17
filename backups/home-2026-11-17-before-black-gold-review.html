@@ -1,0 +1,974 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071a30">
+<meta name="description" content="RYZON - One App, Endless Possibilities!">
+<meta name="application-name" content="RYZON">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>RYZON - Home</title>
+<link rel="manifest" href="./manifest.json">
+<script src="language-system.js"></script>
+
+<style>
+:root{
+ --navy:#071a30;--blue:#123b68;--cyan:#55dcff;
+ --text:#f1f5fb;--muted:#a9bdd2;--panel:#102943;
+ --line:#254766;--pink:#ff5caa;--gold:#ffd76a;
+}
+*{box-sizing:border-box}
+html:not(.auth-ready) body{visibility:hidden}
+html:not(.auth-ready)::before{
+ content:"Checking secure login...";
+ position:fixed;inset:0;display:flex;align-items:center;
+ justify-content:center;background:#f1f5fb;color:#17345c;
+ font-family:Arial,sans-serif;font-weight:bold;visibility:visible;z-index:9999
+}
+body{
+ margin:0;background:var(--navy);color:var(--text);
+ font-family:Arial,sans-serif;padding-bottom:80px;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+header{
+ position:sticky;top:0;z-index:40;
+ display:flex;align-items:center;justify-content:space-between;
+ padding:13px 17px;background:#071a30;
+ border-bottom:1px solid #1c3b58;
+}
+.brand{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:900;letter-spacing:4px;color:white}
+.brand-mark{width:40px;height:40px;flex:0 0 40px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(145deg,#55dcff,#078bd0);color:#fff;font-size:27px;font-weight:900;letter-spacing:0;box-shadow:0 5px 16px #078bd044}
+.header-actions{display:flex;gap:9px}
+.icon-btn{
+ width:42px;height:42px;border:1px solid #31516e;border-radius:14px;
+ background:#102b46;color:white;font-size:20px;
+}
+.shortcut-row{
+ display:flex;gap:12px;padding:12px 15px;
+ background:#0a2038;border-bottom:1px solid #1b3b58;
+}
+.shortcut{
+ flex:1;min-height:53px;border:1px solid #315879;border-radius:15px;
+ color:white;font-weight:bold;font-size:14px;
+ background:linear-gradient(135deg,#173e63,#102b48);
+ box-shadow:0 4px 14px #0003;
+}
+.shortcut.coin{border-color:#94712c;background:linear-gradient(135deg,#614b19,#302a20)}
+.shortcut.shopping{border-color:#245e82;background:linear-gradient(135deg,#14537b,#102d4b)}
+main{max-width:760px;margin:auto}
+.status-area{padding:8px 14px 0}
+.status-line{display:flex;align-items:center;gap:7px;color:#a9bdd2;font-size:11px}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#22c55e}
+.status-dot.offline{background:#ef4444}
+#offlineBanner{
+ display:none;padding:10px;margin-top:8px;border-radius:10px;
+ color:#ffd2d2;background:#56242b;border:1px solid #a74750;font-size:12px
+}
+.feed-heading{
+ display:flex;align-items:center;justify-content:space-between;
+ padding:13px 15px 10px;
+}
+.feed-heading h2{font-size:17px;margin:0}
+.feed-tabs{display:flex;justify-content:center;gap:0;padding:0 12px 12px}
+.feed-tab{
+ flex:1;padding:11px 5px;border:0;border-bottom:2px solid #29435b;
+ background:transparent;color:#9fb4c9;font-size:13px;font-weight:bold
+}
+.feed-tab.active{color:white;border-color:var(--cyan)}
+.feed-stage{
+ position:relative;margin:0 auto;width:100%;
+ height:min(69vh,690px);min-height:440px;overflow:hidden;
+ background:
+ radial-gradient(ellipse at 25% 25%,#245f87 0,transparent 38%),
+ radial-gradient(ellipse at 80% 70%,#542a69 0,transparent 45%),
+ linear-gradient(145deg,#0b2947,#071525 65%,#17243c);
+}
+.feed-stage:before{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(180deg,#06142620 0%,transparent 35%,#061426a8 100%);
+}
+.feed-placeholder{
+ position:absolute;inset:0;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;padding:25px;
+}
+.play-symbol{
+ display:grid;place-items:center;width:82px;height:82px;border-radius:50%;
+ border:1px solid #9ddfff80;background:#ffffff12;
+ font-size:34px;margin-bottom:18px;box-shadow:0 0 35px #55dcff20
+}
+.feed-placeholder h2{font-size:22px;margin:0 0 10px}
+.feed-placeholder p{max-width:290px;color:#c3d5e6;font-size:13px;line-height:1.6;margin:0}
+.feed-placeholder button{
+ margin-top:18px;padding:11px 19px;border:1px solid #67dfff;
+ border-radius:25px;background:#123e60;color:white;font-weight:bold
+}
+.feed-caption{
+ position:absolute;left:15px;right:85px;bottom:18px;z-index:2;
+ text-shadow:0 2px 7px #000;
+}
+.creator{font-weight:bold;font-size:14px;margin-bottom:8px}
+.follow-btn{
+ margin-left:8px;padding:5px 11px;border:1px solid #fff;
+ border-radius:18px;background:#ffffff18;color:white;font-size:11px
+}
+.caption-text{font-size:13px;line-height:1.5;color:#eef6ff}
+.audio-line{font-size:11px;color:#d5e4f3;margin-top:8px}
+.feed-actions{
+ position:absolute;right:12px;bottom:20px;z-index:3;
+ display:flex;flex-direction:column;gap:17px;align-items:center
+}
+.feed-action{
+ border:0;background:transparent;color:white;text-align:center;
+ text-shadow:0 2px 6px #000;font-size:23px;min-width:48px
+}
+.feed-action small{display:block;font-size:10px;margin-top:3px}
+.feed-action:active{transform:scale(.9)}
+.feed-note{
+ padding:12px 15px;color:#9eb4c9;font-size:11px;line-height:1.5;
+ background:#0b2036
+}
+.section{padding:18px 15px}
+.section-heading{
+ display:flex;justify-content:space-between;align-items:center;
+ gap:10px;margin:0 0 12px
+}
+.section-heading h2{font-size:18px;margin:0}
+.section-link{color:#64d9ff;font-size:12px;text-decoration:none}
+.search{
+ width:100%;padding:13px;border:1px solid #31516e;border-radius:12px;
+ background:#102943;color:white;font-size:15px;margin:5px 0 12px
+}
+.search::placeholder{color:#9bb1c7}
+#noResults{display:none;text-align:center;color:#a9bdd2;padding:15px}
+.service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{
+ display:block;padding:15px 9px;text-align:center;border-radius:14px;
+ border:1px solid #294966;background:#102943;color:white;
+ text-decoration:none;font-size:13px;font-weight:bold;
+}
+.tile>span:first-child{display:block;font-size:27px;margin-bottom:8px}
+.tile small{display:block;color:#9eb4c9;font-weight:normal;font-size:10px;margin-top:5px}
+.feature-card,.update-card,.activity-row{
+ background:#102943;border:1px solid #294966;border-radius:12px;
+ padding:13px;margin:9px 0;color:#edf6ff;font-size:13px;line-height:1.5
+}
+.feature-card{display:block;text-decoration:none}
+.feature-card b,.update-card b{display:block;margin-bottom:4px}
+.feature-card small,.update-card small,.activity-row small{
+ color:#9eb4c9;font-size:11px
+}
+.activity-row small{display:block;margin-top:5px}
+.empty-state{
+ padding:18px;text-align:center;color:#9eb4c9;
+ background:#102943;border-radius:12px;font-size:13px
+}
+.scam-ticker{
+ margin:10px 15px;
+ overflow:hidden;
+ white-space:nowrap;
+ border-radius:10px;
+ background:#641515;
+ color:#fff;
+ padding:11px 0;
+ border:1px solid #a74750;
+}
+.scam-ticker-track{
+ display:flex;
+ width:max-content;
+ animation:ryzonScamScroll 20s linear infinite;
+ will-change:transform;
+}
+.scam-ticker-track span{
+ flex:0 0 auto;
+ padding-right:56px;
+ font-size:12px;
+ line-height:1.5;
+ font-weight:700;
+}
+@keyframes ryzonScamScroll{
+ from{transform:translateX(0)}
+ to{transform:translateX(-50%)}
+}
+@media(prefers-reduced-motion:reduce){
+ .scam-ticker-track{animation:none}
+}
+.bottom-nav{
+ position:fixed;bottom:0;left:0;right:0;z-index:50;
+ display:flex;justify-content:space-around;align-items:center;
+ background:#091d32;border-top:1px solid #29435b;
+ padding:7px 3px calc(7px + env(safe-area-inset-bottom));
+ box-shadow:0 -4px 16px #0004
+}
+.bottom-nav button{
+ flex:1;border:0;background:transparent;color:#9db2c7;
+ font-size:10px;padding:4px 1px
+}
+.bottom-nav button span{display:block;font-size:21px;margin-bottom:3px}
+.bottom-nav button.active{color:var(--cyan);font-weight:bold}
+.help{
+ position:fixed;right:14px;bottom:92px;z-index:25;
+ width:48px;height:48px;border:1px solid #68dfff;border-radius:50%;
+ background:#14527b;color:white;font-size:22px;box-shadow:0 4px 15px #0005
+}
+footer{text-align:center;padding:22px;color:#8198ae;font-size:11px}
+.modal-backdrop{
+ display:none;position:fixed;inset:0;z-index:100;
+ background:#020b16c9;padding:16px;align-items:center;justify-content:center
+}
+.modal-backdrop.open{display:flex}
+.modal{
+ width:100%;max-width:430px;max-height:86vh;overflow-y:auto;
+ background:#102943;color:white;border:1px solid #31516e;
+ border-radius:18px;padding:19px;box-shadow:0 12px 35px #0008
+}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.modal-header h2{margin:0;font-size:19px}
+.close-modal{
+ width:34px;height:34px;border:0;border-radius:50%;
+ background:#25435e;color:white;font-size:21px
+}
+.modal-item{
+ display:block;width:100%;text-align:left;padding:13px;margin:8px 0;
+ background:#173651;color:white;border:1px solid #31516e;
+ border-radius:11px;font-size:13px;text-decoration:none
+}
+.modal-item small{display:block;color:#a9bdd2;margin-top:5px;line-height:1.5}
+.modal-primary{
+ width:100%;padding:13px;margin-top:9px;border:0;border-radius:10px;
+ background:#087fb5;color:white;font-weight:bold
+}
+.modal-danger{background:#b42318}
+.modal-note{font-size:12px;color:#b5c7d8;line-height:1.6}
+#message{text-align:center;font-size:13px;font-weight:bold;padding:8px;overflow-wrap:anywhere}
+.modal input{width:100%;margin:10px 0}
+@media(min-width:700px){
+ body{padding-bottom:0}
+ .bottom-nav{display:none}
+ .feed-stage{border-radius:16px}
+ .help{bottom:18px}
+}
+@media(max-width:360px){
+ .brand{font-size:22px}
+.brand-mark{width:36px;height:36px;flex-basis:36px;font-size:24px}
+ .feed-stage{min-height:420px}
+ .tile{padding:13px 6px}
+}
+
+/* RYZON app-shell layout: fixed header/shortcuts/navigation, scroll only the center */
+html,body{width:100%;height:100%;min-height:100%;overflow:hidden}
+body{
+ height:100dvh;min-height:100dvh;padding:0!important;
+ display:flex;flex-direction:column;overflow:hidden;
+}
+body>header{position:relative;top:auto;z-index:60;flex:0 0 auto}
+body>.shortcut-row{position:relative;z-index:55;flex:0 0 auto}
+body>main{
+ width:100%;max-width:none;flex:1 1 auto;min-height:0;
+ margin:0;overflow-x:hidden;overflow-y:auto;
+ overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+ padding:0 0 calc(88px + env(safe-area-inset-bottom));
+ scrollbar-width:thin;scrollbar-color:#315879 #071a30;
+}
+body>.bottom-nav{
+ display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;
+ padding-bottom:calc(7px + env(safe-area-inset-bottom));
+}
+body>.help{bottom:calc(92px + env(safe-area-inset-bottom))}
+@media(min-width:700px){
+ body{padding-bottom:0}
+ body>.bottom-nav{display:flex}
+ body>main{max-width:none;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+ body>.help{bottom:calc(92px + env(safe-area-inset-bottom))}
+}
+@media(max-width:480px){
+ body>header{padding:10px 13px}
+ body>.shortcut-row{padding:9px 12px;gap:9px}
+ body>.shortcut-row .shortcut{min-height:48px;font-size:12px}
+ body>main{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+}
+
+
+
+/* RYZON MASTER BLACK + GOLD THEME — layout and existing features preserved */
+:root{
+ --navy:#050505 !important;--blue:#17130a !important;--cyan:#e9bd58 !important;
+ --text:#fff8e8 !important;--muted:#c5b58e !important;--panel:#11100d !important;
+ --line:#72551d !important;--gold:#f5c95c !important;
+}
+body{background:radial-gradient(ellipse at 50% -15%,#39290d 0%,#0a0907 42%,#020202 100%) !important;color:#fff8e8 !important}
+header,.shortcut-row,.bottom-nav{background:#080807 !important;border-color:#72551d !important}
+.brand,.brand h2{color:#f4cf70 !important}
+.brand-mark{background:#090909 !important;border:2px solid #d9aa43 !important;color:#f8d77d !important;box-shadow:0 0 16px #d9aa4355 !important}
+.icon-btn,.shortcut,.shortcut.shopping,.feed-tab,.modal-item{background:#12110e !important;border-color:#755a25 !important;color:#f8e5b5 !important}
+.shortcut.coin{background:linear-gradient(135deg,#725018,#211807) !important;border-color:#e3b64e !important}
+.feed-stage{background:radial-gradient(ellipse at 25% 25%,#4a3510 0,transparent 38%),radial-gradient(ellipse at 80% 70%,#30220c 0,transparent 45%),linear-gradient(145deg,#17120a,#050505 70%,#1b1509) !important}
+.feed-stage:before{background:linear-gradient(180deg,#0003 0%,transparent 35%,#000b 100%) !important}
+.play-symbol{border-color:#e8c36a99 !important;background:#e7bd5015 !important;box-shadow:0 0 35px #d6a83b25 !important}
+.feed-placeholder button,.follow-btn{border-color:#e4bd60 !important;background:linear-gradient(135deg,#f5d477,#b47a18) !important;color:#171006 !important}
+.feed-note,.feature-card,.update-card,.activity-row,.empty-state,.tile,.search,.modal,.modal-item{background:#11100d !important;border-color:#72551d !important;color:#fff5dc !important}
+.tile{box-shadow:inset 0 0 16px #d5a43b0b,0 5px 16px #0008 !important}
+.tile>span:first-child{filter:drop-shadow(0 0 7px #e3b64e66)}
+.tile small,.feature-card small,.update-card small,.activity-row small{color:#c6b68e !important}
+.feed-tab.active,.section-link,.bottom-nav button.active{color:#f5cd68 !important;border-color:#e5b84c !important}
+.status-line,.status-area{color:#c6b68e !important}
+.status-dot{background:#3ecb78 !important}
+.scam-ticker{background:#24180a !important;border-color:#9a6d22 !important;color:#ffe5a3 !important}
+.help{background:linear-gradient(135deg,#f5d477,#b47a18) !important;color:#171006 !important;border-color:#f5d477 !important}
+.modal-backdrop{background:#000d !important}
+.modal{box-shadow:0 12px 40px #000c,0 0 0 1px #9b742b44 !important}
+
+/* RYZON REFERENCE HOME */
+:root{--navy:#030303!important;--blue:#0b0a08!important;--cyan:#f1c65e!important;--text:#fff8e8!important;--muted:#c6b68e!important;--panel:#11100d!important;--line:#72551d!important}
+html,body{background:#030303!important;color:#fff8e8!important}body{background:radial-gradient(ellipse at 50% -20%,#34230b 0%,#090806 44%,#020202 80%)!important}
+body>header{background:#050505!important;border-bottom:1px solid #74571f!important;min-height:66px!important;justify-content:center!important}
+.brand{color:#f5d078!important;font-family:Georgia,'Times New Roman',serif!important;font-size:30px!important;letter-spacing:5px!important;text-shadow:0 0 12px #d5a33b66!important}
+.brand-mark{background:#090909!important;border:2px solid #d5a63d!important;color:#f4d477!important;box-shadow:0 0 15px #d5a33b55!important}
+.header-actions{position:absolute!important;right:10px!important;top:50%!important;transform:translateY(-50%)!important;gap:5px!important}
+.icon-btn{width:35px!important;height:35px!important;border-radius:50%!important;background:#111!important;border:1px solid #715522!important;color:#f6d47c!important;font-size:17px!important}
+.ryzon-welcome-banner{position:relative;display:flex;align-items:center;justify-content:space-between;overflow:hidden;min-height:116px;margin:13px 13px 9px;padding:18px;border:1px solid #e4b84d;border-radius:16px;background:radial-gradient(ellipse at 78% 50%,#69440f88,transparent 45%),linear-gradient(110deg,#0b0a08,#211606 55%,#080706);box-shadow:0 0 18px #d9a83a2b,inset 0 0 25px #d7a63a15}
+.welcome-copy{position:relative;z-index:2;display:flex;flex-direction:column;gap:6px}.welcome-copy strong{font-size:22px;color:#fff8e8;text-shadow:0 2px 6px #000}.welcome-copy span{font-size:14px;color:#f0d48a}
+.welcome-gift{position:relative;z-index:2;font-size:48px;filter:drop-shadow(0 0 10px #e9b83d88)}.welcome-trail{position:absolute;width:62%;height:65px;right:8%;bottom:-29px;border-top:3px solid #f5ca59;border-radius:50%;transform:rotate(-10deg);filter:drop-shadow(0 0 7px #e7ad35)}
+.shortcut-row{background:#080706!important;border-color:#6b5120!important}.shortcut{background:#15120b!important;border-color:#806126!important;color:#f7e5b5!important}.shortcut.coin{background:linear-gradient(120deg,#765314,#241a09)!important;border-color:#e3b64e!important}.shortcut.shopping{background:#11100d!important;border-color:#806126!important}
+body>main{scrollbar-color:#9b742d #050505!important}.feed-heading h2,.section-heading h2{color:#f5d37b!important}
+.feed-tabs{gap:5px!important}.feed-tab{border-color:#5f4a22!important;color:#c8b98e!important}.feed-tab.active{color:#ffe18a!important;border-color:#e8b94b!important}
+.feed-stage{background:radial-gradient(ellipse at 50% 0%,#4b3511 0%,transparent 48%),linear-gradient(145deg,#17120a,#050505 70%,#1b1509)!important;border:1px solid #72551d!important}
+.play-symbol{border-color:#e8c36a99!important;color:#f5d67c!important}.feed-placeholder button,.help{background:linear-gradient(135deg,#ffe17b,#b77b12)!important;color:#171006!important;border-color:#f3cf6d!important}
+.service-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:9px!important}
+.tile{min-width:0!important;min-height:104px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;padding:11px 4px!important;border-radius:15px!important;border:1px solid #655126!important;background:linear-gradient(155deg,#17140e,#070707 70%)!important;color:#fff7df!important;box-shadow:inset 0 0 17px #d8a63b0b,0 4px 14px #0008!important;font-size:11px!important}
+.tile>span:first-child{font-size:29px!important;margin-bottom:6px!important;filter:drop-shadow(0 0 7px #e5b84f66)}.tile small{font-size:9px!important;color:#c9b98d!important;line-height:1.3!important}
+.feature-card,.update-card,.activity-row,.empty-state,.search,.modal{background:#11100d!important;border-color:#74571f!important;color:#fff5dc!important}
+.feature-card small,.update-card small,.activity-row small{color:#c6b68e!important}.section-link{color:#f3cc6b!important}
+.scam-ticker{background:#24180a!important;border-color:#9a6d22!important;color:#ffe5a3!important}
+.bottom-nav{background:#050505!important;border-top:1px solid #74571f!important;box-shadow:0 -5px 18px #000b!important}
+.bottom-nav button{color:#b9b4a6!important}.bottom-nav button.active{color:#ffd76a!important;text-shadow:0 0 10px #e3ae3d!important}.bottom-nav button span{font-size:23px!important}
+@media(max-width:380px){.service-grid{gap:6px!important}.tile{min-height:96px!important;font-size:10px!important}.tile>span:first-child{font-size:26px!important}.welcome-copy strong{font-size:19px!important}.welcome-gift{font-size:40px!important}.brand{font-size:24px!important}}
+/* Reference layout refinements */
+body>header.ryzon-reference-header{position:relative;display:flex;align-items:center;justify-content:center;min-height:72px;padding:9px 8px;background:#050505!important;border-bottom:1px solid #74571f!important}
+.header-menu{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;background:transparent;color:#f7e2a0;font-size:27px}
+.brand-wordmark{gap:0!important}.brand-wordmark .brand-name{font-family:Georgia,'Times New Roman',serif;font-size:clamp(27px,7vw,39px);font-weight:700;letter-spacing:4px;color:#f3c95d;text-shadow:0 0 13px #e8b44788}
+.brand-y{position:relative;color:#fffdf4}.brand-y i{position:absolute;left:7px;top:3px;font:700 17px Arial,sans-serif;color:#16b94b;transform:rotate(-8deg);text-shadow:0 0 5px #25d66b}
+.ryzon-reference-header .header-actions{right:8px;gap:4px}.ryzon-reference-header .icon-btn{width:34px;height:34px;border-radius:50%;font-size:19px}
+.ryzon-welcome-banner{min-height:150px!important;margin:15px 13px 12px!important;padding:20px 17px!important;border-radius:18px!important;background:radial-gradient(ellipse at 83% 56%,#8c5a1599 0%,transparent 37%),linear-gradient(110deg,#0b0906,#211707 58%,#080706)!important}
+.welcome-copy strong{font-size:clamp(21px,5vw,28px)!important}.welcome-copy span{font-size:clamp(14px,3.7vw,18px)!important}
+.welcome-gift{width:76px;height:76px;flex:0 0 76px;filter:drop-shadow(0 0 12px #ffca42aa);z-index:3}.welcome-gift svg{width:100%;height:100%;overflow:visible}
+.welcome-trail{position:absolute;left:29%;right:3%;bottom:-1px;width:68%;height:70px;z-index:1;overflow:visible;transform:none;filter:drop-shadow(0 0 7px #e7ad35)}
+.service-grid .tile:nth-child(n+8){display:none!important}.service-grid .tile.more-services-tile:nth-child(n+8){display:flex!important}.service-grid.expanded .tile:nth-child(n+8){display:flex!important}
+.more-services-tile{font-family:Arial,sans-serif;cursor:pointer}.more-services-tile b{font-size:12px}
+.bottom-nav{justify-content:space-around}.bottom-nav button{font-size:11px}.bottom-nav button span{font-size:25px;line-height:1.1}
+@media(max-width:390px){.brand-wordmark .brand-name{letter-spacing:2px}.ryzon-reference-header .icon-btn{width:30px;height:32px;font-size:17px}.header-menu{left:7px}.welcome-gift{width:65px;height:65px;flex-basis:65px}.ryzon-welcome-banner{min-height:140px!important}}
+</style>
+<script src="./ryzon-branding.js" defer></script>
+<link rel="stylesheet" href="./responsive-system.css">
+</head>
+
+<body>
+
+<header class="ryzon-reference-header">
+ <button class="header-menu" onclick="openModal('settingsModal')" aria-label="Menu">☰</button>
+ <div class="brand brand-wordmark" aria-label="RYZON"><span class="brand-name">R<span class="brand-y">Y<i>✓</i></span>ZON</span></div>
+ <div class="header-actions">
+  <button class="icon-btn" onclick="focusSearch()" aria-label="Search">⌕</button>
+  <button class="icon-btn" onclick="openModal('notificationsModal')" aria-label="Notifications">♧</button>
+  <button class="icon-btn" onclick="goTo('language.html','Opened Language')" aria-label="Language">◎</button>
+ </div>
+</header>
+
+<section class="ryzon-welcome-banner" aria-label="Welcome to RYZON">
+ <div class="welcome-copy"><strong>Welcome to RYZON!</strong><span>Explore • Connect • Grow</span></div>
+ <div class="welcome-gift" aria-hidden="true"><svg viewBox="0 0 100 100"><defs><linearGradient id="giftGold" x2="0" y2="1"><stop stop-color="#fff08a"/><stop offset=".55" stop-color="#ffb900"/><stop offset="1" stop-color="#b66a00"/></linearGradient><linearGradient id="giftRed" x2="0" y2="1"><stop stop-color="#ff7474"/><stop offset="1" stop-color="#bd1010"/></linearGradient></defs><path d="M18 42h64v48H18z" fill="url(#giftGold)" stroke="#ffe38b" stroke-width="3"/><path d="M12 34h76v17H12z" fill="url(#giftRed)" stroke="#ffb4a0" stroke-width="2"/><path d="M45 34h12v56H45z" fill="#fff0a0"/><path d="M50 34C20 34 18 8 34 8c13 0 16 16 16 26Zm0 0C80 34 82 8 66 8 53 8 50 24 50 34Z" fill="url(#giftRed)" stroke="#ffb5a0" stroke-width="2"/><path d="M24 57h13v9H24zm39 0h13v9H63z" fill="#fff0a0" opacity=".8"/></svg></div>
+ <svg class="welcome-trail" viewBox="0 0 520 120" preserveAspectRatio="none" aria-hidden="true"><path d="M4 108 C110 5 265 16 365 28 S470 50 514 2" fill="none" stroke="#ffda64" stroke-width="3"/><path d="M4 108 C110 5 265 16 365 28 S470 50 514 2" fill="none" stroke="#ffbf32" stroke-width="10" opacity=".22"/><path d="M495 8l9-9 8 11-12 1" fill="#fff0a1"/><circle cx="495" cy="8" r="5" fill="#fff4bd"/></svg>
+</section>
+<div class="shortcut-row">
+ <button class="shortcut coin" onclick="openModal('coinModal')">🪙 Coin Wallet　⌄</button>
+ <button class="shortcut shopping" onclick="goTo('shopping.html','Opened Shopping')">🛍️ Shopping</button>
+</div>
+
+<main>
+ <div class="status-area">
+  <div class="status-line">
+   <span class="status-dot" id="connectionDot"></span>
+   <span id="connectionText">Checking connection...</span>
+  </div>
+  <div id="offlineBanner">⚠️ You are offline. Some RYZON services may not work.</div>
+ </div>
+
+ <div class="scam-ticker" role="status" aria-label="Scam safety alert">
+  <div class="scam-ticker-track">
+   <span>⚠️ SCAM ALERT: Never share OTP, UPI PIN or bank details. Verify before you pay.</span>
+   <span aria-hidden="true">⚠️ SCAM ALERT: Never share OTP, UPI PIN or bank details. Verify before you pay.</span>
+  </div>
+ </div>
+
+ <section class="section" id="allServices">
+  <div class="section-heading">
+   <h2>🌐 All RYZON Services</h2>
+  </div>
+  <input class="search" id="serviceSearch" type="search"
+   placeholder="🔍 Search RYZON services..."
+   data-ryzon-placeholder="search" oninput="searchTiles(this.value)">
+  <div id="noResults">No services found. Try another search.</div>
+
+  <div class="service-grid" id="serviceGrid">
+   <a class="tile" href="random-chat.html"><span>💬</span>Random Chat<small>Meet and chat through RYZON</small></a>
+    <a class="tile" href="friends.html"><span>♧</span>Find Friends<small>Friends and requests</small></a>
+    <a class="tile" href="wallet.html"><span>🪙</span>Coin Wallet<small>Balances and history</small></a>
+   <a class="tile" href="seller-dashboard.html"><span>🏪</span>Business<small>Seller and business workspace</small></a>
+   <a class="tile" href="shopping.html"><span>🛍️</span>Shopping</a>
+   <a class="tile" href="educational.html"><span>🎓</span>Education</a>
+   <a class="tile" href="project-ideas.html"><span>💡</span>Project Ideas</a>
+   <a class="tile" href="my-safe.html"><span>🔐</span>Personal Data Safe Locker</a>
+   <a class="tile" href="jobs.html"><span>💼</span>Jobs</a>
+   <a class="tile" href="ai-assistant.html"><span>🤖</span>AI Assistant</a>
+   <a class="tile" href="browser.html"><span>🌐</span>Browser</a>
+   <a class="tile" href="parcel-safety.html"><span>📦</span>Parcel Safety</a>
+   <a class="tile" href="local-services.html"><span>📍</span>Local Services</a>
+   <a class="tile" href="safety-help.html"><span>🛡️</span>Safety &amp; Help</a>
+   <a class="tile" href="premium.html"><span>⭐</span>Premium</a>
+   <a class="tile" href="language.html"><span>🌐</span>Language</a>
+   <a class="tile" href="settings.html"><span>⚙️</span>Settings</a>
+   <button class="tile more-services-tile" id="moreServicesButton" type="button" onclick="toggleMoreServices()"><span>✣</span><b>More</b><small>All other services</small></button>
+  </div>
+ </section>
+
+ <section class="section">
+  <div class="section-heading">
+   <h2>⭐ Featured Services</h2>
+   <a class="section-link" href="#allServices">All services</a>
+  </div>
+  <a class="feature-card" href="random-chat.html">
+   <b>💬 Random Chat</b>
+   <small>Find a chat match and connect through RYZON.</small>
+  </a>
+  <a class="feature-card" href="ai-assistant.html">
+   <b>🤖 AI Chat Assistant</b>
+   <small>Get help and explore ideas with RYZON AI Assistant.</small>
+  </a>
+  <a class="feature-card" href="premium.html">
+   <b>⭐ RYZON Premium</b>
+   <small>Explore paid features and membership options.</small>
+  </a>
+ </section>
+
+ <section class="section">
+  <div class="section-heading">
+   <h2>🕘 Recent Activities</h2>
+   <a class="section-link" href="#" onclick="openModal('activityModal');return false">View all</a>
+  </div>
+  <div id="homeRecentActivity">
+   <div class="empty-state">Your recent activities will appear here.</div>
+  </div>
+ </section>
+
+ <section class="section">
+  <div class="section-heading"><h2>🆕 New Updates</h2></div>
+  <div class="update-card">
+   <b>💬 RYZON Chat</b>
+   <div>Personal and group chat features are part of the RYZON development plan.</div>
+   <small>RYZON Features</small>
+  </div>
+  <div class="update-card">
+   <b>🎁 Gifts &amp; Coins</b>
+   <div>RYZON gifts use RYZON Coins. Wallet services will be connected separately.</div>
+   <small>RYZON Updates</small>
+  </div>
+  <div class="update-card">
+   <b>💬 Random Chat</b>
+   <div>Discover Random Chat and connect through the RYZON chat experience.</div>
+   <small>RYZON Services</small>
+  </div>
+ </section>
+
+ <p id="message"></p>
+ <footer>RYZON © 2026 · One App, Endless Possibilities!</footer>
+</main>
+
+<nav class="bottom-nav" aria-label="App navigation">
+ <button class="active" onclick="goHome()"><span>⌂</span>Home</button>
+ <button onclick="goTo('chat.html','Opened Group Chat')"><span>♧</span>Group Chat</button>
+ <button onclick="goTo('notifications.html','Opened Notifications')"><span>♢</span>Notifications</button>
+ <button onclick="openProfile()"><span>♙</span>Profile</button>
+</nav>
+
+<button class="help" onclick="openModal('helpModal')" aria-label="Help Center">🎧</button>
+
+<!-- Coin options -->
+<div class="modal-backdrop" id="coinModal">
+ <section class="modal">
+  <div class="modal-header">
+   <h2>🪙 RYZON Coin Wallet</h2>
+   <button class="close-modal" onclick="closeModal('coinModal')">×</button>
+  </div>
+  <button class="modal-item" onclick="coinNotice('Reward Coins balance and earning history will appear after the secure wallet is connected.')">
+   🟢 Reward Coins
+   <small>Coins earned through eligible activities and rewards.</small>
+  </button>
+  <button class="modal-item" onclick="coinNotice('Purchased Coins balance and purchase history will appear after the secure wallet is connected.')">
+   🟡 Purchased Coins
+   <small>Coins purchased through supported payment options.</small>
+  </button>
+  <button class="modal-item" onclick="goTo('shopping.html','Opened Shopping from Coin Wallet')">
+   🛍️ Shopping
+   <small>Explore shopping options.</small>
+  </button>
+  <p class="modal-note">Wallet balances and transfers are not displayed until the secure server-side wallet is connected.</p>
+   <a class="modal-item" href="./wallet.html">Open Full Coin Wallet →</a>
+ </section>
+</div>
+
+<!-- Profile -->
+<div class="modal-backdrop" id="profileModal">
+ <section class="modal">
+  <div class="modal-header">
+   <h2>👤 My Profile</h2>
+   <button class="close-modal" onclick="closeModal('profileModal')">×</button>
+  </div>
+  <div class="modal-item">
+   <b id="profileName">RYZON User</b>
+   <small id="profileEmail">Loading account...</small>
+   <small id="profilePhone"></small>
+  </div>
+  <button class="modal-item" onclick="goTo('profile.html','Opened Full Profile')">👤 Open Full Profile</button>
+  <button class="modal-item" onclick="openModal('settingsModal')">⚙️ Account Settings</button>
+  <button class="modal-item" onclick="openModal('securityModal')">🛡️ Privacy &amp; Security</button>
+  <button class="modal-item" onclick="openModal('activityModal')">🕘 Recent Activity</button>
+  <button class="modal-primary" onclick="logoutUser()">Logout</button>
+  <button class="modal-item" onclick="openModal('deleteModal')">⚠️ Delete Account</button>
+ </section>
+</div>
+
+<!-- Notifications -->
+<div class="modal-backdrop" id="notificationsModal">
+ <section class="modal">
+  <div class="modal-header">
+   <h2>🔔 Notifications</h2>
+   <button class="close-modal" onclick="closeModal('notificationsModal')">×</button>
+  </div>
+  <div class="empty-state">
+   No new notifications.
+   <p class="modal-note">Friend requests, messages and security alerts will appear here when notification services are connected.</p>
+  </div>
+  <button class="modal-primary" onclick="goTo('notifications.html','Opened Notifications')">Open Notifications</button>
+ </section>
+</div>
+
+<!-- Activity -->
+<div class="modal-backdrop" id="activityModal">
+ <section class="modal">
+  <div class="modal-header">
+   <h2>🕘 Recent Activity</h2>
+   <button class="close-modal" onclick="closeModal('activityModal')">×</button>
+  </div>
+  <div id="activityList"></div>
+  <button class="modal-item" onclick="clearActivity()">Clear activity history</button>
+ </section>
+</div>
+
+<!-- Settings -->
+<div class="modal-backdrop" id="settingsModal">
+ <section class="modal">
+  <div class="modal-header">
+   <h2>⚙️ Account Settings</h2>
+   <button class="close-modal" onclick="closeModal('settingsModal')">×</button>
+  </div>
+  <button class="modal-item" onclick="goTo('settings.html','Opened Settings')">⚙️ Open Full Settings</button>
+  <button class="modal-item" onclick="openProfile()">👤 My Profile</button>
+  <button class="modal-item" onclick="openModal('securityModal')">🛡️ Privacy &amp; Security</button>
+  <button class="modal-item" onclick="openModal('activityModal')">🕘 Recent Activity</button>
+  <button class="modal-item" onclick="openModal('helpModal')">🎧 Help &amp; Feedback</button>
+  <button class="modal-primary" onclick="logoutUser()">Logout</button>
+ </section>
+</div>
+
+<!-- Security -->
+<div class="modal-backdrop" id="securityModal">
+ <section class="modal">
+  <div class="modal-header">
+   <h2>🛡️ Privacy &amp; Security</h2>
+   <button class="close-modal" onclick="closeModal('securityModal')">×</button>
+  </div>
+  <div class="modal-item"><b>Secure Login</b><small>Your account is authenticated through Firebase.</small></div>
+  <div class="modal-item"><b>Connection</b><small id="securityConnection">Checking...</small></div>
+  <div class="modal-item"><b>Privacy Policy</b><small><a href="./privacy.html" style="color:#68dfff">Read Privacy Policy</a></small></div>
+  <div class="modal-item"><b>Terms &amp; Conditions</b><small><a href="./terms.html" style="color:#68dfff">Read Terms</a></small></div>
+  <p class="modal-note">Never share your password or OTP with anyone.</p>
+ </section>
+</div>
+
+<!-- Help -->
+<div class="modal-backdrop" id="helpModal">
+ <section class="modal">
+  <div class="modal-header">
+   <h2>🎧 Help &amp; Feedback</h2>
+   <button class="close-modal" onclick="closeModal('helpModal')">×</button>
+  </div>
+  <div class="modal-item">
+   <b>Need help?</b>
+   <small>Help Center and support contact will be connected when the support service is configured.</small>
+  </div>
+  <div class="modal-item">
+   <b>Report a Problem</b>
+   <small>Please use the support channel when it becomes available.</small>
+  </div>
+  <a class="modal-item" href="./help.html">Open Help Center</a>
+  <a class="modal-item" href="./terms.html">Terms &amp; Conditions</a>
+  <a class="modal-item" href="./privacy.html">Privacy Policy</a>
+ </section>
+</div>
+
+<!-- Delete account -->
+<div class="modal-backdrop" id="deleteModal">
+ <section class="modal">
+  <div class="modal-header">
+   <h2>⚠️ Delete Account</h2>
+   <button class="close-modal" onclick="closeModal('deleteModal')">×</button>
+  </div>
+  <p>Are you sure you want to delete your RYZON login account?</p>
+  <p class="modal-note">This action deletes the Firebase Authentication account. Other stored app data may require separate secure backend cleanup. You may need to sign in again before deletion.</p>
+  <label for="deleteConfirm">Type DELETE to confirm:</label>
+  <input id="deleteConfirm" class="search" type="text" placeholder="DELETE" autocomplete="off">
+  <button class="modal-primary modal-danger" onclick="confirmDeleteAccount()">Delete Account</button>
+ </section>
+</div>
+
+<script>
+function $(id){return document.getElementById(id)}
+
+function focusSearch(){
+ $("serviceSearch").scrollIntoView({behavior:"smooth",block:"center"});
+ $("serviceSearch").focus();
+}
+
+function goTo(url,activity){
+ if(activity)recordActivity(activity);
+ window.location.href=url;
+}
+
+function feedNotice(message){
+ $("message").textContent=message;
+ $("message").style.color="#8bdfff";
+}
+
+function coinNotice(message){
+ closeModal("coinModal");
+ $("message").textContent=message;
+ $("message").style.color="#ffd76a";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function changeFeed(type,button){
+ document.querySelectorAll(".feed-tab").forEach(tab=>tab.classList.remove("active"));
+ button.classList.add("active");
+
+ const titles={
+  "for-you":"Your RYZON Services",
+  "following":"Following Feed",
+  "trending":"Trending on RYZON"
+ };
+ const descriptions={
+  "for-you":"Short videos from the RYZON community will appear here when the video-feed service is connected.",
+  "following":"Videos from accounts you follow will appear here after the feed service is connected.",
+  "trending":"Popular community videos will appear here after the feed service is connected."
+ };
+ $("feedTitle").textContent=titles[type];
+ $("feedDescription").textContent=descriptions[type];
+}
+
+async function shareRYZON(){
+ const shareData={
+  title:"RYZON",
+  text:"One App, Endless Possibilities!",
+  url:window.location.href
+ };
+ try{
+  if(navigator.share)await navigator.share(shareData);
+  else if(navigator.clipboard){
+   await navigator.clipboard.writeText(shareData.url);
+   feedNotice("RYZON link copied.");
+  }else feedNotice("Sharing is not supported on this browser.");
+ }catch(error){
+  if(error.name!=="AbortError")feedNotice("Unable to share right now.");
+ }
+}
+
+function toggleMoreServices(){
+ const grid=$("serviceGrid"),button=$("moreServicesButton");
+ if(!grid||!button)return;
+ const expanded=grid.classList.toggle("expanded");
+ button.querySelector("b").textContent=expanded?"Less":"More";
+ button.querySelector("small").textContent=expanded?"Show fewer services":"All other services";
+ button.querySelector("span").textContent=expanded?"−":"✣";
+}
+function searchTiles(value){
+ const tiles=document.querySelectorAll("#serviceGrid .tile");
+ let visibleCount=0;
+ const query=value.toLowerCase().trim();
+
+ tiles.forEach(tile=>{
+  const match=tile.textContent.toLowerCase().includes(query);
+  tile.style.display=match?"":"none";
+  if(match)visibleCount++;
+ });
+ $("noResults").style.display=visibleCount===0?"block":"none";
+}
+
+function openModal(id){
+ document.querySelectorAll(".modal-backdrop").forEach(modal=>modal.classList.remove("open"));
+ const modal=$(id);
+ if(modal)modal.classList.add("open");
+ if(id==="activityModal")renderActivity();
+}
+
+function closeModal(id){
+ const modal=$(id);
+ if(modal)modal.classList.remove("open");
+}
+
+document.querySelectorAll(".modal-backdrop").forEach(backdrop=>{
+ backdrop.addEventListener("click",event=>{
+  if(event.target===backdrop)backdrop.classList.remove("open");
+ });
+});
+
+document.addEventListener("keydown",event=>{
+ if(event.key==="Escape"){
+  document.querySelectorAll(".modal-backdrop").forEach(modal=>modal.classList.remove("open"));
+ }
+});
+
+function goHome(){
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function openRandomChat(){
+ recordActivity("Opened Random Chat");
+ if(window.ryzonAuthenticated){
+  sessionStorage.removeItem("ryzonNextAction");
+  window.location.href="random-chat.html";
+ }else{
+  sessionStorage.setItem("ryzonNextAction","randomChat");
+  window.location.href="otp.html";
+ }
+}
+
+function openProfile(){openModal("profileModal")}
+
+function updateConnectionStatus(){
+ const online=navigator.onLine;
+ $("connectionText").textContent=online?"Internet connected":"You are offline";
+ $("securityConnection").textContent=online?"Connected":"Offline";
+ $("connectionDot").classList.toggle("offline",!online);
+ $("offlineBanner").style.display=online?"none":"block";
+}
+window.addEventListener("online",updateConnectionStatus);
+window.addEventListener("offline",updateConnectionStatus);
+updateConnectionStatus();
+
+/* Local activity history */
+function recordActivity(text){
+ try{
+  const list=JSON.parse(localStorage.getItem("ryzonActivity")||"[]");
+  list.unshift({text,time:new Date().toLocaleString()});
+  localStorage.setItem("ryzonActivity",JSON.stringify(list.slice(0,30)));
+  renderHomeRecentActivity();
+ }catch(error){console.warn("Activity storage unavailable",error)}
+}
+
+function getActivity(){
+ try{return JSON.parse(localStorage.getItem("ryzonActivity")||"[]")}
+ catch(error){return []}
+}
+
+function renderActivity(){
+ const container=$("activityList");
+ const list=getActivity();
+ if(!list.length){
+  container.innerHTML='<div class="empty-state">No recent activity yet.</div>';
+  return;
+ }
+ container.replaceChildren();
+ list.forEach(item=>{
+  const row=document.createElement("div");
+  row.className="activity-row";
+  const title=document.createElement("b");
+  title.textContent=item.text;
+  const time=document.createElement("small");
+  time.textContent=item.time;
+  row.append(title,time);
+  container.appendChild(row);
+ });
+}
+
+function renderHomeRecentActivity(){
+ const container=$("homeRecentActivity");
+ if(!container)return;
+ const list=getActivity().slice(0,4);
+ if(!list.length){
+  container.innerHTML='<div class="empty-state">Your recent activities will appear here.</div>';
+  return;
+ }
+ container.replaceChildren();
+ list.forEach(item=>{
+  const row=document.createElement("div");
+  row.className="activity-row";
+  const title=document.createElement("b");
+  title.textContent=item.text;
+  const time=document.createElement("small");
+  time.textContent=item.time;
+  row.append(title,time);
+  container.appendChild(row);
+ });
+}
+
+function clearActivity(){
+ localStorage.removeItem("ryzonActivity");
+ renderActivity();
+ renderHomeRecentActivity();
+}
+
+document.querySelectorAll("#serviceGrid .tile").forEach(tile=>{
+ tile.addEventListener("click",()=>{
+  recordActivity("Opened "+tile.textContent.trim());
+ });
+});
+
+renderHomeRecentActivity();
+
+/* Register existing PWA service worker */
+if("serviceWorker" in navigator){
+ window.addEventListener("load",async()=>{
+  try{
+   const registration=await navigator.serviceWorker.register("./service-worker.js",{scope:"./"});
+   console.log("RYZON Service Worker registered:",registration.scope);
+  }catch(error){
+   console.error("RYZON Service Worker registration failed:",error);
+  }
+ });
+}
+</script>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {
+ getAuth,onAuthStateChanged,signOut,deleteUser
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+const firebaseConfig={
+ apiKey:"AIzaSyCpMeChXryE3KXE7-xUk_iKZGqRaknYcsw",
+ authDomain:"seavora-5be21.firebaseapp.com",
+ projectId:"seavora-5be21",
+ storageBucket:"seavora-5be21.firebasestorage.app",
+ messagingSenderId:"41187328725",
+ appId:"1:41187328725:web:07ca55487383bc5798d85c",
+ measurementId:"G-PDY0RZRDDH"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+let currentUser=null;
+const byId=id=>document.getElementById(id);
+
+function showHomeMessage(text,success=false){
+ const message=byId("message");
+ message.textContent=text;
+ message.style.color=success?"#22c55e":"#ff8d8d";
+}
+
+function showProfile(user){
+ byId("profileName").textContent=user.displayName||"RYZON User";
+ byId("profileEmail").textContent=user.email||"Phone login account";
+ byId("profilePhone").textContent=user.phoneNumber||"";
+ byId("welcomeUser")?.textContent;
+}
+
+function hasAcceptedLogin(user){
+ const providers=user.providerData||[];
+ const hasPhone=providers.some(provider=>provider.providerId==="phone");
+ const hasGoogle=providers.some(provider=>provider.providerId==="google.com");
+ const hasVerifiedEmail=Boolean(user.email&&user.emailVerified);
+ return hasVerifiedEmail||hasGoogle||hasPhone;
+}
+
+onAuthStateChanged(auth,async user=>{
+ if(!user){
+  window.ryzonAuthenticated=false;
+  window.location.replace("otp.html");
+  return;
+ }
+
+ try{
+  await user.reload();
+  const freshUser=auth.currentUser;
+
+  if(!freshUser||!hasAcceptedLogin(freshUser)){
+   window.ryzonAuthenticated=false;
+   await signOut(auth);
+   window.location.replace("otp.html");
+   return;
+  }
+
+  currentUser=freshUser;
+  window.ryzonAuthenticated=true;
+  showProfile(currentUser);
+
+  const displayName=currentUser.displayName||currentUser.email||"RYZON User";
+  const welcome=byId("welcomeUser");
+  if(welcome)welcome.textContent="Hello, "+displayName+"! Welcome back.";
+
+  recordActivity("Logged in to RYZON");
+  document.documentElement.classList.add("auth-ready");
+
+ }catch(error){
+  console.error("Authentication check failed:",error);
+  window.ryzonAuthenticated=false;
+  try{await signOut(auth)}catch(signOutError){console.error(signOutError)}
+  window.location.replace("otp.html");
+ }
+});
+
+window.logoutUser=async function(){
+ try{
+  await signOut(auth);
+  window.ryzonAuthenticated=false;
+  sessionStorage.removeItem("ryzonNextAction");
+  window.location.replace("otp.html");
+ }catch(error){
+  console.error(error);
+  showHomeMessage("Logout failed. Please try again.");
+ }
+};
+
+window.confirmDeleteAccount=async function(){
+ const confirmation=byId("deleteConfirm").value.trim();
+ if(confirmation!=="DELETE"){
+  showHomeMessage("Please type DELETE to confirm.");
+  return;
+ }
+ if(!currentUser){
+  showHomeMessage("Please login again.");
+  return;
+ }
+
+ const confirmed=window.confirm("Final confirmation: Delete this Firebase login account?");
+ if(!confirmed)return;
+
+ try{
+  await deleteUser(currentUser);
+  localStorage.removeItem("ryzonActivity");
+  sessionStorage.clear();
+  window.location.replace("otp.html");
+ }catch(error){
+  console.error("Account deletion failed:",error);
+  if(error.code==="auth/requires-recent-login"){
+   showHomeMessage("For security, please login again before deleting your account.");
+  }else{
+   showHomeMessage("Account deletion failed: "+(error.message||"Please try again."));
+  }
+ }
+};
+</script>
+
+</body>
+</html>
