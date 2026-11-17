@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#071426">
-<meta name="description" content="Manage your RYZON friends and friend requests.">
-<title>RYZON · Friends</title>
+<meta name="description" content="Manage your RYZONE friends and friend requests.">
+<title>RYZONE · Friends</title>
 <link rel="stylesheet" href="./responsive-system.css">
 <script src="./language-system.js"></script>
 <style>
@@ -26,9 +26,9 @@ main{max-width:760px;margin:auto;padding:14px}.intro{padding:17px;border:1px sol
 </style>
 </head>
 <body>
-<header><div class="brand"><span>R</span>RYZON</div><div class="actions"><button class="head-btn" onclick="toggleLanguage()" aria-label="Change language">🌐</button><a class="head-btn" href="./home.html">⌂ Home</a></div></header>
+<header><div class="brand"><span>R</span>RYZONE</div><div class="actions"><button class="head-btn" onclick="toggleLanguage()" aria-label="Change language">🌐</button><a class="head-btn" href="./home.html">⌂ Home</a></div></header>
 <main>
-<section class="intro"><h1>♧ Find Friends</h1><p>Manage accepted friends and review your friend requests. RYZON shows real account data only; it will not create sample profiles.</p></section>
+<section class="intro"><h1>♧ Find Friends</h1><p>Manage accepted friends and review your friend requests. RYZONE shows real account data only; it will not create sample profiles.</p></section>
 <div class="tabs" role="tablist">
 <button class="tab active" data-tab="friends" onclick="showTab('friends')">Friends</button>
 <button class="tab" data-tab="incoming" onclick="showTab('incoming')">Received</button>
@@ -38,26 +38,26 @@ main{max-width:760px;margin:auto;padding:14px}.intro{padding:17px;border:1px sol
 <section class="panel" id="panel-friends"><h2>👥 My Friends</h2><p class="sub">Accepted friends. Favorite and online indicators will appear when the matching secure API is available.</p><div class="action-row"><button class="action primary" onclick="loadFriends()">↻ Refresh</button><a class="action" href="./chat.html">💬 Friends Chat</a></div><div id="friendsStatus" class="status">Checking secure connection…</div><div id="friendsList" class="list"></div></section>
 <section class="panel hidden" id="panel-incoming"><h2>📩 Received Requests</h2><p class="sub">Friend requests sent to your account.</p><button class="action primary" onclick="loadRequests('incoming')">↻ Refresh</button><div id="incomingStatus" class="status">Not loaded yet.</div><div id="incomingList" class="list"></div></section>
 <section class="panel hidden" id="panel-outgoing"><h2>📤 Sent Requests</h2><p class="sub">Requests you have sent that are still pending.</p><button class="action primary" onclick="loadRequests('outgoing')">↻ Refresh</button><div id="outgoingStatus" class="status">Not loaded yet.</div><div id="outgoingList" class="list"></div></section>
-<section class="panel hidden" id="panel-discover"><h2>🔎 Discover People</h2><p class="sub">Search will show only profiles whose privacy settings allow discovery.</p><div class="status warn">Discover/Search is not connected yet. The current Worker has no privacy-filtered Discover endpoint, so RYZON will not show or guess user profiles.</div><button class="action" disabled>Search unavailable</button></section>
+<section class="panel hidden" id="panel-discover"><h2>🔎 Discover People</h2><p class="sub">Search will show only profiles whose privacy settings allow discovery.</p><div class="status warn">Discover/Search is not connected yet. The current Worker has no privacy-filtered Discover endpoint, so RYZONE will not show or guess user profiles.</div><button class="action" disabled>Search unavailable</button></section>
 <section class="panel"><h2>🛡️ Privacy &amp; Safety</h2><p class="sub">Block, report, private-profile visibility and request permissions must be enforced by the server. Never share OTPs, passwords or financial details with a new contact.</p><div class="action-row"><a class="action" href="./settings.html">Privacy Settings</a><a class="action" href="./help.html">Safety Help</a></div></section>
 </main>
 <nav class="bottom"><a href="./home.html"><span>🏠</span>Home</a><a href="./random-chat.html"><span>💬</span>Chat</a><a class="active" href="./friends.html"><span>♧</span>Friends</a><a href="./wallet.html"><span>🪙</span>Wallet</a><a href="./profile.html"><span>👤</span>Profile</a></nav>
-<footer>RYZON © 2026 · One App, Endless Possibilities!</footer>
+<footer>RYZONE © 2026 · One App, Endless Possibilities!</footer>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import{getAuth,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 const firebaseConfig={apiKey:"AIzaSyCpMeChXryE3KXE7-xUk_iKZGqRaknYcsw",authDomain:"seavora-5be21.firebaseapp.com",projectId:"seavora-5be21",storageBucket:"seavora-5be21.firebasestorage.app",messagingSenderId:"41187328725",appId:"1:41187328725:web:07ca55487383bc5798d85c",measurementId:"G-PDY0RZRDDH"};
 const auth=getAuth(initializeApp(firebaseConfig)),API="https://ryzon-friends-api.riyazsahail.workers.dev";let user=null;
 const $=id=>document.getElementById(id);
-function toggleLanguage(){if(typeof window.toggleRYZONLanguage==="function")window.toggleRYZONLanguage();else alert("Language selector will be available after language system loads.");}
+function toggleLanguage(){if(typeof window.toggleRYZONELanguage==="function")window.toggleRYZONELanguage();else alert("Language selector will be available after language system loads.");}
 window.toggleLanguage=toggleLanguage;
 window.showTab=function(tab){document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));["friends","incoming","outgoing","discover"].forEach(t=>$("panel-"+t).classList.toggle("hidden",t!==tab));if(tab==="friends")loadFriends();if(tab==="incoming"||tab==="outgoing")loadRequests(tab);};
 async function api(path){if(!user)throw Error("Please sign in again.");const token=await user.getIdToken();const res=await fetch(API+path,{headers:{Authorization:"Bearer "+token}});let data={};try{data=await res.json()}catch{throw Error("Invalid server response.")}if(!res.ok)throw Error(data.error||"Service unavailable ("+res.status+").");return data;}
 function extract(data,keys){for(const k of keys)if(Array.isArray(data?.[k]))return data[k];if(Array.isArray(data))return data;return [];}
 function safe(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function renderList(target,rows,kind){const el=$(target);el.replaceChildren();if(!rows.length){el.innerHTML='<div class="empty">No '+(kind==="friends"?"accepted friends":kind==="incoming"?"received requests":"sent requests")+' returned by the server.</div>';return;}rows.forEach(row=>{const uid=row.friend_uid||row.friendUid||row.user_uid||row.uid||row.sender_uid||row.recipient_uid||row;const time=row.created_at||row.createdAt||"";const item=document.createElement("div");item.className="item";const info=document.createElement("div");info.innerHTML='<strong>RYZON member</strong><small>Account reference: '+safe(String(uid).slice(0,10))+(time?" · "+safe(time):"")+'</small>';item.appendChild(info);if(kind==="friends"){const a=document.createElement("a");a.className="action";a.href="./chat.html";a.textContent="Open Chat";item.appendChild(a);}el.appendChild(item);});}
-window.loadFriends=async function(){ $("friendsStatus").textContent="Loading friends…";$("friendsStatus").className="status";try{const d=await api("/friends/list");const rows=extract(d,["friends","items","results"]);renderList("friendsList",rows,"friends");$("friendsStatus").textContent="Loaded from RYZON server."; }catch(e){$("friendsStatus").textContent=e.message;$("friendsStatus").className="status error";$("friendsList").innerHTML='<div class="empty">Friend data could not be loaded. No local sample list is shown.</div>';}}
-window.loadRequests=async function(type){const prefix=type==="incoming"?"incoming":"outgoing";$(prefix+"Status").textContent="Loading requests…";$(prefix+"Status").className="status";try{const d=await api("/friends/requests/"+type);const rows=extract(d,["requests","items","results"]);renderList(prefix+"List",rows,type);$(prefix+"Status").textContent="Loaded from RYZON server.";}catch(e){$(prefix+"Status").textContent=e.message;$(prefix+"Status").className="status error";$(prefix+"List").innerHTML='<div class="empty">Request data could not be loaded.</div>';}}
+function renderList(target,rows,kind){const el=$(target);el.replaceChildren();if(!rows.length){el.innerHTML='<div class="empty">No '+(kind==="friends"?"accepted friends":kind==="incoming"?"received requests":"sent requests")+' returned by the server.</div>';return;}rows.forEach(row=>{const uid=row.friend_uid||row.friendUid||row.user_uid||row.uid||row.sender_uid||row.recipient_uid||row;const time=row.created_at||row.createdAt||"";const item=document.createElement("div");item.className="item";const info=document.createElement("div");info.innerHTML='<strong>RYZONE member</strong><small>Account reference: '+safe(String(uid).slice(0,10))+(time?" · "+safe(time):"")+'</small>';item.appendChild(info);if(kind==="friends"){const a=document.createElement("a");a.className="action";a.href="./chat.html";a.textContent="Open Chat";item.appendChild(a);}el.appendChild(item);});}
+window.loadFriends=async function(){ $("friendsStatus").textContent="Loading friends…";$("friendsStatus").className="status";try{const d=await api("/friends/list");const rows=extract(d,["friends","items","results"]);renderList("friendsList",rows,"friends");$("friendsStatus").textContent="Loaded from RYZONE server."; }catch(e){$("friendsStatus").textContent=e.message;$("friendsStatus").className="status error";$("friendsList").innerHTML='<div class="empty">Friend data could not be loaded. No local sample list is shown.</div>';}}
+window.loadRequests=async function(type){const prefix=type==="incoming"?"incoming":"outgoing";$(prefix+"Status").textContent="Loading requests…";$(prefix+"Status").className="status";try{const d=await api("/friends/requests/"+type);const rows=extract(d,["requests","items","results"]);renderList(prefix+"List",rows,type);$(prefix+"Status").textContent="Loaded from RYZONE server.";}catch(e){$(prefix+"Status").textContent=e.message;$(prefix+"Status").className="status error";$(prefix+"List").innerHTML='<div class="empty">Request data could not be loaded.</div>';}}
 onAuthStateChanged(auth, u=>{user=u;if(!u){location.replace("./otp.html");return;}loadFriends();});
 </script>
 </body></html>
