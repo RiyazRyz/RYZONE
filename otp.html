@@ -307,6 +307,49 @@ body{min-height:100vh;align-items:flex-start!important;justify-content:center!im
  .brand-name{font-size:32px!important;letter-spacing:4px!important}
  .premium-entry .premium-login{font-size:11px!important}
 }
+
+/* FINAL MOBILE LOGIN ALIGNMENT — keep existing auth markup and handlers */
+html,body{width:100%;max-width:100%;overflow-x:hidden!important;background:#030303!important}
+body{display:flex!important;align-items:flex-start!important;justify-content:center!important;padding:0 0 24px!important}
+.container{width:min(100%,440px)!important;max-width:440px!important;margin:0 auto!important;overflow:visible!important}
+.top{position:absolute!important;top:12px!important;right:max(12px,calc((100vw - 440px)/2 + 12px))!important;z-index:20!important;margin:0!important}
+.top button{min-height:38px!important;padding:8px 12px!important;border-radius:22px!important}
+.brand-banner{width:100%!important;min-height:145px!important;padding:48px 16px 16px!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;background:radial-gradient(ellipse at 50% 38%,#38270d 0%,#100c06 45%,#030303 78%)!important}
+.brand-lockup{width:100%!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:5px!important;text-align:center!important}
+.brand-lockup img{display:none!important}
+.brand-name{display:block!important;margin:0 auto!important;font-family:Georgia,'Times New Roman',serif!important;font-size:clamp(35px,10vw,43px)!important;line-height:1.08!important;letter-spacing:6px!important;color:#f5d078!important;text-align:center!important}
+.brand-tagline{display:block!important;margin:4px auto 0!important;font-size:9px!important;letter-spacing:2px!important;text-align:center!important;color:#e8c979!important}
+.auth-panel{width:100%!important;min-height:0!important;margin:0!important;padding:12px 18px 18px!important;background:#050505!important}
+.method-tabs{display:flex!important;width:100%!important;gap:9px!important;margin:7px 0 13px!important}
+.method-tabs button{flex:1 1 0!important;width:50%!important;min-width:0!important;height:46px!important}
+#emailFields,#phoneSection,#verifiedSection{width:100%!important}
+#emailFields input:not([type=checkbox]),#phoneSection input:not([type=checkbox]),#verifiedSection input:not([type=checkbox]){display:block!important;width:100%!important;max-width:100%!important;min-width:0!important}
+.password-row{width:100%!important}
+.password-row input{width:100%!important}
+.login-options{display:flex!important;align-items:center!important;justify-content:space-between!important;flex-wrap:nowrap!important;width:100%!important;gap:8px!important;margin:8px 0 12px!important}
+.auth-panel .login-options .remember-row{flex:0 1 auto!important;white-space:nowrap!important;font-size:12px!important}
+.auth-panel .login-options #forgotLink{flex:0 0 auto!important;white-space:nowrap!important;font-size:12px!important}
+.auth-panel #mainButton,.auth-panel #sendOtpButton,.auth-panel #verifyOtpButton,.auth-panel .google-button{width:100%!important;max-width:100%!important}
+.auth-panel #mainButton{height:47px!important;margin:3px 0 0!important}
+.auth-panel .divider{margin:13px 0!important}
+.auth-panel .google-button{height:46px!important;margin:0!important}
+.premium-box{width:100%!important;margin:14px 0 0!important;padding:12px!important}
+.premium-entry{display:flex!important;width:100%!important;gap:7px!important}
+.premium-entry .premium-pin{flex:1 1 auto!important;width:0!important;min-width:0!important;height:44px!important}
+.premium-entry .premium-login{flex:0 0 31%!important;width:31%!important;min-width:0!important;height:44px!important;padding:5px!important;font-size:13px!important}
+.premium-actions{display:flex!important;width:100%!important;gap:8px!important;margin-top:9px!important}
+.premium-forgot,.premium-signup{flex:1 1 0!important;min-width:0!important;min-height:36px!important}
+.bottom-text{margin-top:13px!important;line-height:1.5!important}
+#lastLogin,#message{max-width:calc(100% - 36px)!important;margin-left:18px!important;margin-right:18px!important}
+.footer-links{width:calc(100% - 36px)!important;margin:14px 18px 0!important;padding-bottom:20px!important}
+@media(max-width:360px){
+ .brand-banner{min-height:132px!important;padding-top:45px!important}
+ .auth-panel{padding-left:13px!important;padding-right:13px!important}
+ .brand-name{font-size:34px!important;letter-spacing:5px!important}
+ .auth-panel .login-options .remember-row,.auth-panel .login-options #forgotLink{font-size:11px!important}
+ .premium-heading{font-size:14px!important}
+ .premium-entry .premium-login{font-size:11px!important}
+}
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
