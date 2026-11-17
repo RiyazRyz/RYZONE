@@ -1,4 +1,4 @@
-# RYZON Coin Wallet API & D1 Implementation Contract
+# RYZONE Coin Wallet API & D1 Implementation Contract
 
 Status: design specification only. No wallet endpoint, coin credit, payment, gift delivery, transfer, or external gift-card redemption is activated by this document.
 
@@ -41,9 +41,9 @@ No `/coins/purchase` route is to be enabled until an approved payment provider, 
 ## Coin rules
 
 1. Free Coins are gift-only. They cannot be transferred, redeemed externally, or spent on Premium, shopping, recharge, bills, or other features.
-2. Purchased Coins may be used only for the supported uses explicitly enabled by RYZON policy and backend controls. The current wallet UI lists eligible gifts, Premium/features, and accepted-friend transfers; external gift-card redemption remains a future partner-dependent feature.
+2. Purchased Coins may be used only for the supported uses explicitly enabled by RYZONE policy and backend controls. The current wallet UI lists eligible gifts, Premium/features, and accepted-friend transfers; external gift-card redemption remains a future partner-dependent feature.
 3. Free Coins are used first for a gift where the user has not explicitly selected another eligible balance. If Free Coins are insufficient, the UI must ask the user to choose Purchased Coins; do not silently switch balances.
-4. Transfers are limited to accepted, unblocked RYZON friends. Never transfer Coins to random chat matches or strangers. Free Coins cannot be transferred.
+4. Transfers are limited to accepted, unblocked RYZONE friends. Never transfer Coins to random chat matches or strangers. Free Coins cannot be transferred.
 5. Purchased Coin batches expire 12 months after the applicable purchase date. Spend the earliest-expiring eligible batch first (FIFO). The server must calculate expiry and allocation.
 6. The proposed 1 Coin = ₹1 is an internal accounting example only, not cash value, stored value, guaranteed gift-card value, or a promise of partner denomination.
 7. Free Coins cannot be redeemed for Amazon, Flipkart, Meesho, or any external voucher. External redemption, if approved later, is Purchased-Coins-only.
@@ -151,7 +151,7 @@ Use a state machine such as `pending`, `processing`, `issued`, `failed`, `cancel
 - Use server-side gift prices and redemption denomination mappings.
 - Enforce unique idempotency keys and atomic conditional balance updates to prevent duplicate or negative balances.
 - Never log Firebase tokens, payment secrets, partner credentials, coupon codes, or unnecessary personal data.
-- Restrict CORS to the configured RYZON origin(s); add abuse rate limits and audit trails.
+- Restrict CORS to the configured RYZONE origin(s); add abuse rate limits and audit trails.
 - Keep secrets only in Cloudflare Worker Secrets, never in GitHub or frontend JavaScript.
 - Add tests for token failures, cross-user access, duplicate retries, concurrent spends, insufficient balances, expired batches, blocked/non-friend transfers, Free Coin misuse, failed gift delivery, and failed/uncertain partner issuance.
 
