@@ -587,6 +587,146 @@ body{min-height:100vh!important;display:flex!important;justify-content:center!im
  top:16px!important;
 }
 
+
+/* FINAL REFERENCE-MATCH LOGIN LAYOUT — centered RYZON wordmark, black & gold */
+html,body{min-height:100%!important;background:#020306!important}
+body{
+ display:block!important;margin:0!important;padding:0 12px 24px!important;
+ color:#f7f7f7!important;font-family:Arial,Helvetica,sans-serif!important;
+ background:
+  linear-gradient(132deg,transparent 0 9%,#d59b24 9.2%,transparent 9.8% 100%),
+  linear-gradient(312deg,transparent 0 87%,#a97719 87.2%,transparent 88% 100%),
+  radial-gradient(ellipse at 50% 0%,#14243a 0%,#05070b 47%,#000 100%)!important;
+}
+.container{
+ width:100%!important;max-width:460px!important;margin:0 auto!important;
+ padding:0 12px 22px!important;border:0!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important;
+}
+.top{position:absolute!important;top:10px!important;right:12px!important;z-index:5!important;margin:0!important}
+.top button{background:#101b30!important;border:1px solid #8b692b!important;color:#f4d37c!important}
+.logo,h1,.tagline,.hero-banner,.access-title,.access-subtitle,.subtitle,#accountTabs{display:none!important}
+.brand-banner{
+ position:relative!important;width:100%!important;min-height:190px!important;
+ padding:52px 12px 24px!important;margin:0!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ text-align:center!important;border:0!important;border-radius:0!important;
+ background:transparent!important;
+}
+.brand-lockup{
+ width:100%!important;margin:0 auto!important;display:flex!important;
+ flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ gap:5px!important;text-align:center!important;
+}
+.brand-mark{display:none!important}
+.brand-copy{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important}
+.brand-name{
+ display:block!important;margin:0!important;font-family:Arial,Helvetica,sans-serif!important;
+ font-size:clamp(42px,11vw,54px)!important;font-weight:900!important;line-height:1!important;
+ letter-spacing:5px!important;color:#f7c95e!important;
+ text-shadow:0 0 13px #e3a52e99,0 2px 3px #000!important;
+}
+.brand-tagline{
+ margin-top:8px!important;font-size:10px!important;letter-spacing:1.8px!important;
+ color:#f6d77c!important;text-align:center!important;
+}
+.secure-access{display:none!important}
+.auth-panel{
+ width:100%!important;margin:0 auto!important;padding:8px 18px 20px!important;
+ border:1px solid #9b762d!important;border-radius:22px!important;
+ background:linear-gradient(160deg,#080a10f5,#020305f7)!important;
+ box-shadow:0 0 22px #d49c3020,inset 0 0 18px #c18a1c0c!important;
+ color:#f7f7f7!important;
+}
+.tabs,.access-title,.access-subtitle{display:none!important}
+.method-tabs{
+ display:flex!important;width:100%!important;gap:0!important;margin:4px 0 14px!important;
+}
+.method-tabs button{
+ flex:1!important;min-width:0!important;height:49px!important;margin:0!important;
+ border:1px solid #5d5d5d!important;border-radius:13px!important;
+ background:#080a0f!important;color:#f3f3f3!important;font-size:15px!important;font-weight:700!important;
+}
+.method-tabs button.active{
+ background:linear-gradient(180deg,#ffe37a,#f2ad08)!important;
+ color:#080808!important;border:1px solid #ffdb55!important;
+ box-shadow:0 0 12px #e6aa2f55!important;
+}
+.field-label{display:none!important}
+#emailSection input:not([type=checkbox]),#phoneSection input:not([type=checkbox]){
+ width:100%!important;max-width:100%!important;height:51px!important;margin:6px 0!important;
+ padding:0 16px!important;border:1px solid #777!important;border-radius:13px!important;
+ background:linear-gradient(110deg,#11141b,#050609)!important;color:#fff!important;
+ font-size:15px!important;box-shadow:inset 0 1px 5px #000!important;
+}
+.password-row{position:relative!important;display:flex!important;align-items:center!important}
+.password-row input{padding-right:64px!important}
+.password-toggle{
+ position:absolute!important;right:8px!important;top:50%!important;transform:translateY(-50%)!important;
+ width:auto!important;min-width:42px!important;padding:7px!important;margin:0!important;
+ background:transparent!important;color:#eee!important;border:0!important;font-size:12px!important;
+}
+.auth-panel .login-options{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:8px!important;margin:8px 0 14px!important;min-height:28px!important;
+}
+.auth-panel .login-options .remember-row{display:flex!important;align-items:center!important;gap:8px!important;color:#fff!important;font-size:14px!important}
+.auth-panel .login-options .remember-row input{width:19px!important;height:19px!important;accent-color:#f4bd25!important}
+.auth-panel .login-options #forgotLink{color:#ffcf3e!important;font-size:13px!important;font-weight:700!important}
+.auth-panel #mainButton{
+ width:100%!important;height:53px!important;margin:4px 0 0!important;border:1px solid #ffdb5c!important;
+ border-radius:13px!important;background:linear-gradient(180deg,#ffe77a 0%,#ffc21e 48%,#e99b00 100%)!important;
+ color:#090909!important;font-size:18px!important;font-weight:800!important;
+ box-shadow:0 3px 12px #e7a51e44!important;
+}
+.auth-panel .divider{display:flex!important;align-items:center!important;gap:12px!important;margin:14px 0!important;color:#fff!important}
+.auth-panel .divider:before,.auth-panel .divider:after{content:""!important;flex:1!important;height:1px!important;background:#777!important}
+.auth-panel .google-button{
+ display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;
+ width:100%!important;height:48px!important;margin:0!important;border:0!important;border-radius:13px!important;
+ background:#fff!important;color:#111!important;font-size:15px!important;font-weight:700!important;
+}
+.premium-box{
+ margin:17px 0 0!important;padding:14px 12px 12px!important;
+ border:2px solid #e0ae22!important;border-radius:17px!important;
+ background:linear-gradient(145deg,#08080b,#030306)!important;
+ box-shadow:0 0 13px #e0ae2233,inset 0 0 12px #d6a31c12!important;
+}
+.premium-heading{margin:0 0 10px!important;text-align:center!important;color:#ffd33f!important;font-size:17px!important;font-weight:900!important}
+.premium-subtitle{display:none!important}
+.premium-entry{display:flex!important;align-items:center!important;gap:8px!important}
+.premium-entry .premium-pin{
+ flex:1 1 auto!important;min-width:0!important;height:43px!important;margin:0!important;
+ border:1px solid #777!important;border-radius:11px!important;background:#090b16!important;
+ color:#fff!important;font-size:13px!important;padding:0 12px!important;
+}
+.premium-entry .premium-login{
+ flex:0 0 auto!important;width:auto!important;min-width:105px!important;height:43px!important;
+ margin:0!important;border:1px solid #ffdc58!important;border-radius:10px!important;
+ background:linear-gradient(180deg,#ffe77a,#f2ad08)!important;color:#090909!important;
+ font-weight:900!important;
+}
+.premium-actions{display:flex!important;gap:9px!important;margin-top:9px!important}
+.premium-actions>div{
+ flex:1!important;min-width:0!important;text-align:center!important;padding:8px 5px!important;
+ border-radius:11px!important;font-size:12px!important;font-weight:700!important;
+}
+.premium-forgot{border:1px solid #e51b35!important;color:#ff5368!important}
+.premium-signup{border:1px solid #c23cdd!important;color:#e78cff!important}
+.bottom-text{display:block!important;text-align:center!important;margin:12px 0 6px!important;color:#ddd!important;font-size:12px!important}
+.bottom-text a{color:#ffcf3e!important}
+.consent-line{margin:12px 0 0!important;text-align:center!important;color:#ddd!important;font-size:11px!important}
+.consent-line a{color:#ffcf3e!important}
+.footer-links{display:none!important}
+#lastLogin:empty,#message:empty{display:none!important}
+@media(max-width:380px){
+ .brand-banner{min-height:160px!important;padding-top:43px!important}
+ .auth-panel{padding-left:13px!important;padding-right:13px!important}
+ .method-tabs button{height:46px!important;font-size:14px!important}
+ .premium-heading{font-size:15px!important}
+ .premium-entry .premium-login{min-width:90px!important}
+}
+
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
