@@ -29,12 +29,13 @@
       const lockup = document.createElement("div");
       lockup.className = "ryzon-unified-brand";
 
-      if (!mark) {
-        mark = document.createElement("span");
-        mark.textContent = "R";
-      }
-      mark.classList.add("ryzon-unified-mark");
-      mark.setAttribute("aria-hidden", "true");
+      const logoImage = document.createElement("img");
+      logoImage.className = "ryzon-unified-mark";
+      logoImage.src = "./assets/ryzon-logo.svg";
+      logoImage.alt = "RYZON";
+      logoImage.decoding = "async";
+      if (mark) mark.replaceWith(logoImage);
+      mark = logoImage;
 
       const stack = document.createElement("span");
       stack.className = "ryzon-unified-copy";
@@ -82,11 +83,12 @@
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
-        background: linear-gradient(145deg,#55dcff,#078bd0) !important;
-        color: #fff !important;
-        font: 700 32px/1 "Trebuchet MS", "Segoe UI", sans-serif !important;
-        letter-spacing: 0 !important;
-        box-shadow: 0 6px 18px #0799e544 !important;
+        display: block !important;
+        object-fit: cover !important;
+        overflow: hidden !important;
+        border-radius: 12px !important;
+        background: #090909 !important;
+        box-shadow: 0 4px 15px #d6a83b55 !important;
       }
       .ryzon-unified-copy {
         display: flex !important;
@@ -100,7 +102,7 @@
         display: block !important;
         margin: 0 !important;
         padding: 0 !important;
-        color: #55dcff !important;
+        color: #e6bd62 !important;
         font: 600 22px/1.1 "Trebuchet MS", "Segoe UI", sans-serif !important;
         letter-spacing: 1.2px !important;
         text-align: left !important;
@@ -110,7 +112,7 @@
         display: block !important;
         margin: 0 !important;
         padding: 0 !important;
-        color: #8bdfff !important;
+        color: #d8c28d !important;
         font: 400 10px/1.25 Arial,sans-serif !important;
         letter-spacing: .15px !important;
         text-align: left !important;
@@ -199,6 +201,14 @@
     addStyles();
     applyUserAppearance();
     applyRYZONBranding();
+    if (!document.querySelector('link[rel="icon"][data-ryzon-logo]')) {
+      const icon = document.createElement("link");
+      icon.rel = "icon";
+      icon.type = "image/svg+xml";
+      icon.href = "./assets/ryzon-logo.svg";
+      icon.dataset.ryzonLogo = "true";
+      document.head.appendChild(icon);
+    }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
   else start();
