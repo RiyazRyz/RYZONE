@@ -5,10 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071426">
-<meta name="description" content="RYZON AI Assistant for learning, writing, translation and ideas.">
+<meta name="description" content="RYZONE AI Assistant for learning, writing, translation and ideas.">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/icon-192.png">
-<title>RYZON - AI Assistant</title>
+<title>RYZONE - AI Assistant</title>
 
 <style>
 :root{
@@ -241,23 +241,23 @@ button:focus-visible,a:focus-visible{
 <header>
   <button class="back" onclick="goBack()" aria-label="Go back">←</button>
   <div>
-    <div class="brand">RYZON</div>
+    <div class="brand">RYZONE</div>
     <small>One App, Endless Possibilities!</small>
   </div>
 </header>
 
-<div id="loading">Checking your RYZON account...</div>
+<div id="loading">Checking your RYZONE account...</div>
 
 <main class="container" id="mainContent" hidden>
 
 <section class="hero">
   <div class="hero-icon">🤖</div>
-  <h2>RYZON AI Assistant</h2>
+  <h2>RYZONE AI Assistant</h2>
   <p>Your smart assistant for everyday questions, learning, writing and ideas.</p>
 </section>
 
 <section class="card">
-  <h3>✨ What can RYZON AI help with?</h3>
+  <h3>✨ What can RYZONE AI help with?</h3>
 
   <div class="prompts">
     <button class="prompt" onclick="usePrompt('Help me learn a new topic step by step.')">📚 Education Help</button>
@@ -312,10 +312,10 @@ button:focus-visible,a:focus-visible{
 </section>
 
 <section class="card">
-  <h3>ℹ️ About RYZON AI</h3>
+  <h3>ℹ️ About RYZONE AI</h3>
 
   <p class="status">
-    RYZON AI is designed to assist with learning and education,
+    RYZONE AI is designed to assist with learning and education,
     writing and translation, general knowledge, ideas and planning,
     and technology guidance.
   </p>
@@ -329,7 +329,7 @@ button:focus-visible,a:focus-visible{
 </main>
 
 <footer>
-  RYZON © 2026<br><br>
+  RYZONE © 2026<br><br>
   One App, Endless Possibilities!
 </footer>
 
@@ -398,7 +398,7 @@ function addMessage(role,text,save=true){
 
   const label=document.createElement("span");
   label.className="message-label";
-  label.textContent=role==="user"?"YOU":"RYZON AI";
+  label.textContent=role==="user"?"YOU":"RYZONE AI";
 
   const content=document.createElement("div");
   content.textContent=text;
@@ -437,7 +437,7 @@ function showWelcome(){
   $("chatBox").innerHTML="";
   addMessage(
     "assistant",
-    "Welcome to RYZON AI Assistant! 👋\n\nType your question below or choose one of the quick prompts.",
+    "Welcome to RYZONE AI Assistant! 👋\n\nType your question below or choose one of the quick prompts.",
     false
   );
 }
@@ -532,7 +532,7 @@ window.showHistory=function(){
     div.className="history-item";
 
     const title=document.createElement("strong");
-    title.textContent=item.role==="user"?"You":"RYZON AI";
+    title.textContent=item.role==="user"?"You":"RYZONE AI";
 
     const content=document.createElement("div");
     content.textContent=item.text;
