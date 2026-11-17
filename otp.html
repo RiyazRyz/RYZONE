@@ -965,6 +965,41 @@ body{
  .bottom-text,.consent-line{margin-top:5px!important}
 }
 
+
+/* FIX: keep the country selector and phone number on one horizontal row */
+#phoneSection .iti{
+ display:block!important;
+ position:relative!important;
+ width:100%!important;
+ max-width:100%!important;
+ margin:3px 0!important;
+}
+#phoneSection .iti__country-container{
+ position:absolute!important;
+ top:0!important;
+ bottom:0!important;
+ left:0!important;
+ display:flex!important;
+ align-items:center!important;
+ z-index:3!important;
+}
+#phoneSection .iti__selected-country{
+ display:flex!important;
+ align-items:center!important;
+ height:100%!important;
+ white-space:nowrap!important;
+}
+#phoneSection .iti__selected-dial-code{white-space:nowrap!important}
+#phoneSection .iti input#loginPhone{
+ display:block!important;
+ width:100%!important;
+ min-width:0!important;
+ height:43px!important;
+ margin:0!important;
+ padding:0 12px 0 112px!important;
+ text-align:left!important;
+}
+
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
