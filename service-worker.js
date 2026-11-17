@@ -21,6 +21,9 @@ const APP_FILES = [
   "./admin-dashboard.html",
   "./help.html",
   "./manifest.json",
+  "./language.html",
+  "./language-system.js",
+  "./ryzon-branding.js",
   "./responsive-system.css",
   "./assets/ryzon-logo.svg"
 ];
