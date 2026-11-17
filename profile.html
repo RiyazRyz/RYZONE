@@ -5,13 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071426">
-<meta name="description" content="RYZON User Profile">
+<meta name="description" content="RYZONE User Profile">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<title>RYZON - My Profile</title>
+<title>RYZONE - My Profile</title>
 
 <script src="language-system.js"></script>
 
@@ -227,7 +227,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
 
 <header>
  <button onclick="goBack()">← Back</button>
- <h1>RYZON</h1>
+ <h1>RYZONE</h1>
  <button onclick="location.href='home.html'">🏠 Home</button>
 </header>
 
@@ -243,8 +243,8 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
  <h2 id="profileName">Loading Profile...</h2>
  <p class="username" id="profileUsername">@ryzonuser</p>
  <div id="profileEmail">Loading account...</div>
- <p id="profileBio">Welcome to my RYZON profile!</p>
- <span class="badge">✦ RYZON MEMBER</span>
+ <p id="profileBio">Welcome to my RYZONE profile!</p>
+ <span class="badge">✦ RYZONE MEMBER</span>
 
  <div class="actions">
   <button class="btn" onclick="openEditProfile()">✏️ Edit Profile</button>
@@ -316,14 +316,14 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
  <h2 style="font-size:17px">⚙️ Profile Options</h2>
  <button class="option-btn" onclick="location.href='settings.html'">⚙️ Account Settings</button>
  <button class="option-btn" onclick="location.href='chat.html'">💬 My Chats</button>
- <button class="option-btn" onclick="location.href='premium.html'">⭐ RYZON Premium</button>
+ <button class="option-btn" onclick="location.href='premium.html'">⭐ RYZONE Premium</button>
  <button class="option-btn" onclick="location.href='help.html'">🎧 Help & Support</button>
  <button class="option-btn" onclick="location.href='notifications.html'">🔔 Notifications</button>
  <button class="option-btn" style="background:#762a40" onclick="logoutUser()">🚪 Logout</button>
 </section>
 
 <p id="message"></p>
-<footer>RYZON © 2026 · One App, Endless Possibilities!</footer>
+<footer>RYZONE © 2026 · One App, Endless Possibilities!</footer>
 </main>
 
 <nav class="bottom-nav">
@@ -459,7 +459,7 @@ function updateCover(photo){
 }
 
 function showUser(user){
- const name=user.displayName||"RYZON User";
+ const name=user.displayName||"RYZONE User";
  const username=usernameFor(user);
  const email=user.email||"Phone login account";
  const phone=user.phoneNumber||"Not available";
@@ -467,7 +467,7 @@ function showUser(user){
  $("profileName").textContent=name;
  $("profileUsername").textContent="@"+username;
  $("profileEmail").textContent=email;
- $("profileBio").textContent=localStorage.getItem("ryzonBio_"+user.uid)||"Welcome to my RYZON profile!";
+ $("profileBio").textContent=localStorage.getItem("ryzonBio_"+user.uid)||"Welcome to my RYZONE profile!";
 
  $("infoName").textContent=name;
  $("infoUsername").textContent="@"+username;
@@ -513,7 +513,7 @@ function renderPosts(){
 
   const identity=document.createElement("div");
   const name=document.createElement("strong");
-  name.textContent=currentUser.displayName||"RYZON User";
+  name.textContent=currentUser.displayName||"RYZONE User";
   const date=document.createElement("small");
   date.style.display="block";
   date.style.color="var(--muted)";
@@ -688,7 +688,7 @@ window.shareProfile=async()=>{
  const url=location.origin+location.pathname+"?user="+encodeURIComponent(username);
  try{
   if(navigator.share){
-   await navigator.share({title:"RYZON Profile",text:"Check out my RYZON profile!",url});
+   await navigator.share({title:"RYZONE Profile",text:"Check out my RYZONE profile!",url});
   }else if(navigator.clipboard){
    await navigator.clipboard.writeText(url);
    showMessage("Profile link copied.",true);
