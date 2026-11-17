@@ -1,0 +1,26 @@
+{
+  "id": "./",
+  "name": "RYZON - One App, Endless Possibilities!",
+  "short_name": "RYZON",
+  "description": "RYZON - One App, Endless Possibilities! Connect, Chat, Explore and Discover.",
+  "start_url": "./otp.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#090909",
+  "theme_color": "#090909",
+  "categories": [
+    "social",
+    "communication",
+    "education",
+    "entertainment"
+  ],
+  "icons": [
+    {
+      "src": "./assets/ryzon-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
