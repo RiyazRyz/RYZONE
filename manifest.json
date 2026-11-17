@@ -3,7 +3,7 @@
   "name": "RYZONE - One App, Endless Possibilities!",
   "short_name": "RYZONE",
   "description": "RYZONE - One App, Endless Possibilities! Connect, Chat, Explore and Discover.",
-  "start_url": "./otp.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
