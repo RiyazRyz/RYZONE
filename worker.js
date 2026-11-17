@@ -1,1 +1,1 @@
-// RYZON Friend System backend
+// RYZONE Friend System backend
