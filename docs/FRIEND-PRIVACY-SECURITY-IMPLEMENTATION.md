@@ -1,4 +1,4 @@
-# RYZON Friend Privacy & Safety Implementation Notes
+# RYZONE Friend Privacy & Safety Implementation Notes
 
 Status: additive implementation specification. This document does not change the deployed Cloudflare Worker, D1 schema, or front-end.
 
