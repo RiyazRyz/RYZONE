@@ -1,14 +1,14 @@
 (function () {
   "use strict";
-  function applyRYZONBranding() {
+  function applyRYZONEBranding() {
     const candidates = Array.from(document.querySelectorAll(
       "header h1, header h2, header .ryzon-brand, main h1, main h2, main .ryzon-brand, h1, h2, .ryzon-brand"
     )).filter(el => {
       if (el.closest("footer, .ryzon-unified-brand")) return false;
-      if (!/RYZON/i.test((el.textContent || "").trim())) return false;
+      if (!/RYZONE/i.test((el.textContent || "").trim())) return false;
       // Prefer the smallest brand-name element; never replace a wrapper containing another brand heading.
       return !Array.from(el.querySelectorAll("h1, h2, .ryzon-brand")).some(child =>
-        /RYZON/i.test((child.textContent || "").trim())
+        /RYZONE/i.test((child.textContent || "").trim())
       );
     });
 
@@ -24,7 +24,7 @@
       oldTaglines.forEach(el => el.remove());
 
       const targetText = (target.textContent || "").trim();
-      const label = (mark && target.contains(mark) ? targetText.replace(/^R\\s*/i, "").trim() : targetText) || "RYZON";
+      const label = (mark && target.contains(mark) ? targetText.replace(/^R\\s*/i, "").trim() : targetText) || "RYZONE";
       const parent = target.parentElement;
       const lockup = document.createElement("div");
       lockup.className = "ryzon-unified-brand";
@@ -32,7 +32,7 @@
       const logoImage = document.createElement("img");
       logoImage.className = "ryzon-unified-mark";
       logoImage.src = "./assets/ryzon-logo.svg";
-      logoImage.alt = "RYZON";
+      logoImage.alt = "RYZONE";
       logoImage.decoding = "async";
       if (mark) mark.replaceWith(logoImage);
       mark = logoImage;
@@ -41,7 +41,7 @@
       stack.className = "ryzon-unified-copy";
       const name = document.createElement("span");
       name.className = "ryzon-unified-name";
-      name.textContent = label.replace(/^RYZON\\s*/i, "RYZON") || "RYZON";
+      name.textContent = label.replace(/^RYZONE\\s*/i, "RYZONE") || "RYZONE";
       const tagline = document.createElement("span");
       tagline.className = "ryzon-unified-tagline";
       tagline.textContent = "One App, Endless Possibilities!";
@@ -160,7 +160,7 @@
       root.style.setProperty(key,palette[i]);
       document.body.style.setProperty(key,palette[i]);
     });
-    // Common aliases used by existing RYZON page styles.
+    // Common aliases used by existing RYZONE page styles.
     const aliases = {"--bg":palette[0],"--navy":palette[0],"--card":palette[1],"--panel":palette[1],"--card2":palette[2],"--panel2":palette[2],"--accent":palette[3],"--cyan":palette[3],"--text":palette[4],"--muted":palette[5],"--border":palette[6],"--line":palette[6]};
     Object.entries(aliases).forEach(([key,value])=>{
       root.style.setProperty(key,value);
@@ -195,12 +195,12 @@
       body.light { background-color: var(--ryzon-bg) !important; }
     `;
   }
-  window.RYZONApplyAppearance = applyUserAppearance;
+  window.RYZONEApplyAppearance = applyUserAppearance;
 
   function start() {
     addStyles();
     applyUserAppearance();
-    applyRYZONBranding();
+    applyRYZONEBranding();
     if (!document.querySelector('link[rel="icon"][data-ryzon-logo]')) {
       const icon = document.createElement("link");
       icon.rel = "icon";
