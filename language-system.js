@@ -1,6 +1,6 @@
 
-const RYZONE_LANG_KEY = "ryzonLanguage";
-const RYZONE_TEMP_LANG_KEY = "ryzonTemporaryEnglish";
+const RYZON_LANG_KEY = "ryzonLanguage";
+const RYZON_TEMP_LANG_KEY = "ryzonTemporaryEnglish";
 
 const languageNames = {
   en: "English",
@@ -434,55 +434,55 @@ Object.keys(commonTranslations).forEach(language => {
   translations[language] = commonTranslations[language];
 });
 
-function getRYZONEPrimaryLanguage() {
-  const saved = localStorage.getItem(RYZONE_LANG_KEY);
+function getRYZONPrimaryLanguage() {
+  const saved = localStorage.getItem(RYZON_LANG_KEY);
   return translations[saved] ? saved : "en";
 }
 
-function getRYZONELanguage() {
-  const primary = getRYZONEPrimaryLanguage();
-  const temporary = localStorage.getItem(RYZONE_TEMP_LANG_KEY);
+function getRYZONLanguage() {
+  const primary = getRYZONPrimaryLanguage();
+  const temporary = localStorage.getItem(RYZON_TEMP_LANG_KEY);
 
   if (temporary === "true") return "en";
   return primary;
 }
 
-function setRYZONELanguage(language) {
+function setRYZONLanguage(language) {
   if (!translations[language]) {
-    alert(translations[getRYZONELanguage()].unsupportedLanguage);
+    alert(translations[getRYZONLanguage()].unsupportedLanguage);
     return;
   }
 
-  localStorage.setItem(RYZONE_LANG_KEY, language);
-  localStorage.removeItem(RYZONE_TEMP_LANG_KEY);
-  applyRYZONELanguage();
+  localStorage.setItem(RYZON_LANG_KEY, language);
+  localStorage.removeItem(RYZON_TEMP_LANG_KEY);
+  applyRYZONLanguage();
 }
 
-function toggleRYZONELanguage() {
-  const primary = getRYZONEPrimaryLanguage();
+function toggleRYZONLanguage() {
+  const primary = getRYZONPrimaryLanguage();
 
   if (primary === "en") return;
 
-  const temporary = localStorage.getItem(RYZONE_TEMP_LANG_KEY);
+  const temporary = localStorage.getItem(RYZON_TEMP_LANG_KEY);
 
   if (temporary === "true") {
-    localStorage.removeItem(RYZONE_TEMP_LANG_KEY);
+    localStorage.removeItem(RYZON_TEMP_LANG_KEY);
   } else {
-    localStorage.setItem(RYZONE_TEMP_LANG_KEY, "true");
+    localStorage.setItem(RYZON_TEMP_LANG_KEY, "true");
   }
 
-  applyRYZONELanguage();
+  applyRYZONLanguage();
 }
 
-function getRYZONEText(key) {
-  const language = getRYZONELanguage();
+function getRYZONText(key) {
+  const language = getRYZONLanguage();
   const dictionary = translations[language] || translations.en;
 
   return dictionary[key] || translations.en[key] || key;
 }
 
-function applyRYZONELanguage() {
-  const language = getRYZONELanguage();
+function applyRYZONLanguage() {
+  const language = getRYZONLanguage();
   const dictionary = translations[language] || translations.en;
 
   document.documentElement.lang = language;
@@ -500,9 +500,9 @@ function applyRYZONELanguage() {
   });
 
   document.querySelectorAll("[data-ryzon-language-toggle]").forEach(button => {
-    const primary = getRYZONEPrimaryLanguage();
+    const primary = getRYZONPrimaryLanguage();
     const isTemporaryEnglish =
-      localStorage.getItem(RYZONE_TEMP_LANG_KEY) === "true";
+      localStorage.getItem(RYZON_TEMP_LANG_KEY) === "true";
 
     button.textContent = isTemporaryEnglish
       ? "🌐 " + (languageNames[primary] || "Language")
@@ -510,13 +510,13 @@ function applyRYZONELanguage() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", applyRYZONELanguage);
+document.addEventListener("DOMContentLoaded", applyRYZONLanguage);
 
 window.addEventListener("storage", function(event) {
   if (
-    event.key === RYZONE_LANG_KEY ||
-    event.key === RYZONE_TEMP_LANG_KEY
+    event.key === RYZON_LANG_KEY ||
+    event.key === RYZON_TEMP_LANG_KEY
   ) {
-    applyRYZONELanguage();
+    applyRYZONLanguage();
   }
 });
