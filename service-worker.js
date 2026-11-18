@@ -23,7 +23,9 @@ const APP_FILES = [
   "./manifest.json",
   "./language.html",
   "./language-system.js",
-  "./ryzon-branding.js",\n  "./ryzone-theme-system.js",\n  "./ryzone-themes.css",
+  "./ryzon-branding.js",
+  "./ryzone-theme-system.js",
+  "./ryzone-themes.css",
   "./responsive-system.css",
   "./assets/ryzon-logo.svg"
 ];
