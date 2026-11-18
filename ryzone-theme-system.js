@@ -22,6 +22,10 @@ function updateBrand(){
    if(el.innerHTML!==mark)el.innerHTML=mark;
   }else if(el.textContent!=="RYZONE")el.textContent="RYZONE";
  });
+ document.querySelectorAll(".brand-mark,.logo").forEach(el=>{
+  const mark=theme==="2"?'R<span class="ryzone-y">Y<i>✓</i></span>Z':"🌍";
+  if(el.innerHTML!==mark)el.innerHTML=mark;
+ });
 }
 function chooser(){
  if(document.getElementById("ryzoneThemeChooser"))return;
