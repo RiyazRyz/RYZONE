@@ -475,6 +475,9 @@ body .ryzon-welcome-banner .welcome-gift{
  width:58px!important;height:58px!important;flex:0 0 58px!important;
 }
 
+
+/* RYZONE home section tagline */
+.services-tagline{margin:4px 0 0;color:#d8c28b;font-size:13px;line-height:1.3}
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
@@ -491,6 +494,11 @@ body .ryzon-welcome-banner .welcome-gift{
   <button class="icon-btn" onclick="goTo('language.html','Opened Language')" aria-label="Language">◎</button>
  </div>
 </header>
+
+<div class="shortcut-row">
+ <button class="shortcut coin" onclick="openModal('coinModal')">🪙 Coin Wallet　⌄</button>
+ <button class="shortcut shopping" onclick="goTo('shopping.html','Opened Shopping')">🛍️ Shopping</button>
+</div>
 
 <section class="ryzon-welcome-banner" aria-label="Welcome to RYZONE">
  <div class="welcome-copy"><strong>Welcome to RYZONE!</strong><span>Explore • Connect • Grow</span></div>
@@ -520,7 +528,8 @@ body .ryzon-welcome-banner .welcome-gift{
 
  <section class="section" id="allServices">
   <div class="section-heading">
-   <h2>🌐 All RYZONE Services</h2>
+   <h2>RYZONE 🌐 All RYZONE Services</h2>
+    <p class="services-tagline">One App, Endless Possibilities!</p>
   </div>
   <input class="search" id="serviceSearch" type="search"
    placeholder="🔍 Search RYZONE services..."
