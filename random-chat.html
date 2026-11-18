@@ -946,21 +946,38 @@ function escapeHTML(value){
 
 // Firebase token and Worker API
 async function apiRequest(path,options={}){
- if(!currentUser)throw new Error("Please login again.");
- const token=await currentUser.getIdToken();
- const headers={
-  "Authorization":"Bearer "+token,
-  ...(options.body?{"Content-Type":"application/json"}:{}),
-  ...(options.headers||{})
- };
- const response=await fetch(API_BASE+path,{
-  method:options.method||"GET",headers,body:options.body
- });
- let data={};
- try{data=await response.json();}
- catch{throw new Error("Invalid server response.");}
- if(!response.ok)throw new Error(data.error||"Server request failed.");
- return data;
+ const user=currentUser;
+ if(!user)throw new Error("Please login again.");
+
+ async function sendWithToken(token){
+  const headers={
+   "Authorization":"Bearer "+token,
+   ...(options.body?{"Content-Type":"application/json"}:{}),
+   ...(options.headers||{})
+  };
+  const response=await fetch(API_BASE+path,{
+   method:options.method||"GET",headers,body:options.body
+  });
+  let data={};
+  try{data=await response.json();}
+  catch{throw new Error("Invalid server response.");}
+  return {response,data};
+ }
+
+ let token=await user.getIdToken();
+ let result=await sendWithToken(token);
+
+ // Refresh Firebase ID token once if the Worker rejects authentication.
+ if(result.response.status===401){
+  if(currentUser!==user)throw new Error("Please login again.");
+  token=await user.getIdToken(true);
+  result=await sendWithToken(token);
+ }
+
+ if(!result.response.ok){
+  throw new Error(result.data.error||"Server request failed.");
+ }
+ return result.data;
 }
 function clearPolling(){
  if(statusTimer){clearInterval(statusTimer);statusTimer=null;}
