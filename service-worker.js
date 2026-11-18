@@ -46,7 +46,6 @@ self.addEventListener("install", event => {
         })
       );
 
-      await self.skipWaiting();
     })()
   );
 });
@@ -129,4 +128,11 @@ self.addEventListener("fetch", event => {
       }
     })()
   );
+});
+
+// Activate a downloaded update only after the app user chooses Update now.
+self.addEventListener("message", event => {
+  if (event.data && event.data.type === "RYZONE_SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });
