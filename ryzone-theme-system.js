@@ -16,13 +16,11 @@ function setTheme(value){
 function updateBrand(){
  const theme=current();
  document.documentElement.dataset.ryzoneTheme=theme;
- document.querySelectorAll(".ryzon-unified-name").forEach(el=>{
-  if(theme==="2") el.innerHTML='R<span class="ryzone-y">Y<i>✓</i></span>Z';
-  else el.textContent="RYZONE";
- });
- document.querySelectorAll(".brand-name,.ryzone-wordmark").forEach(el=>{
-  if(theme==="2") el.innerHTML='R<span class="ryzone-y">Y<i>✓</i></span>Z';
-  else el.textContent="RYZONE";
+ document.querySelectorAll(".ryzon-unified-name,.brand-name,.ryzone-wordmark").forEach(el=>{
+  if(theme==="2"){
+   const mark='R<span class="ryzone-y">Y<i>✓</i></span>Z';
+   if(el.innerHTML!==mark)el.innerHTML=mark;
+  }else if(el.textContent!=="RYZONE")el.textContent="RYZONE";
  });
 }
 function chooser(){
@@ -45,7 +43,7 @@ function chooser(){
  });
 }
 function addSwitcher(){
- if(location.pathname.endsWith("/index.html")||location.pathname==="/"||document.getElementById("ryzoneThemeSwitch"))return;
+ if(document.getElementById("ryzoneThemeSwitch"))return;
  const btn=document.createElement("button");
  btn.id="ryzoneThemeSwitch";btn.type="button";btn.className="ryzone-theme-switch";
  btn.textContent="THEME";btn.setAttribute("aria-label","Change RYZONE theme");
