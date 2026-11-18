@@ -17,8 +17,8 @@
   ],
   "icons": [
     {
-      "src": "./assets/ryzon-logo.svg",
-      "sizes": "any",
+      "src": "./assets/ryzone-app-icon.svg",
+      "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }

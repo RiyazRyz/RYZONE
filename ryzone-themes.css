@@ -76,3 +76,28 @@ a,.small-link,.bottom-text a,.footer-links a{color:#D4AF37!important}
 #ryzonSplash{background:#000!important;color:#D4AF37!important}
 #ryzonSplash *{color:#D4AF37!important}
 :root[data-ryzone-theme="1"] .brand-mark,:root[data-ryzone-theme="1"] .logo{filter:sepia(1) saturate(1.8)}
+
+
+/* RYZONE GLOBAL BRAND SYSTEM — consistent black, gold and Tamil-ready typography */
+:root{color-scheme:dark!important;--ryzon-bg:#000!important;--ryzon-card:#090909!important;--ryzon-card2:#141414!important;--ryzon-accent:#D4AF37!important;--ryzon-text:#fff!important;--ryzon-muted:#D9C78D!important;--ryzon-border:#6E571B!important;--bg:#000!important;--navy:#000!important;--card:#090909!important;--panel:#090909!important;--card2:#141414!important;--panel2:#141414!important;--accent:#D4AF37!important;--cyan:#D4AF37!important;--text:#fff!important;--muted:#D9C78D!important;--border:#6E571B!important;--line:#6E571B!important;--ryzon-font:"Noto Sans","Noto Sans Tamil",Arial,sans-serif!important}
+html,body{min-height:100%;background:#000!important;color:#fff!important;font-family:var(--ryzon-font)!important}
+body,body *{font-family:var(--ryzon-font)!important;box-sizing:border-box}
+body{background-image:radial-gradient(1px 1px at 15% 20%,#d4af3740 0,transparent 100%),radial-gradient(1px 1px at 75% 32%,#d4af3735 0,transparent 100%),linear-gradient(135deg,#000 0%,#080706 48%,#000 100%)!important}
+input,select,textarea,[contenteditable="true"],.field input,.field select,.field textarea,.password-row input{background:#050505!important;color:#fff!important;border:1px solid #D4AF37!important;border-radius:10px!important;font:inherit!important;caret-color:#D4AF37!important;accent-color:#D4AF37!important}
+input::placeholder,textarea::placeholder{color:#D9C78D!important;opacity:.8}
+input:focus,select:focus,textarea:focus,[contenteditable="true"]:focus{outline:2px solid #D4AF37!important;outline-offset:2px!important;box-shadow:0 0 0 3px #D4AF3725!important}
+input[type="checkbox"],input[type="radio"],input[type="range"]{accent-color:#D4AF37!important}
+select option{background:#090909!important;color:#fff!important}
+button,input[type="button"],input[type="submit"],input[type="reset"],[role="button"],.btn,.primary-button,.action-button{font-family:var(--ryzon-font)!important;border-color:#D4AF37!important}
+button:not(.plain-icon):not(.icon-only),input[type="button"],input[type="submit"],input[type="reset"],.btn,.primary-button,.action-button{background:linear-gradient(110deg,#B88920 0%,#F5E6A8 48%,#D4AF37 100%)!important;color:#090909!important}
+button:focus-visible,a:focus-visible,[role="button"]:focus-visible{outline:2px solid #F5E6A8!important;outline-offset:3px!important}
+header,.topbar,.app-header,.bottom-nav,.bottom-navigation,.nav-bar,.chat-header{background:#050505!important;color:#D4AF37!important;border-color:#6E571B!important}
+.card,.account-box,.setting,.panel,.modal-content,.feature-card,.service-card,.home-card,.section-card,.premium-box,.chat-card{background:#090909!important;color:#fff!important;border-color:#6E571B!important}
+h1,h2,h3,h4,h5,h6,.brand,.brand-name,.ryzon-unified-name{color:#D4AF37!important}
+a,.small-link,.footer-links a{color:#D4AF37!important}
+.ryzon-unified-brand{display:flex!important;justify-content:center!important;align-items:center!important;max-width:100%!important}
+.ryzon-unified-mark{display:block!important;width:min(260px,72vw)!important;height:auto!important;max-height:100px!important;object-fit:contain!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.ryzon-unified-copy,.ryzon-unified-brand:before,.ryzon-unified-brand:after{display:none!important;content:none!important}
+::selection{background:#D4AF37!important;color:#000!important}
+::-webkit-scrollbar{width:7px;height:7px}::-webkit-scrollbar-track{background:#050505}::-webkit-scrollbar-thumb{background:#80651f;border-radius:8px}
+@media(max-width:360px){.ryzon-unified-mark{width:min(220px,68vw)!important;max-height:82px!important}}

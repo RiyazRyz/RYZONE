@@ -27,7 +27,9 @@ const APP_FILES = [
   "./ryzone-theme-system.js",
   "./ryzone-themes.css",
   "./responsive-system.css",
-  "./assets/ryzon-logo.svg"
+  "./assets/ryzon-logo.svg",
+  "./assets/ryzone-app-icon.svg",
+  "./assets/ryzone-wordmark.svg"
 ];
 
 // INSTALL: Cache the latest app files

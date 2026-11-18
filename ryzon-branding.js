@@ -31,7 +31,7 @@
 
       const logoImage = document.createElement("img");
       logoImage.className = "ryzon-unified-mark";
-      logoImage.src = "./assets/ryzon-logo.svg";
+      logoImage.src = "./assets/ryzone-wordmark.svg";
       logoImage.alt = "RYZONE";
       logoImage.decoding = "async";
       if (mark) mark.replaceWith(logoImage);
@@ -71,24 +71,24 @@
         vertical-align: middle;
       }
       .ryzon-unified-mark {
-        flex: 0 0 48px !important;
-        width: 48px !important;
-        height: 48px !important;
-        min-width: 48px !important;
-        min-height: 48px !important;
+        flex: 0 1 260px !important;
+        width: min(260px, 72vw) !important;
+        height: auto !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
         margin: 0 !important;
         padding: 0 !important;
         border: 0 !important;
-        border-radius: 14px !important;
+        border-radius: 0 !important;
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
         display: block !important;
-        object-fit: cover !important;
+        object-fit: contain !important;
         overflow: hidden !important;
-        border-radius: 12px !important;
-        background: #090909 !important;
-        box-shadow: 0 4px 15px #d6a83b55 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
       }
       .ryzon-unified-copy {
         display: flex !important;
@@ -119,8 +119,8 @@
         white-space: normal;
       }
       @media (max-width: 360px) {
-        .ryzon-unified-brand { gap: 8px !important; }
-        .ryzon-unified-mark { flex-basis: 42px !important; width: 42px !important; height: 42px !important; min-width: 42px !important; min-height: 42px !important; font-size: 30px !important; }
+        .ryzon-unified-brand { gap: 0 !important; }
+        .ryzon-unified-mark { flex-basis: min(220px, 68vw) !important; width: min(220px, 68vw) !important; height: auto !important; min-width: 0 !important; min-height: 0 !important; }
         .ryzon-unified-name { font-size: 19px !important; }
         .ryzon-unified-tagline { font-size: 9px !important; }
       }
@@ -150,10 +150,8 @@
       coral:["#51251f","#67342c","#80473c","#ff9b86","#fff7f3","#dfb9af","#95594d"],
       galaxy:["#10102f","#1b1b48","#292963","#a98aff","#f8f5ff","#c0b8df","#55518c"]
     };
-    const themeKey = localStorage.getItem("ryzon_appearance_theme") || "ocean";
-    const palette = themes[themeKey] || themes.ocean;
-    const fontKey = localStorage.getItem("ryzon_appearance_font") || "Poppins";
-    const safeFont = /^[a-zA-Z ]+$/.test(fontKey) ? fontKey : "Poppins";
+    const palette = ["#000000","#090909","#141414","#D4AF37","#FFFFFF","#D9C78D","#6E571B"];
+    const safeFont = "Noto Sans";
     const root = document.documentElement;
     const variableNames = ["--ryzon-bg","--ryzon-card","--ryzon-card2","--ryzon-accent","--ryzon-text","--ryzon-muted","--ryzon-border"];
     variableNames.forEach((key,i)=>{
@@ -167,7 +165,7 @@
       document.body.style.setProperty(key,value);
     });
     root.dataset.ryzonTheme = themeKey;
-    root.style.setProperty("--ryzon-font", '"' + safeFont + '", "Noto Sans", Arial, sans-serif');
+    root.style.setProperty("--ryzon-font", '"Noto Sans", "Noto Sans Tamil", Arial, sans-serif');
     let fontLink = document.getElementById("ryzon-selected-google-font");
     if (!fontLink) {
       fontLink = document.createElement("link");
@@ -175,7 +173,7 @@
       fontLink.rel = "stylesheet";
       document.head.appendChild(fontLink);
     }
-    fontLink.href = "https://fonts.googleapis.com/css2?family=" + encodeURIComponent(safeFont).replace(/%20/g, "+") + ":wght@400;500;600;700&display=swap";
+    fontLink.href = "https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap";
     document.body.style.backgroundColor = palette[0];
     document.body.style.color = palette[4];
     document.body.style.fontFamily = root.style.getPropertyValue("--ryzon-font");
@@ -186,7 +184,7 @@
       document.head.appendChild(style);
     }
     style.textContent = `
-      body, body button, body input, body select, body textarea { font-family: var(--ryzon-font) !important; }
+      body, body * { font-family: var(--ryzon-font) !important; }
       body { background-color: var(--ryzon-bg) !important; color: var(--ryzon-text); }
       header, .topbar, .app-header { background-color: var(--ryzon-card) !important; }
       .card, .account-box, .setting, .panel, .modal-content, .feature-card, .service-card, .home-card {
@@ -212,7 +210,7 @@
       const icon = document.createElement("link");
       icon.rel = "icon";
       icon.type = "image/svg+xml";
-      icon.href = "./assets/ryzon-logo.svg";
+      icon.href = "./assets/ryzone-app-icon.svg";
       icon.dataset.ryzonLogo = "true";
       document.head.appendChild(icon);
     }
