@@ -309,12 +309,99 @@ document.getElementById("language").addEventListener("change", function() {
 </script>
 
 <script>
+/* RYZONE PWA AUTO UPDATE */
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js")
-      .catch(error => {
-        console.log("Service worker registration failed:", error);
+  window.addEventListener("load", async () => {
+    try {
+      const registration = await navigator.serviceWorker.register("./service-worker.js", {
+        updateViaCache: "none"
       });
+
+      let reloadAfterUpdate = false;
+      let updateBanner;
+
+      function showUpdateBanner() {
+        if (updateBanner || !registration.waiting) return;
+
+        const style = document.createElement("style");
+        style.textContent = [
+          "#ryzone-update-banner{position:fixed;left:12px;right:12px;bottom:16px;z-index:10000;max-width:560px;margin:auto;padding:15px;border:1px solid #d9aa43;border-radius:16px;background:#10100d;color:#fff8e8;box-shadow:0 8px 30px #000b;font-family:Arial,sans-serif}",
+          "#ryzone-update-banner strong{display:block;color:#f5cf70;font-size:15px;margin-bottom:5px}",
+          "#ryzone-update-banner p{margin:0 0 12px;color:#e8dfc9;font-size:13px;line-height:1.45}",
+          "#ryzone-update-actions{display:flex;gap:9px}",
+          "#ryzone-update-actions button{flex:1;min-height:42px;border:1px solid #d9aa43;border-radius:10px;font-weight:bold;font-size:13px}",
+          "#ryzone-update-now{background:linear-gradient(135deg,#f5d77c,#c18b24);color:#17120a}",
+          "#ryzone-update-later{background:#211d13;color:#f7e7bd}"
+        ].join("");
+        document.head.appendChild(style);
+
+        updateBanner = document.createElement("section");
+        updateBanner.id = "ryzone-update-banner";
+        updateBanner.setAttribute("role", "status");
+        const heading = document.createElement("strong");
+        heading.textContent = "RYZONE update ready";
+        const message = document.createElement("p");
+        message.textContent = "A new version is downloaded. Update now to use the latest RYZONE features.";
+        const actions = document.createElement("div");
+        actions.id = "ryzone-update-actions";
+        const updateButton = document.createElement("button");
+        updateButton.id = "ryzone-update-now";
+        updateButton.type = "button";
+        updateButton.textContent = "Update now";
+        updateButton.addEventListener("click", () => {
+          if (!registration.waiting) return;
+          reloadAfterUpdate = true;
+          registration.waiting.postMessage({ type: "RYZONE_SKIP_WAITING" });
+        });
+        const laterButton = document.createElement("button");
+        laterButton.id = "ryzone-update-later";
+        laterButton.type = "button";
+        laterButton.textContent = "Later";
+        laterButton.addEventListener("click", () => {
+          updateBanner.remove();
+          updateBanner = null;
+        });
+        actions.append(updateButton, laterButton);
+        updateBanner.append(heading, message, actions);
+        document.body.appendChild(updateBanner);
+      }
+
+      if (registration.waiting) showUpdateBanner();
+
+      registration.addEventListener("updatefound", () => {
+        const installingWorker = registration.installing;
+        if (!installingWorker) return;
+        installingWorker.addEventListener("statechange", () => {
+          if (installingWorker.state === "installed" && navigator.serviceWorker.controller) {
+            showUpdateBanner();
+          }
+        });
+      });
+
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (reloadAfterUpdate) window.location.reload();
+      });
+
+      await registration.update();
+
+      // Check periodically while the app's language/start page remains open.
+      window.setInterval(() => {
+        registration.update().catch(error => {
+          console.log("RYZONE update check failed:", error);
+        });
+      }, 60 * 60 * 1000);
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+          registration.update().catch(error => {
+            console.log("RYZONE update check failed:", error);
+          });
+          if (registration.waiting) showUpdateBanner();
+        }
+      });
+    } catch (error) {
+      console.log("Service worker registration failed:", error);
+    }
   });
 }
 </script>
