@@ -478,6 +478,145 @@ body .ryzon-welcome-banner .welcome-gift{
 
 /* RYZONE home section tagline */
 .services-tagline{margin:4px 0 0;color:#d8c28b;font-size:13px;line-height:1.3}
+
+
+/* META AI REFERENCE MATCH — Home screen visual layer */
+:root{
+ --navy:#050505!important;--blue:#11100d!important;--cyan:#f2d27b!important;
+ --text:#fff4d1!important;--muted:#c7b887!important;--panel:#151515!important;
+ --line:#b18a3d!important;--gold:#f4d17a!important;
+}
+html,body{background:#030303!important;color:#fff4d1!important}
+body{
+ background:
+  radial-gradient(ellipse at 50% 8%,#30200b55 0%,transparent 45%),
+  radial-gradient(ellipse at 8% 75%,#4a361522 0%,transparent 40%),
+  repeating-linear-gradient(118deg,#080706 0px,#0b0907 3px,#030303 8px,#090806 13px)!important;
+ font-family:Georgia,"Times New Roman",serif!important;
+}
+body>header.ryzon-reference-header{
+ min-height:82px!important;justify-content:center!important;
+ background:linear-gradient(180deg,#080706f5,#050505f5)!important;
+ border-bottom:1px solid #9b783b!important;
+ box-shadow:0 5px 20px #000b!important;
+}
+body>header.ryzon-reference-header .brand-wordmark{
+ order:0!important;margin:0 auto!important;display:flex!important;
+ align-items:center!important;justify-content:center!important;
+}
+body>header.ryzon-reference-header .brand-wordmark:before{
+ content:"🌍";display:inline-block;font-family:Arial,sans-serif;
+ font-size:28px;margin-right:5px;filter:grayscale(1) sepia(1) saturate(3) brightness(1.2);
+ text-shadow:0 0 12px #e7bf63aa;
+}
+body>header.ryzon-reference-header .brand-wordmark .brand-name{
+ font-family:Georgia,"Times New Roman",serif!important;
+ font-size:clamp(29px,8vw,39px)!important;font-weight:500!important;
+ letter-spacing:2px!important;color:#f4d27a!important;
+ text-shadow:0 1px 0 #fff0b0,0 3px 5px #7a5015,0 0 14px #d9aa4b88!important;
+}
+body>header.ryzon-reference-header .brand-y{color:#f7e8b5!important}
+body>header.ryzon-reference-header .brand-y i{color:#36b85d!important}
+body>header.ryzon-reference-header .header-menu{
+ position:absolute!important;left:8px!important;top:50%!important;
+ transform:translateY(-50%)!important;color:#f2d27b!important;
+}
+body>header.ryzon-reference-header .header-actions{
+ position:absolute!important;right:7px!important;top:50%!important;
+ transform:translateY(-50%)!important;display:flex!important;
+}
+body>header.ryzon-reference-header .icon-btn{
+ width:31px!important;height:31px!important;border-radius:50%!important;
+ background:#100e0a!important;border:1px solid #9c783b!important;
+ color:#f6dc99!important;
+}
+body>.shortcut-row{
+ background:#080706!important;border-top:1px solid #4b391c!important;
+ border-bottom:1px solid #a28242!important;
+}
+body>.shortcut-row .shortcut{
+ min-height:46px!important;border:1px solid #b18a3d!important;
+ border-radius:13px!important;background:linear-gradient(180deg,#292013,#0c0a07)!important;
+ color:#f8e8b8!important;box-shadow:inset 0 1px #f7df9a33,0 4px 12px #000b!important;
+ font-family:Georgia,"Times New Roman",serif!important;
+}
+body>.shortcut-row .shortcut.coin{
+ background:linear-gradient(135deg,#b48a38,#49300d 55%,#171006)!important;
+ color:#fff1c6!important;
+}
+body .ryzon-welcome-banner{
+ min-height:86px!important;margin:10px 13px 8px!important;
+ padding:12px 13px!important;border:1px solid #d4b56b!important;
+ border-radius:12px!important;
+ background:linear-gradient(110deg,#17130b,#080706 52%,#171108)!important;
+ box-shadow:inset 0 0 16px #e6c16b12,0 0 13px #c99d4722!important;
+}
+body .ryzon-welcome-banner .welcome-copy strong{
+ color:#f8e7b1!important;font-family:Georgia,"Times New Roman",serif!important;
+ font-size:clamp(17px,4.5vw,21px)!important;letter-spacing:.2px!important;
+}
+body .ryzon-welcome-banner .welcome-copy span{
+ color:#e4d4a4!important;font-size:12px!important;
+}
+body .ryzon-welcome-banner .welcome-gift{
+ width:48px!important;height:48px!important;flex-basis:48px!important;
+ filter:drop-shadow(0 0 8px #e6bc5b99)!important;
+}
+body>main .section{padding:14px 13px!important}
+body>main .section-heading h2{
+ color:#f1d58b!important;font-family:Georgia,"Times New Roman",serif!important;
+ font-weight:600!important;letter-spacing:.2px!important;
+}
+body>main .services-tagline{color:#d8c18a!important}
+body>main .search{
+ background:#11100d!important;border:1px solid #8d713c!important;
+ color:#fff1c9!important;border-radius:10px!important;
+}
+body>main .service-grid{
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;
+}
+body>main .service-grid .tile{
+ min-height:98px!important;border:1px solid #8e713b!important;
+ border-radius:12px!important;
+ background:linear-gradient(145deg,#1b1915 0%,#0b0a08 72%)!important;
+ color:#f8eac3!important;box-shadow:inset 0 1px #fff0bd13,0 5px 13px #000a!important;
+ font-family:Georgia,"Times New Roman",serif!important;font-size:13px!important;
+}
+body>main .service-grid .tile>span:first-child{
+ color:#f1d17b!important;filter:sepia(.8) saturate(1.5) drop-shadow(0 0 5px #d8ad4c66)!important;
+}
+body>main .service-grid .tile small{color:#c9bb96!important}
+body>main .feature-card,body>main .update-card,body>main .activity-row,
+body>main .empty-state,body>main .search{
+ background:linear-gradient(145deg,#171510,#090908)!important;
+ border:1px solid #806638!important;color:#f8eac3!important;
+}
+body>main .section-link{color:#e9ca7b!important}
+body>main .scam-ticker{
+ background:#21190c!important;border:1px solid #a18142!important;color:#f4dfaa!important;
+}
+body>.bottom-nav{
+ background:linear-gradient(180deg,#11100d,#030303)!important;
+ border-top:1px solid #a18142!important;box-shadow:0 -5px 18px #000c!important;
+}
+body>.bottom-nav button{color:#bcae8a!important;font-family:Georgia,"Times New Roman",serif!important}
+body>.bottom-nav button.active{color:#f7d783!important;text-shadow:0 0 9px #e1b75599!important}
+body>.bottom-nav button span{color:#e9ca7b!important}
+body>.help{
+ background:linear-gradient(135deg,#f8e19b,#a87924)!important;
+ color:#211708!important;border:1px solid #f2d27b!important;
+}
+body .modal{background:#100f0c!important;border:1px solid #a18142!important;color:#fff0c4!important}
+body .modal-item{background:#18150e!important;border:1px solid #806638!important;color:#f7e6b7!important}
+@media(max-width:390px){
+ body>header.ryzon-reference-header{min-height:72px!important}
+ body>header.ryzon-reference-header .brand-wordmark:before{font-size:23px!important}
+ body>header.ryzon-reference-header .brand-wordmark .brand-name{font-size:27px!important;letter-spacing:1px!important}
+ body>header.ryzon-reference-header .icon-btn{width:27px!important;height:29px!important}
+ body>main .service-grid{gap:8px!important}
+ body>main .service-grid .tile{min-height:92px!important}
+}
+
 </style>
 <script src="./ryzon-branding.js" defer></script>
 <link rel="stylesheet" href="./responsive-system.css">
