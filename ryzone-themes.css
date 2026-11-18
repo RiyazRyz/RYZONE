@@ -72,3 +72,7 @@ a,.small-link,.bottom-text a,.footer-links a{color:#D4AF37!important}
 :root[data-ryzone-theme="2"] .ryzon-unified-brand:before{content:"🌐";filter:sepia(1) saturate(2) brightness(1.1)}
 :root[data-ryzone-theme="2"] .ryzon-unified-brand:after{transform:translateY(-50%) rotate(-24deg) scale(1.12)}
 :root[data-ryzone-theme="1"] .ryzon-unified-brand:after{display:none}
+
+#ryzonSplash{background:#000!important;color:#D4AF37!important}
+#ryzonSplash *{color:#D4AF37!important}
+:root[data-ryzone-theme="1"] .brand-mark,:root[data-ryzone-theme="1"] .logo{filter:sepia(1) saturate(1.8)}
