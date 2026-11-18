@@ -197,13 +197,6 @@
 
   function start() {
     addStyles();
-    if (!document.getElementById("ryzone-theme-system-script")) {
-      const themeScript = document.createElement("script");
-      themeScript.id = "ryzone-theme-system-script";
-      themeScript.src = "./ryzone-theme-system.js";
-      themeScript.defer = true;
-      document.head.appendChild(themeScript);
-    }
     applyUserAppearance();
     applyRYZONBranding();
     if (!document.querySelector('link[rel="icon"][data-ryzon-logo]')) {
