@@ -62,3 +62,13 @@ a,.small-link,.bottom-text a,.footer-links a{color:#D4AF37!important}
 .ryzone-theme-confirm:disabled{opacity:.4}
 .ryzone-theme-switch{position:fixed!important;right:12px!important;bottom:calc(16px + env(safe-area-inset-bottom))!important;z-index:9990!important;width:auto!important;padding:8px 12px!important;border-radius:22px!important;font-size:10px!important;letter-spacing:1px!important}
 @media(max-width:480px){.ryzone-theme-dialog{padding:21px 16px}.ryzone-theme-dialog h2{font-size:21px}}
+
+/* Distinctive RYZONE logo lockups */
+.ryzon-unified-brand{position:relative!important}
+.ryzon-unified-brand:after{content:"";position:absolute;left:0;top:50%;width:46px;height:15px;border:1px solid #D4AF37;border-radius:50%;transform:translateY(-50%) rotate(-24deg);pointer-events:none}
+.brand-mark,.logo{display:grid!important;place-items:center!important;width:44px!important;height:44px!important;min-width:44px!important;border:1px solid #D4AF37!important;border-radius:12px!important;background:linear-gradient(145deg,#D4AF37,#8f6c18)!important;color:#000!important;font:900 13px Georgia,serif!important;letter-spacing:0!important;box-shadow:0 3px 13px #d4af3740!important}
+.ryzone-y{display:inline-block!important;position:relative!important;color:#fff!important}
+.ryzone-y i{position:absolute!important;left:50%!important;top:42%!important;transform:translate(-50%,-50%)!important;font:900 10px Arial,sans-serif!important;color:#00C853!important;text-shadow:0 1px 2px #000!important;margin:0!important}
+:root[data-ryzone-theme="2"] .ryzon-unified-brand:before{content:"🌐";filter:sepia(1) saturate(2) brightness(1.1)}
+:root[data-ryzone-theme="2"] .ryzon-unified-brand:after{transform:translateY(-50%) rotate(-24deg) scale(1.12)}
+:root[data-ryzone-theme="1"] .ryzon-unified-brand:after{display:none}
