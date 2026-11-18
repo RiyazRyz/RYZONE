@@ -24,8 +24,6 @@ const APP_FILES = [
   "./language.html",
   "./language-system.js",
   "./ryzon-branding.js",
-  "./ryzone-theme-system.js",
-  "./ryzone-themes.css",
   "./responsive-system.css",
   "./assets/ryzon-logo.svg",
   "./assets/ryzone-app-icon.svg",
