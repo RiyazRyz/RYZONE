@@ -1,0 +1,227 @@
+/* RYZONE METALLIC GOLD REFERENCE THEME
+   Shared visual layer only. Existing page markup, navigation, auth and integrations stay intact. */
+:root {
+  --rz-bg: #050505;
+  --rz-surface: #0d0c0a;
+  --rz-surface-2: #14120e;
+  --rz-gold: #c7a66a;
+  --rz-gold-light: #e2d0a1;
+  --rz-gold-deep: #80663d;
+  --rz-text: #f4efe3;
+  --rz-muted: #b9ad94;
+  --rz-border: #6e5938;
+  --rz-button: linear-gradient(135deg, #e2d2a8 0%, #c6a66b 48%, #96713d 100%);
+}
+html, body {
+  background: #050505 !important;
+  color: var(--rz-text) !important;
+}
+body {
+  background:
+    radial-gradient(ellipse at 50% -18%, #292216 0%, transparent 43%),
+    radial-gradient(ellipse at 8% 100%, #17130d 0%, transparent 35%),
+    #050505 !important;
+  color: var(--rz-text) !important;
+}
+button, input, select, textarea { font-family: inherit; }
+a { accent-color: var(--rz-gold); }
+:focus-visible { outline: 2px solid var(--rz-gold-light) !important; outline-offset: 3px; }
+
+/* Shared brand lockup uses the repository's existing RYZONE wordmark asset. */
+body .ryzon-unified-brand {
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  margin: 10px auto 16px !important;
+  text-align: center !important;
+}
+body .ryzon-unified-mark {
+  width: min(270px, 76vw) !important;
+  max-width: 100% !important;
+  flex: 0 1 auto !important;
+  filter: drop-shadow(0 3px 12px #b18a4a24) !important;
+}
+body .ryzon-unified-copy { align-items: center !important; text-align: center !important; }
+body .ryzon-unified-name {
+  color: var(--rz-gold-light) !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+}
+body .ryzon-unified-tagline {
+  color: #c8b58c !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 10px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+}
+
+/* Language / entry screen */
+body:has(> .container .card) .container {
+  max-width: 460px !important;
+}
+body:has(> .container .card) .tagline {
+  color: #c8b58c !important;
+}
+body:has(> .container .card) .card {
+  background: linear-gradient(155deg, #15130f, #080807 76%) !important;
+  color: var(--rz-text) !important;
+  border: 1px solid var(--rz-border) !important;
+  border-radius: 24px !important;
+  padding: 30px 24px 25px !important;
+  box-shadow: 0 14px 38px #000b, inset 0 0 24px #c3a16a0b !important;
+}
+body:has(> .container .card) .card h2 { color: var(--rz-gold-light) !important; font-size: clamp(22px, 5vw, 29px) !important; }
+body:has(> .container .card) .card p { color: #c7bda8 !important; font-size: 15px !important; margin-bottom: 24px !important; }
+body:has(> .container .card) select {
+  min-height: 54px !important; padding: 12px 15px !important;
+  background: #0b0a08 !important; color: var(--rz-text) !important;
+  border: 1px solid var(--rz-border) !important; border-radius: 12px !important;
+  font-size: 15px !important;
+}
+body:has(> .container .card) button {
+  min-height: 52px !important; padding: 12px 18px !important;
+  border: 1px solid #d0b47d !important; border-radius: 12px !important;
+  background: var(--rz-button) !important; color: #17130c !important;
+  font-size: 16px !important; box-shadow: 0 4px 14px #a8834728 !important;
+}
+body:has(> .container .card) .random {
+  margin-top: 12px !important; background: #11100d !important;
+  color: var(--rz-gold-light) !important; border-color: var(--rz-border) !important;
+}
+body:has(> .container .card) .note,
+body:has(> .container .card) footer { color: var(--rz-muted) !important; font-size: 12px !important; }
+
+/* Login screen — preserve all existing Firebase auth controls and flow. */
+body:has(.auth-panel) .container {
+  border-color: var(--rz-border) !important;
+  background: linear-gradient(160deg, #0d0c0a, #050505 75%) !important;
+}
+body:has(.auth-panel) .brand-banner {
+  background: radial-gradient(ellipse at center, #1b1710 0%, #050505 72%) !important;
+  border-bottom: 1px solid #6e5938 !important;
+}
+body:has(.auth-panel) .brand-name {
+  color: var(--rz-gold-light) !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  text-shadow: 0 2px 12px #b18a4a30 !important;
+}
+body:has(.auth-panel) .brand-tagline { color: #c8b58c !important; letter-spacing: 1.8px !important; }
+body:has(.auth-panel) .auth-panel {
+  background: #090908 !important; color: var(--rz-text) !important;
+  border-color: var(--rz-border) !important;
+}
+body:has(.auth-panel) .method-tabs button {
+  background: #15130f !important; color: #d7c7a5 !important; border: 1px solid #6e5938 !important;
+}
+body:has(.auth-panel) .method-tabs button.active {
+  background: var(--rz-button) !important; color: #17130c !important; border-color: #dfc58e !important;
+  box-shadow: 0 3px 12px #b18a4a22 !important;
+}
+body:has(.auth-panel) .auth-panel input:not([type=checkbox]) {
+  background-color: #0d0c0a !important; color: var(--rz-text) !important;
+  border: 1px solid #6e5938 !important; box-shadow: inset 0 0 9px #000 !important;
+}
+body:has(.auth-panel) .auth-panel input::placeholder { color: #a99d84 !important; }
+body:has(.auth-panel) .auth-panel #mainButton,
+body:has(.auth-panel) .auth-panel #sendOtpButton,
+body:has(.auth-panel) .auth-panel #verifyOtpButton,
+body:has(.auth-panel) .premium-entry .premium-login {
+  background: var(--rz-button) !important; color: #17130c !important;
+  border: 1px solid #dfc58e !important; box-shadow: 0 4px 14px #a8834728 !important;
+}
+body:has(.auth-panel) .auth-panel .small-link,
+body:has(.auth-panel) .auth-panel .bottom-text a,
+body:has(.auth-panel) .footer-links a { color: var(--rz-gold-light) !important; }
+body:has(.auth-panel) .auth-panel .remember-row,
+body:has(.auth-panel) .auth-panel .note,
+body:has(.auth-panel) .auth-panel .description,
+body:has(.auth-panel) .auth-panel .bottom-text { color: var(--rz-muted) !important; }
+body:has(.auth-panel) .premium-box {
+  background: linear-gradient(145deg, #17130d, #070706 72%) !important;
+  border: 1px solid #8c7144 !important; box-shadow: inset 0 0 18px #c3a16a0b !important;
+}
+body:has(.auth-panel) .premium-heading { color: var(--rz-gold-light) !important; text-shadow: none !important; }
+body:has(.auth-panel) .premium-pin { background: #0b0a08 !important; border-color: #806b48 !important; }
+body:has(.auth-panel) .premium-forgot,
+body:has(.auth-panel) .premium-signup { border-color: #806b48 !important; color: #d6c39b !important; }
+
+/* Home dashboard — keep existing 2-column cards, routes and working controls. */
+body:has(.service-grid) {
+  --navy: #050505 !important; --blue: #0d0c0a !important; --cyan: #c7a66a !important;
+  --text: #f4efe3 !important; --muted: #b9ad94 !important; --panel: #11100d !important;
+  --line: #6e5938 !important; --gold: #d2b77e !important;
+}
+body:has(.service-grid) header,
+body:has(.service-grid) .shortcut-row,
+body:has(.service-grid) .bottom-nav { background: #070706 !important; border-color: #6e5938 !important; }
+body:has(.service-grid) .brand { color: var(--rz-gold-light) !important; }
+body:has(.service-grid) .shortcut,
+body:has(.service-grid) .icon-btn,
+body:has(.service-grid) .tile,
+body:has(.service-grid) .feature-card,
+body:has(.service-grid) .update-card,
+body:has(.service-grid) .activity-row,
+body:has(.service-grid) .empty-state,
+body:has(.service-grid) .modal,
+body:has(.service-grid) .modal-item {
+  background: linear-gradient(155deg, #17140f, #090908 78%) !important;
+  border-color: #6e5938 !important; color: #eee5d2 !important;
+}
+body:has(.service-grid) .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 11px !important; }
+body:has(.service-grid) .tile {
+  min-height: 100px !important; border-radius: 15px !important;
+  box-shadow: inset 0 0 16px #c3a16a0a, 0 4px 14px #0008 !important;
+}
+body:has(.service-grid) .tile > span:first-child { filter: grayscale(.12) sepia(.2) saturate(.8) !important; }
+body:has(.service-grid) .tile small,
+body:has(.service-grid) .feature-card small,
+body:has(.service-grid) .update-card small,
+body:has(.service-grid) .activity-row small,
+body:has(.service-grid) .status-line { color: var(--rz-muted) !important; }
+body:has(.service-grid) .feed-tab.active,
+body:has(.service-grid) .section-link,
+body:has(.service-grid) .bottom-nav button.active { color: var(--rz-gold-light) !important; border-color: var(--rz-gold) !important; }
+body:has(.service-grid) .ryzon-welcome-banner {
+  border-color: #806b48 !important;
+  background: radial-gradient(ellipse at 80% 50%, #6e593822, transparent 48%), linear-gradient(110deg, #0b0a08, #1b1710 58%, #080807) !important;
+  box-shadow: 0 0 18px #b18a4a12, inset 0 0 22px #c3a16a08 !important;
+}
+body:has(.service-grid) .welcome-copy span { color: #d4c29b !important; }
+body:has(.service-grid) .feed-stage {
+  background: radial-gradient(ellipse at 50% 0%, #322819 0%, transparent 48%), linear-gradient(145deg, #17140f, #050505 72%, #15110b) !important;
+  border-color: #6e5938 !important;
+}
+body:has(.service-grid) .feed-placeholder button,
+body:has(.service-grid) .help { background: var(--rz-button) !important; color: #17130c !important; border-color: #d0b47d !important; }
+
+/* Profile page */
+body:has(.profile-top) { --bg: #050505 !important; --panel: #11100d !important; --border: #6e5938 !important; --cyan: #c7a66a !important; }
+body:has(.profile-top) header,
+body:has(.profile-top) .card,
+body:has(.profile-top) .stat,
+body:has(.profile-top) .info-box,
+body:has(.profile-top) .item,
+body:has(.profile-top) .post-card,
+body:has(.profile-top) .modal,
+body:has(.profile-top) .option-btn {
+  background: linear-gradient(155deg, #17140f, #090908 78%) !important;
+  border-color: #6e5938 !important; color: #eee5d2 !important;
+}
+body:has(.profile-top) header h1,
+body:has(.profile-top) .stat strong,
+body:has(.profile-top) .username { color: var(--rz-gold-light) !important; }
+body:has(.profile-top) .cover { background: radial-gradient(ellipse at 50% 10%, #5b482a, #17130d 68%, #080807) !important; }
+body:has(.profile-top) .avatar { background: #17140f !important; border-color: #8c7144 !important; }
+body:has(.profile-top) .btn { background: var(--rz-button) !important; color: #17130c !important; border: 1px solid #d0b47d !important; }
+body:has(.profile-top) .btn-secondary { background: #15130f !important; color: #e2d0a1 !important; border-color: #6e5938 !important; }
+body:has(.profile-top) .bottom-nav { background: #070706 !important; border-color: #6e5938 !important; }
+body:has(.profile-top) .bottom-nav a.active { color: var(--rz-gold-light) !important; }
+body:has(.profile-top) .profile-field input,
+body:has(.profile-top) .profile-field textarea { background: #0b0a08 !important; color: var(--rz-text) !important; border-color: #6e5938 !important; }
+@media (max-width: 480px) {
+  body:has(> .container .card) { padding: 18px 12px !important; }
+  body:has(> .container .card) .ryzon-unified-mark { width: min(235px, 72vw) !important; }
+  body:has(.service-grid) .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
