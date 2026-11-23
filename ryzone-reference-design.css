@@ -1,0 +1,54 @@
+/* RYZONE Reference UI — additive visual layer; preserves existing page logic and controls */
+:root{--rz-bg:#050505;--rz-panel:#0b0a08;--rz-gold:#d7b66b;--rz-gold2:#f4d98d;--rz-line:#9b7b3e;--rz-text:#f8efd9}
+html,body{background:#050505!important;color:var(--rz-text)!important}
+body{background-image:radial-gradient(ellipse at 50% 0%,#241a0b 0%,#090806 48%,#020202 100%)!important}
+button,select,input{font-family:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--rz-gold2)!important;outline-offset:3px}
+.brand-logo{display:block;width:min(72vw,300px);max-height:130px;object-fit:contain;margin:0 auto 12px;filter:drop-shadow(0 0 14px #d4a84b55)}
+/* Language selection */
+body:has(>main.container) .container{max-width:430px!important}
+body:has(>main.container) .tagline{color:#d8bd7c!important;font-size:12px!important;letter-spacing:3px!important;text-transform:uppercase!important;margin:0 0 28px!important}
+body:has(>main.container) .card{background:linear-gradient(160deg,#15120c,#050505 70%)!important;color:#f6e8c3!important;border:1px solid var(--rz-line)!important;border-radius:24px!important;padding:28px 24px!important;box-shadow:0 0 0 1px #d6b66b22,inset 0 0 28px #d3a43a0b,0 18px 45px #000!important}
+body:has(>main.container) .card h2{font-size:23px!important;margin:0 0 10px!important}
+body:has(>main.container) .card p{font-size:14px!important;color:#cbb98f!important;margin:0 0 20px!important}
+body:has(>main.container) select{min-height:50px!important;border:1px solid #9b7b3e!important;border-radius:13px!important;background:#080807!important;color:#f5e8c8!important;margin-bottom:12px!important;font-size:15px!important}
+body:has(>main.container) button{min-height:48px!important;border:1px solid #f3d68b!important;border-radius:14px!important;background:linear-gradient(180deg,#f5df9b,#c99a42 58%,#91651f)!important;color:#171006!important;font-size:16px!important}
+body:has(>main.container) button.random{margin-top:10px!important;background:transparent!important;color:#f2d88e!important;border:1px solid #9b7b3e!important}
+body:has(>main.container) .note,body:has(>main.container) footer{color:#b9a77e!important;font-size:11px!important}
+/* Splash — gold wordmark and curved illuminated earth horizon */
+#ryzonSplash{background:radial-gradient(ellipse at 50% 52%,#211809 0%,#090806 46%,#020202 82%)!important}
+#ryzonSplash>img{display:none!important}
+#ryzonSplash .splash-word{font-family:Georgia,serif!important;font-size:clamp(46px,12vw,76px)!important;letter-spacing:5px!important;color:#e8c36e!important;text-shadow:0 1px #fff0bd,0 3px 0 #76501b,0 8px 20px #000,0 0 24px #d7a83f88!important}
+#ryzonSplash .splash-tag{font-size:10px!important;letter-spacing:2.5px!important;color:#f2d98e!important}
+#ryzonSplash .splash-planet{left:-18%!important;right:-18%!important;bottom:-19%!important;height:45%!important;border-radius:50% 50% 0 0/30% 30% 0 0!important;border-top:3px solid #ffe18a!important;background:radial-gradient(ellipse at 50% 0%,#e4a72d66 0%,#53380e55 23%,#090806 65%)!important;box-shadow:0 -9px 35px #f2c04f99,0 -35px 100px #bd852e44!important}
+#ryzonSplash .planet-lights{opacity:.8!important;background:repeating-linear-gradient(90deg,transparent 0 7px,#f2bd4d66 8px 9px,transparent 10px 16px),repeating-linear-gradient(0deg,transparent 0 11px,#d99a2e33 12px 13px)!important;mask-image:radial-gradient(ellipse at 50% 20%,#000 0%,transparent 72%)!important}
+#ryzonSplash .splash-loader{z-index:5!important}
+#ryzonSplash .splash-loader small{color:#fff!important}
+/* Login */
+.brand-banner{background:radial-gradient(ellipse at 50% 25%,#281d0b,#070605 72%)!important;border-bottom:1px solid #8f7138!important}
+.brand-name,.brand-copy,.brand-tagline{color:#e8c879!important}
+.hero-banner{background:linear-gradient(110deg,#151007,#050505)!important;border:1px solid #8d713c!important;color:#f3dfa8!important}
+.auth-panel{background:linear-gradient(160deg,#12100b,#050505)!important;color:#f7ebcf!important;border:1px solid #8d713c!important;border-radius:22px!important}
+.auth-panel input:not([type=checkbox]){background-color:#080807!important;border:1px solid #9b7b3e!important;color:#fff!important;border-radius:12px!important}
+.auth-panel #mainButton,.auth-panel #sendOtpButton,.auth-panel #verifyOtpButton{background:linear-gradient(180deg,#f5df9b,#c99a42 58%,#91651f)!important;color:#171006!important;border:1px solid #f2d78e!important}
+.auth-panel .small-link,.auth-panel .bottom-text a{color:#f0d38a!important}
+/* Home */
+body:has(.ryzon-reference-header) .ryzon-reference-header{background:#050505!important;border-bottom:1px solid #9a7b42!important}
+body:has(.ryzon-reference-header) .brand-name{color:#e8c879!important}
+body:has(.ryzon-reference-header) .shortcut{background:#100e09!important;border:1px solid #8d713c!important;color:#f3dda0!important}
+body:has(.ryzon-reference-header) .ryzon-welcome-banner{background:linear-gradient(110deg,#151007,#050505)!important;border:1px solid #9b7b3e!important;border-radius:17px!important}
+body:has(.ryzon-reference-header) .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+body:has(.ryzon-reference-header) .service-grid .tile{min-height:112px!important;background:linear-gradient(155deg,#17130b,#050505)!important;border:1px solid #a1844c!important;border-radius:15px!important;color:#f4e4bd!important;box-shadow:inset 0 0 18px #d2a4490b,0 4px 14px #000!important}
+body:has(.ryzon-reference-header) .service-grid .tile>span:first-child{color:#e8c879!important}
+body:has(.ryzon-reference-header) .feature-card,body:has(.ryzon-reference-header) .update-card{background:#0d0b07!important;border:1px solid #8f713c!important;color:#f1dfb5!important;border-radius:14px!important}
+body:has(.ryzon-reference-header) .bottom-nav{background:#050505!important;border-top:1px solid #8f713c!important}
+body:has(.ryzon-reference-header) .bottom-nav button{color:#e9d59e!important}
+/* Random Chat */
+body:has(#randomHub) .container{background:#050505!important}
+body:has(#randomHub) header,body:has(#randomHub) .shorts-topbar{background:#050505!important;border-bottom:1px solid #94753b!important}
+body:has(#randomHub) .social-shell{background:radial-gradient(ellipse at 50% 0%,#1b1408,#050505 60%)!important;border:1px solid #8f713c!important;border-radius:18px!important}
+body:has(#randomHub) .shorts-stage{background:radial-gradient(ellipse at 50% 40%,#171108,#050505 70%)!important;border:1px solid #8f713c!important;border-radius:15px!important}
+body:has(#randomHub) .shorts-brand-name,body:has(#randomHub) h1,body:has(#randomHub) h2{color:#f0d48b!important}
+body:has(#randomHub) .shorts-top-btn,body:has(#randomHub) .social-bottom button{color:#ecd18a!important}
+body:has(#randomHub) .social-bottom{background:#050505!important;border-top:1px solid #8f713c!important}
+@media(max-width:480px){body:has(>main.container){padding:20px 14px!important}body:has(>main.container) .card{padding:25px 19px!important}#ryzonSplash .splash-word{font-size:clamp(40px,11vw,58px)!important}}
