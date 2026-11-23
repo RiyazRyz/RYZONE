@@ -225,3 +225,23 @@ body:has(.profile-top) .profile-field textarea { background: #0b0a08 !important;
   body:has(> .container .card) .ryzon-unified-mark { width: min(235px, 72vw) !important; }
   body:has(.service-grid) .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
 }
+
+/* Final brand-image and control refinements */
+body:has(> .container .card) .brand-logo {
+  display:block !important;
+  width:min(270px,76vw) !important;
+  height:auto !important;
+  margin:4px auto 10px !important;
+  object-fit:contain !important;
+  filter:drop-shadow(0 3px 12px #b18a4a24) !important;
+}
+body:has(> .container .card) > .container > .tagline { display:none !important; }
+body:has(.auth-panel) .auth-panel .google-button {
+  background:#11100d !important;
+  color:#eee5d2 !important;
+  border:1px solid #806b48 !important;
+  box-shadow:none !important;
+}
+body:has(.auth-panel) .auth-panel .google-button span:first-child { color:#d6c39b !important; }
+body:has(.auth-panel) .auth-panel .remember-row input { accent-color:#c7a66a !important; }
+body:has(.auth-panel) .auth-panel .password-toggle { color:#d6c39b !important; }
