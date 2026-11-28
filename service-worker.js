@@ -1,5 +1,5 @@
 
-const CACHE_NAME = "ryzon-cache-v2";
+const CACHE_NAME = "ryzon-cache-v3";
 
 const APP_FILES = [
   "./",
@@ -25,6 +25,8 @@ const APP_FILES = [
   "./language-system.js",
   "./ryzon-branding.js",
   "./responsive-system.css",
+  "./ryzone-metallic-gold.css",
+  "./ryzone-reference-design.css",
   "./assets/ryzon-logo.svg",
   "./assets/ryzone-app-icon.svg",
   "./assets/ryzone-wordmark.svg"
