@@ -1014,7 +1014,7 @@ function resetChatState(){
  $("sendBtn").disabled=true;
  $("cancelBtn").disabled=true;
  $("nextBtn").disabled=true;
- $("findBtn").disabled=false;
+ $("findBtn").disabled=!RANDOM_CHAT_SAFETY_READY;
 }
 function showShortsHome(event){
  if(event)event.preventDefault();
