@@ -573,8 +573,12 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline-color:#f2c
   <span data-chat="welcome">Welcome to RYZONE Random Chat!</span>
  </div>
 
+ <div class="note" id="safetyGateNotice" role="status" aria-live="polite" data-chat="safetyGateNotice">
+  🔒 Random Chat is temporarily paused while RYZONE adds server-verified age checks, under-18 Safe Mode, and moderation. Please use the other RYZONE features meanwhile.
+ </div>
+
  <button class="primary" id="findBtn" onclick="findPartner()" disabled
-  data-chat="findPartner">🔍 Find a Chat Partner</button>
+  aria-describedby="safetyGateNotice" data-chat="findPartner">🔍 Find a Chat Partner</button>
 
  <p class="subtitle" style="text-align:center" data-chat="freeNote">
   Worldwide Random Chat is free. No Premium membership required.
@@ -691,6 +695,8 @@ const chatTranslations = {
   partnerLanguage:"Partner Language",
   anyLanguage:"Any Language",
   welcome:"Welcome to RYZONE Random Chat!",
+  safetyGateNotice:"🔒 Random Chat is temporarily paused while RYZONE adds server-verified age checks, under-18 Safe Mode, and moderation. Please use the other RYZONE features meanwhile.",
+  safetyGateBlocked:"Random Chat is paused until server-verified age checks, under-18 Safe Mode, and moderation are ready.",
   findPartner:"🔍 Find a Chat Partner",
   freeNote:"Worldwide Random Chat is free. No Premium membership required.",
   randomChat:"Random Chat",
@@ -751,6 +757,8 @@ const chatTranslations = {
   partnerLanguage:"பேச விரும்பும் மொழி",
   anyLanguage:"எந்த மொழியும்",
   welcome:"RYZONE Random Chat-க்கு வரவேற்கிறோம்!",
+  safetyGateNotice:"🔒 வயது சரிபார்ப்பு, 18 வயதுக்குக் கீழானவர்களுக்கான Safe Mode, மற்றும் moderation ஆகிய server பாதுகாப்புகள் அமைக்கப்படும் வரை Random Chat தற்காலிகமாக நிறுத்தப்பட்டுள்ளது. இதற்கிடையில் RYZONE-இன் மற்ற வசதிகளைப் பயன்படுத்தலாம்.",
+  safetyGateBlocked:"Server வழி வயது சரிபார்ப்பு, Under-18 Safe Mode, moderation தயாராகும் வரை Random Chat நிறுத்தப்பட்டுள்ளது.",
   findPartner:"🔍 நண்பரைத் தேடுங்கள்",
   freeNote:"உலகளாவிய Random Chat இலவசம். Premium தேவையில்லை.",
   randomChat:"சீரற்ற அரட்டை",
@@ -814,6 +822,8 @@ function chatText(key){
 const $ = id => document.getElementById(id);
 function showCoinInfo(message){alert(message);}
 
+// Fail closed until the Cloudflare Worker enforces age-group and Safe Mode checks.
+const RANDOM_CHAT_SAFETY_READY = false;
 let authReady=false;
 let currentUser=null;
 let searching=false;
@@ -1036,6 +1046,10 @@ function showSetupScreen(){
 
 // Find partner
 async function findPartner(){
+ if(!RANDOM_CHAT_SAFETY_READY){
+  showStatus(chatText("safetyGateBlocked"));
+  return;
+ }
  if(!authReady||busy)return;
  if(!currentUser){openRandomChatLogin();return;}
  busy=true;
@@ -1494,8 +1508,10 @@ onAuthStateChanged(auth,user=>{
 
  $("authLoading").style.display="none";
  $("mainContent").style.display="block";
- $("findBtn").disabled=false;
- showStatus(chatText("welcome"));
+ // Keep matchmaking disabled until the Worker enforces server-side age and safety checks.
+ $("findBtn").disabled=true;
+ $("findBtn").setAttribute("aria-describedby","safetyGateNotice");
+ showStatus(chatText("safetyGateBlocked"));
 
  const nextAction=sessionStorage.getItem("ryzonNextAction");
  if(nextAction==="randomChat"){
